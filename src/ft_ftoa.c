@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:08:39 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/08 13:54:35 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/11 15:26:48 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_get_f_int(double nb)
 	str = ft_strnew(0);
 	while (nb > 1)
 	{
-		nb /= 10;
+		nb /= 2;
 		i++;
 	}
 	//str = ft_llitoa(nb);
@@ -78,7 +78,7 @@ char	*ft_get_f_int(double nb)
 	//printf("nb vaut : %f", nb);	
 	while (i--)
 	{
-		nb = nb * 10;
+		nb = nb * 2;
 		str_tmp = ft_llitoa(nb);
 		str = ft_strjoin(str, str_tmp);
 		nb = nb - (long)nb;

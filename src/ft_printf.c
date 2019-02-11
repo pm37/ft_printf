@@ -1,16 +1,5 @@
 #include "../inc/ft_printf.h"
 
-void	ft_putstr_len(char *str, int len)
-{
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-}
 int		ft_printf(const char *format, ...)
 {
 	int			i;
@@ -29,10 +18,13 @@ int		ft_printf(const char *format, ...)
 			//conv.length = 0;
 		}
 		else
+		{
 			ft_putchar(format[i]);
+			conv.length++;
+		}
 	}
 	va_end(conv.ap);
-	return (1);
+	return (conv.length);
 }
 
 int		ft_is_conv(char *fmt, t_conv *conv)
