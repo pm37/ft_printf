@@ -10,8 +10,7 @@ int		main(int ac, char **av)
 	//nbr /= 1.23;
 	//ptr = &str[0];
 
-	ft_printf("%.1050f", nbr);
-	printf("\n\n\n%.1050f\n", nbr);
+	ft_printf("%.2s", str);
 	//printf("\nle vrai:\n%020.10f", nbr);
 	//floats:
 	//printf renvoie le long max suivi de 0 des qu'on demande trop haut...

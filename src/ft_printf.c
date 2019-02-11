@@ -1,4 +1,4 @@
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
 int		ft_printf(const char *format, ...)
 {
@@ -14,7 +14,7 @@ int		ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			//ft_putendl("format = %");
-			i += ft_is_conv((char *)&format[i + 1], &conv);
+			i += ft_check_flags((char *)&format[i + 1], &conv);
 			//conv.length = 0;
 		}
 		else
@@ -25,115 +25,6 @@ int		ft_printf(const char *format, ...)
 	}
 	va_end(conv.ap);
 	return (conv.length);
-}
-
-int		ft_is_conv(char *fmt, t_conv *conv)
-{
-	int		i;
-	char	*buf;
-
-//			ft_putendl("ft_is_conv");
-	return (ft_check_flags(fmt, conv));
-}
-
-int		ft_check_flags(char *fmt, t_conv *conv)
-{
-	int i;
-
-//			ft_putendl("flags");
-	i = -1;
-	while (fmt[++i] && (fmt[i] == ' ' || fmt[i] == '#' || fmt[i] == '+' ||  fmt[i] == '-' || fmt[i] == '0'))
-	{
-		
-		if (fmt[i] == ' ')
-			conv->flag.space = 1;
-		else if (fmt[i] == '#')
-			conv->flag.sharp = 1;
-		else if (fmt[i] == '+')
-			conv->flag.plus = 1;
-		else if (fmt[i] == '-')
-			conv->flag.less = 1;
-		else if (fmt[i] == '0')
-			conv->flag.zero = 1;
-	}
-	conv->length += i;
-	return (ft_check_width(&fmt[i], conv));
-}
-
-int		ft_check_width(char *fmt, t_conv *conv)
-{
-	int i;
-
-	i = 0;
-//			ft_putendl("width");
-	conv->width = ft_atoi(fmt);
-	while (fmt[i] && (fmt[i] >= '0' && fmt[i] <= '9'))
-		i++;
-	conv->length += i;
-	return (ft_check_prec(&fmt[i], conv));
-}
-
-int		ft_check_prec(char *fmt, t_conv *conv)
-{
-	int i;
-
-	i = 0;
-//			ft_putendl("precision");
-	if (fmt[i] == '.')
-	{	
-		i++;
-		conv->prec = ft_atoi(&fmt[i]);
-		while (fmt[i] && (fmt[i] >= '0' && fmt[i] <= '9'))
-			i++;
-	}
-	conv->length += i;
-	return (ft_check_size(&fmt[i], conv));
-}
-
-int		ft_check_size(char *fmt, t_conv *conv)
-{
-	int i;
-
-	i = 0;
-//			ft_putendl("size");
-	if (fmt[0] == 'h')
-	{
-		if (fmt[1] == 'h')
-			conv->size.hh = 1;
-		else
-			conv->size.h = 1;
-		i = (conv->size.h == 1) ? i + 1 : i + 2;
-	}
-	else if (fmt[0] == 'l')
-	{
-		if (fmt[1] == 'l')
-			conv->size.ll = 1;
-		else
-			conv->size.l = 1;
-		i = (conv->size.l == 1) ? i + 1 : i + 2;
-	}
-	conv->length += i;
-	return (ft_check_conv(&fmt[i], conv));
-}
-
-int		ft_check_conv(char *fmt, t_conv *conv)
-{
-//			ft_putendl("conv");
-	if (*fmt == 'c' || *fmt == 's' || *fmt == 'p' || *fmt == 'd' ||
-	*fmt == 'i' || *fmt == 'o' || *fmt == 'u' || *fmt == 'x' || *fmt == 'X' ||
-	*fmt == 'f')
-	{
-		conv->conv_type = *fmt;
-		ft_handle_conv(conv);
-	}
-	else
-		ft_init_conv(conv);
-//	ft_putstr("renvoie length : ");
-//	ft_putnbr(conv->length + 1);
-//	ft_putendl("");
-//	ft_putendl("");
-
-	return (conv->length + 1);
 }
 
 void	ft_handle_conv(t_conv *conv)

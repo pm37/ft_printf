@@ -6,11 +6,11 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 17:52:36 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/08 13:52:38 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/11 20:47:57 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
 void	ft_handle_sp_p(t_conv *conv)
 {

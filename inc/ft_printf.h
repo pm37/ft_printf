@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/08 18:42:24 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/11 20:44:38 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,17 @@ typedef struct	s_conv
 }				t_conv;
 
 int		ft_printf(const char *format, ...);
-int		ft_is_conv(char *fmt, t_conv *conv);
+
 int		ft_check_flags(char *fmt, t_conv *conv);
-int		ft_check_width(char *fmt, t_conv *conv);
-int		ft_check_prec(char *fmt, t_conv *conv);
-int		ft_check_size(char *fmt, t_conv *conv);
-int		ft_check_conv(char *fmt, t_conv *conv);
+
 void	ft_handle_conv(t_conv *conv);
 void	ft_handle_s(t_conv *conv);
 void	ft_handle_sp_p(t_conv *conv);
 void	ft_handle_di_p(t_conv *conv);
+
 void	ft_init_fp(t_conv *conv);
 void	ft_init_conv(t_conv *conv);
+
 char	*ft_llitoa(long long nb);
 char	*ft_ullitoa(unsigned long long nb);
 char	*ft_llitoa_base(long long nb, int base, int lowercase);

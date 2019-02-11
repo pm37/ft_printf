@@ -6,11 +6,11 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:46:15 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/08 13:52:25 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/11 20:47:46 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
 char	*ft_llitoa_base(long long nb, int base, int lowercase)
 {
