@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/13 12:09:50 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/13 13:35:19 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int		ft_check_size(char *fmt, t_conv *conv)
 	int i;
 
 	i = 0;
-//			ft_putendl("size");
 	if (fmt[0] == 'h')
 	{
 		if (fmt[1] == 'h')
@@ -43,12 +42,11 @@ static int		ft_check_prec(char *fmt, t_conv *conv)
 	int i;
 
 	i = 0;
-//			ft_putendl("precision");
 	if (fmt[i] == '.')
-	{	
+	{
 		i++;
 		conv->prec = ft_atoi(&fmt[i]);
-		while (fmt[i] && (fmt[i] >= '0' && fmt[i] <= '9'))
+		while (fmt[i] && ft_isdigit(fmt[i]))
 			i++;
 	}
 	conv->length += i;
@@ -60,23 +58,25 @@ static int		ft_check_width(char *fmt, t_conv *conv)
 	int i;
 
 	i = 0;
-//			ft_putendl("width");
 	conv->width = ft_atoi(fmt);
-	while (fmt[i] && (fmt[i] >= '0' && fmt[i] <= '9'))
+	while (fmt[i] && ft_isdigit(fmt[i]))
 		i++;
 	conv->length += i;
 	return (ft_check_prec(&fmt[i], conv));
+}
+
+static int		ft_is_flag(char c)
+{
+	return (c == ' ' || c == '#' || c == '+' || c == '-' || c == '0');
 }
 
 int				ft_check_flags(char *fmt, t_conv *conv)
 {
 	int i;
 
-//			ft_putendl("flags");
 	i = -1;
-	while (fmt[++i] && (fmt[i] == ' ' || fmt[i] == '#' || fmt[i] == '+' ||  fmt[i] == '-' || fmt[i] == '0'))
+	while (fmt[++i] && ft_is_flag(fmt[i]))
 	{
-		
 		if (fmt[i] == ' ')
 			conv->flag.space = 1;
 		else if (fmt[i] == '#')
@@ -91,4 +91,3 @@ int				ft_check_flags(char *fmt, t_conv *conv)
 	conv->length += i;
 	return (ft_check_width(&fmt[i], conv));
 }
-

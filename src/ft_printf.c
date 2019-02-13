@@ -12,11 +12,7 @@ int		ft_printf(const char *format, ...)
 	while (format[++i])
 	{
 		if (format[i] == '%')
-		{
-			//ft_putendl("format = %");
 			i += ft_check_flags((char *)&format[i + 1], &conv);
-			//conv.length = 0;
-		}
 		else
 		{
 			ft_putchar(format[i]);
