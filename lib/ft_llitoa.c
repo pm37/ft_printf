@@ -1,46 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_llitoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 18:08:39 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/11 20:47:36 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/13 14:15:18 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/13 14:31:00 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_llitoa(long long nb)
+static int		get_str_len(long long n)
 {
-	int					len;
-	unsigned long long	nbr;
-	char				*str;
-	int					neg;
+	int		i;
 
-	neg = (nb < 0) ? 1 : 0;
-	nbr = (nb < 0) ? -nb : nb;
-//	ft_putnbr(nbr);
-//	ft_putendl("");
-	len = 1;
-	while (nbr /= 10)
-		len++;
-	nbr = (nb < 0) ? -nb : nb;
-//	ft_putnbr(nbr);
-//	ft_putendl("");
-	if (neg)
-		len++;
-	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
-		return (0);
-	str[len] = '\0';
-	//printf("%lld\nfin\n", nbr);
-	while (--len >= 0)
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
+}
+
+char			*ft_llitoa(long long nb)
+{
+	char				*str;
+	int					sign;
+	int					str_len;
+
+	sign = 1;
+	str_len = get_str_len(nb);
+	if (nb < 0)
 	{
-		str[len] = nbr % 10 + '0';
-		nbr /= 10;
+		sign = -1;
+		str_len++;
 	}
-	if (neg)
+	if (!(str = ft_strnew(str_len)))
+		return (NULL);
+	str[--str_len] = nb % 10 * sign + 48;
+	while (nb /= 10)
+		str[--str_len] = nb % 10 * sign + 48;
+	if (sign == -1)
 		str[0] = '-';
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:20:17 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/13 12:46:52 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/13 15:42:05 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	ft_init_conv(t_conv *conv)
 {
+	conv->size.h = 0;
+	conv->size.hh = 0;
+	conv->size.l = 0;
+	conv->size.ll = 0;
 	conv->length = 0;
 	conv->prec = -1;
 	conv->width = -1;
