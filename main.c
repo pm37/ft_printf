@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include "inc/ft_printf.h"
+#include "ft_printf.h"
 
 int		main(int ac, char **av)
 {

@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/11 22:15:54 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/13 12:21:40 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ COMPILE = $(CC) -c
 
 vpath %.c src/
 vpath %.h inc/
+vpath %.c lib/
 
 #Reset
 NC=\033[0m
@@ -53,86 +54,95 @@ INCS = ft_printf.h
 
 SRCM = main.c
 SRCS += ft_printf.c
-SRCS += ft_print_s.c
-SRCS += ft_llitoa.c
-SRCS += ft_llitoa_base.c
-SRCS += ft_ullitoa.c
-SRCS += ft_ullitoa_base.c
-SRCS += ft_ftoa.c
+SRCS += init_struct.c
 SRCS += parsing.c
-SRCS += ft_recursive_power.c
+SRCS += output_handler.c
+SRCS += diouxx_conv.c
+SRCS += address_conv.c
+SRCS += string_conv.c
+SRCS += float_conv.c
 
 
 #--------------------Memory--------------------#
-SRCS += ft_bzero.c
-SRCS += ft_memalloc.c
-SRCS += ft_memmove.c
-SRCS += ft_memchr.c
-SRCS += ft_memcmp.c
-SRCS += ft_memcpy.c
-SRCS += ft_memccpy.c
-SRCS += ft_memdel.c
-SRCS += ft_memset.c
+SRCL += ft_bzero.c
+SRCL += ft_memalloc.c
+SRCL += ft_memmove.c
+SRCL += ft_memchr.c
+SRCL += ft_memcmp.c
+SRCL += ft_memcpy.c
+SRCL += ft_memccpy.c
+SRCL += ft_memdel.c
+SRCL += ft_memset.c
 
 #--------------------Strings---------------------#
-SRCS += ft_isalnum.c
-SRCS += ft_isalpha.c
-SRCS += ft_isascii.c
-SRCS += ft_isdigit.c
-SRCS += ft_isprint.c
-SRCS += ft_strcat.c
-SRCS += ft_strchr.c
-SRCS += ft_strcmp.c
-SRCS += ft_strcpy.c
-SRCS += ft_strdup.c
-SRCS += ft_strlcat.c
-SRCS += ft_strlen.c
-SRCS += ft_strncat.c
-SRCS += ft_strncmp.c
-SRCS += ft_strncpy.c
-SRCS += ft_strnstr.c
-SRCS += ft_strrchr.c
-SRCS += ft_strstr.c
-SRCS += ft_strclr.c
-SRCS += ft_strdel.c
-SRCS += ft_strequ.c
-SRCS += ft_striter.c
-SRCS += ft_striteri.c
-SRCS += ft_strjoin.c
-SRCS += ft_strmap.c
-SRCS += ft_strmapi.c
-SRCS += ft_strnequ.c
-SRCS += ft_strnew.c
-SRCS += ft_strsplit.c
-SRCS += ft_strsub.c
-SRCS += ft_tolower.c
-SRCS += ft_toupper.c
+SRCL += ft_isalnum.c
+SRCL += ft_isalpha.c
+SRCL += ft_isascii.c
+SRCL += ft_isdigit.c
+SRCL += ft_isprint.c
+SRCL += ft_strcat.c
+SRCL += ft_strchr.c
+SRCL += ft_strcmp.c
+SRCL += ft_strcpy.c
+SRCL += ft_strdup.c
+SRCL += ft_strlcat.c
+SRCL += ft_strlen.c
+SRCL += ft_strncat.c
+SRCL += ft_strncmp.c
+SRCL += ft_strncpy.c
+SRCL += ft_strnstr.c
+SRCL += ft_strrchr.c
+SRCL += ft_strstr.c
+SRCL += ft_strclr.c
+SRCL += ft_strdel.c
+SRCL += ft_strequ.c
+SRCL += ft_striter.c
+SRCL += ft_striteri.c
+SRCL += ft_strjoin.c
+SRCL += ft_strmap.c
+SRCL += ft_strmapi.c
+SRCL += ft_strnequ.c
+SRCL += ft_strnew.c
+SRCL += ft_strsplit.c
+SRCL += ft_strsub.c
+SRCL += ft_tolower.c
+SRCL += ft_toupper.c
 
 #--------------------Conversion------------------#
-SRCS += ft_atoi.c
-SRCS += ft_itoa.c
+SRCL += ft_atoi.c
+SRCL += ft_itoa.c
+SRCL += ft_llitoa.c
+SRCL += ft_llitoa_base.c
+SRCL += ft_ullitoa.c
+SRCL += ft_ullitoa_base.c
+SRCL += ft_ftoa.c
 
 #----------------------Tab-----------------------#
 
 #--------------------Lists-----------------------#
-SRCS += ft_lstadd.c
-SRCS += ft_lstdel.c
-SRCS += ft_lstdelone.c
-SRCS += ft_lstiter.c
-SRCS += ft_lstmap.c
-SRCS += ft_lstnew.c
+SRCL += ft_lstadd.c
+SRCL += ft_lstdel.c
+SRCL += ft_lstdelone.c
+SRCL += ft_lstiter.c
+SRCL += ft_lstmap.c
+SRCL += ft_lstnew.c
 
 #--------------------Output----------------------#
-SRCS += ft_putchar.c
-SRCS += ft_putchar_fd.c
-SRCS += ft_putendl.c
-SRCS += ft_putendl_fd.c
-SRCS += ft_putnbr.c
-SRCS += ft_putnbr_fd.c
-SRCS += ft_putstr.c
-SRCS += ft_putstr_fd.c
+SRCL += ft_putchar.c
+SRCL += ft_putchar_fd.c
+SRCL += ft_putendl.c
+SRCL += ft_putendl_fd.c
+SRCL += ft_putnbr.c
+SRCL += ft_putnbr_fd.c
+SRCL += ft_putstr.c
+SRCL += ft_putstr_fd.c
 
-OBJS = $(patsubst %.c, $(OPATH)%.o, $(SRCS))
+
+SRCL += ft_recursive_power.c
+
+
+OBJS += $(patsubst %.c, $(OPATH)%.o, $(SRCS))
+OBJS += $(patsubst %.c, $(OPATH)%.o, $(SRCL))
 
 all: $(OPATH) $(NAME)
 

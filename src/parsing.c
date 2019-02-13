@@ -6,31 +6,11 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/11 20:48:40 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/13 12:09:50 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int		ft_check_conv(char *fmt, t_conv *conv)
-{
-//			ft_putendl("conv");
-	if (*fmt == 'c' || *fmt == 's' || *fmt == 'p' || *fmt == 'd' ||
-	*fmt == 'i' || *fmt == 'o' || *fmt == 'u' || *fmt == 'x' || *fmt == 'X' ||
-	*fmt == 'f')
-	{
-		conv->conv_type = *fmt;
-		ft_handle_conv(conv);
-	}
-	else
-		ft_init_conv(conv);
-//	ft_putstr("renvoie length : ");
-//	ft_putnbr(conv->length + 1);
-//	ft_putendl("");
-//	ft_putendl("");
-
-	return (conv->length + 1);
-}
 
 static int		ft_check_size(char *fmt, t_conv *conv)
 {
@@ -55,7 +35,7 @@ static int		ft_check_size(char *fmt, t_conv *conv)
 		i = (conv->size.l == 1) ? i + 1 : i + 2;
 	}
 	conv->length += i;
-	return (ft_check_conv(&fmt[i], conv));
+	return (output_handler(&fmt[i], conv));
 }
 
 static int		ft_check_prec(char *fmt, t_conv *conv)
