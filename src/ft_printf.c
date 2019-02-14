@@ -154,12 +154,12 @@ void	ft_handle_c(t_conv *conv)
 	
 	if (conv->width != 0)
 		if (!conv->flag.less)
-			while (--conv->width)
+			while (--conv->width && ++conv->length)
 				ft_putchar(' ');
 	ft_putchar(va_arg(conv->ap, int));
 	if (conv->width != 0)
 		if (conv->flag.less)
-			while (--conv->width)
+			while (--conv->width && ++conv->length)
 				ft_putchar(' ');
 //	ft_putendl("");
 //	ft_putendl("");
