@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/14 12:58:05 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/14 18:19:15 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int					ft_check_flags(char *fmt, t_conv *conv);
 void				ft_handle_s(t_conv *conv);
 void				ft_handle_sp_p(t_conv *conv, char *output);
 void				ft_handle_di_p(t_conv *conv, char *output);
+void				ft_handle_x_p(t_conv *conv, char *output);
 void				ft_handle_di(t_conv *conv);
 void				ft_handle_o(t_conv *conv);
 void				ft_handle_u(t_conv *conv);
