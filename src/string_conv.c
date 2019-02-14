@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:59:56 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/13 14:26:35 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/14 13:33:21 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void		ft_handle_sp_p(t_conv *conv, char *output)
 	if (conv->width > len)
 		if (!conv->flag.less)
 			while (--conv->width >= len)
-				ft_putchar(' ');
-	ft_putstr(output);
+				conv->ret += write(1, " ", 1);
+	conv->ret += write(1, output, len);
 	if (conv->width > len)
 		if (conv->flag.less)
 			while (--conv->width >= len)
-				ft_putchar(' ');
+				conv->ret += write(1, " ", 1);
 }
 
 void		ft_handle_di_p(t_conv *conv, char *output)
@@ -45,36 +45,40 @@ void		ft_handle_di_p(t_conv *conv, char *output)
 	if (conv->width > conv->prec && conv->width > len)
 		if (!conv->flag.less && conv->prec != -1)
 			while (--conv->width >= conv->prec && conv->width >= len)
-				ft_putchar(' ');
+				conv->ret += write(1, " ", 1);
 	if (conv->flag.plus)
-		ft_putchar('+');
+		conv->ret += write(1, "+", 1);
 	if (conv->width > conv->prec + conv->flag.plus && conv->width > len)
 		if (!conv->flag.less && conv->flag.zero && conv->prec == -1)
 			while (--conv->width >= conv->prec && conv->width >= len)
-				ft_putchar('0');
+				conv->ret += write(1, "0", 1);
 	if (conv->prec != -1)
 		if (len < conv->prec)
 			while (--conv->prec >= len)
-				ft_putchar('0');
-	ft_putstr(output);
+				conv->ret += write(1, "0", 1);
+	conv->ret += write(1, output, ft_strlen(output));
 	if (conv->width > prec + conv->flag.plus && conv->width > len)
 		if (conv->flag.less)
 			while (--conv->width >= prec && conv->width >= len)
-				ft_putchar(' ');
+				conv->ret += write(1, " ", 1);
 	ft_strdel(&output);
 }
 
 void		ft_handle_c(t_conv *conv)
 {
+	//debug
+	ft_putendl("entree dans ft_hand_c");
 	if (conv->width != 0)
 		if (!conv->flag.less)
 			while (--conv->width)
-				ft_putchar(' ');
+				conv->ret += write(1, " ", 1);
 	ft_putchar(va_arg(conv->ap, int));
+	conv->ret++;
+	printf("apres conv->ret++ :%d\n", conv->ret);
 	if (conv->width != 0)
 		if (conv->flag.less)
 			while (--conv->width)
-				ft_putchar(' ');
+				conv->ret += write(1, " ", 1);
 }
 
 void		ft_handle_s(t_conv *conv)

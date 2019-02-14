@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/13 12:21:40 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/14 14:05:40 by pimichau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,8 +146,8 @@ OBJS += $(patsubst %.c, $(OPATH)%.o, $(SRCL))
 
 all: $(OPATH) $(NAME)
 
-$(EXEC): $(NAME)
-	$(CC) $(SRCM) $(NAME) -I $(IPATH) -o $(EXEC)
+$(EXEC): $(NAME) $(SRCM)
+	$(CC) $^ -I $(IPATH) -o $@
 
 run: $(OPATH) $(EXEC)
 	./$(EXEC)
