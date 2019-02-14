@@ -6,7 +6,7 @@ int		main(int ac, char **av)
 {
 	char	str[]="hello";
 
-	ft_printf("%.2s\n", str);
+	ft_printf("%c", 'a');
 	if (ac == 2)
 		ft_printf("%d", ft_atoi(av[1])); 
 	//printf("\nle vrai:\n%020.10f", nbr);
