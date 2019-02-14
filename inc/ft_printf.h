@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/13 15:42:19 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/14 12:58:05 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct		s_conv
 	char			type[10];
 	void			(*f[10])(struct s_conv *conv);
 	int				length;
+	size_t			ret;
 }					t_conv;
 
 typedef struct		s_list

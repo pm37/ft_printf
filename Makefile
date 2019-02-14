@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/14 13:56:54 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/14 14:18:01 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,7 +166,8 @@ $(OPATH):
 clean:
 	$(CLEANUP) $(OBJS)
 	$(CLEANUP) $(OPATH)
-	printf "$(RED)All removed\n$(NC)"
+	$(CLEANUP) $(EXEC)
+	printf "$(RED)All objects removed\n$(NC)"
 
 fclean: clean
 	$(CLEANUP) $(NAME)
