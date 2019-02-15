@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/14 14:18:01 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/15 13:48:49 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,9 @@ WHITE=\033[0;37m
 MKDIR = mkdir -p
 CLEANUP = rm -rf
 
-#WFLAGS += -Wall
-#WFLAGS += -Werror
-#WFLAGS += -Wextra
+WFLAGS += -Wall
+WFLAGS += -Werror
+WFLAGS += -Wextra
 DFLAGS = -fsanitize=address
 IFLAGS = -I $(IPATH)
 CFLAGS = $(WFLAGS) $(IFLAGS)
@@ -59,7 +59,8 @@ SRCS += parsing.c
 SRCS += output_handler.c
 SRCS += diouxx_conv.c
 SRCS += address_conv.c
-SRCS += string_conv.c
+SRCS += print_diouxx.c
+SRCS += print_csp.c
 SRCS += float_conv.c
 
 
@@ -111,6 +112,7 @@ SRCL += ft_toupper.c
 #--------------------Conversion------------------#
 SRCL += ft_atoi.c
 SRCL += ft_itoa.c
+SRCL += ft_uitoa_base.c
 SRCL += ft_llitoa.c
 SRCL += ft_llitoa_base.c
 SRCL += ft_ullitoa.c
@@ -137,7 +139,7 @@ SRCL += ft_putnbr_fd.c
 SRCL += ft_putstr.c
 SRCL += ft_putstr_fd.c
 
-
+#--------------------Maths-----------------------#
 SRCL += ft_recursive_power.c
 
 

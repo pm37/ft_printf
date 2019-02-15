@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/14 12:58:05 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/15 14:06:01 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,20 @@ int					ft_printf(const char *format, ...);
 
 int					ft_check_flags(char *fmt, t_conv *conv);
 
-void				ft_handle_s(t_conv *conv);
-void				ft_handle_sp_p(t_conv *conv, char *output);
-void				ft_handle_di_p(t_conv *conv, char *output);
+void				print_c(t_conv *conv);
+void				print_sp(t_conv *conv, char *output);
+void				print_di(t_conv *conv, char *output);
+void				print_o(t_conv *conv, char *output);
+void				print_x(t_conv *conv, char *output);
+
 void				ft_handle_di(t_conv *conv);
 void				ft_handle_o(t_conv *conv);
 void				ft_handle_u(t_conv *conv);
 void				ft_handle_x(t_conv *conv);
 void				ft_handle_X(t_conv *conv);
+
 void				ft_handle_c(t_conv *conv);
+void				ft_handle_s(t_conv *conv);
 void				ft_handle_p(t_conv *conv);
 void				ft_handle_f(t_conv *conv);
 

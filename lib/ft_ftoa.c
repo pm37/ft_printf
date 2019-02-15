@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:08:39 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/11 20:47:26 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/15 11:59:46 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*ft_get_f_dec2(double nb, int dec)
 	char		*str;
 	char		*str_tmp;
 	int			i;
-	int			len;
 
 	str = ft_strnew(0);
 	i = dec;
@@ -89,7 +88,6 @@ char	*ft_get_f_int(double nb)
 }
 char	*ft_ftoa(double nb, int dec)
 {
-	int					len;
 	char				*str;
 	char				*str_int;
 	int					neg;
