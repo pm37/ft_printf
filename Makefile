@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/15 13:48:49 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/15 14:38:15 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS += diouxx_conv.c
 SRCS += address_conv.c
 SRCS += print_diouxx.c
 SRCS += print_csp.c
+SRCS += print_flags.c
 SRCS += float_conv.c
 
 
