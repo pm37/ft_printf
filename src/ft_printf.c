@@ -11,6 +11,10 @@ int		ft_printf(const char *format, ...)
 	ft_init_fp(&conv);
 	while (format[++i])
 	{
+		
+		/*ft_putstr("\nwhile avec i : ");
+		ft_putnbr(i);
+		ft_putchar('\n');*/
 		if (format[i] == '%')
 		{
 			//debug
@@ -23,6 +27,8 @@ int		ft_printf(const char *format, ...)
 			//debug
 			//ft_putendl("else (!%) du printf");
 		}
+		if (format[i] == '\0')
+			break ;
 	}
 	va_end(conv.ap);
 	return (conv.ret);

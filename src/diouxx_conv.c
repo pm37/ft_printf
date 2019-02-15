@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:51:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/15 14:13:24 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:49:39 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_handle_u(t_conv *conv)
 		str = ft_strdup(ft_llitoa((unsigned long)va_arg(conv->ap, unsigned long long)));
 	else
 		str = ft_strdup(ft_llitoa(va_arg(conv->ap, unsigned int)));
-	print_di(conv, str);
+	print_u(conv, str);
 	ft_strdel(&str);
 }
 

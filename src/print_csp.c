@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:59:56 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/15 14:08:03 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:23:09 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,12 @@ void		print_sp(t_conv *conv, char *output)
 
 void		print_c(t_conv *conv)
 {
-	//debug
-	//ft_putendl("entree dans ft_hand_c");
 	if (conv->width != 0)
 		if (!conv->flag.less)
 			while (--conv->width)
 				conv->ret += write(1, " ", 1);
 	ft_putchar(va_arg(conv->ap, int));
 	conv->ret++;
-	//debug
-	//printf("apres conv->ret++ :%d\n", conv->ret);
 	if (conv->width != 0)
 		if (conv->flag.less)
 			while (--conv->width)
