@@ -4,7 +4,6 @@
 
 int		main(int ac, char **av)
 {
-	char	c;
 	int		ret;
 	char	str[]="hello";
 

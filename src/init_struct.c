@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:20:17 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/14 13:28:20 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/15 14:05:28 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_init_conv(t_conv *conv)
 void	ft_init_fp(t_conv *conv)
 {
 	conv->ret = 0;
-	conv->f[0] = ft_handle_c;
+	conv->f[0] = print_c;
 	conv->type[0] = 'c';
 	conv->f[1] = ft_handle_s;
 	conv->type[1] = 's';

@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/15 12:51:18 by pimichau         ###   ########.fr        #
+#    Updated: 2019/02/15 16:34:32 by pimichau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,9 @@ WHITE=\033[0;37m
 MKDIR = mkdir -p
 CLEANUP = rm -rf
 
-#WFLAGS += -Wall
-#WFLAGS += -Werror
-#WFLAGS += -Wextra
+WFLAGS += -Wall
+WFLAGS += -Werror
+WFLAGS += -Wextra
 DFLAGS = -fsanitize=address
 IFLAGS = -I $(IPATH)
 CFLAGS = $(WFLAGS) $(IFLAGS)
@@ -59,7 +59,9 @@ SRCS += parsing.c
 SRCS += output_handler.c
 SRCS += diouxx_conv.c
 SRCS += address_conv.c
-SRCS += print_conv.c
+SRCS += print_diouxx.c
+SRCS += print_csp.c
+SRCS += print_flags.c
 SRCS += float_conv.c
 
 
@@ -167,7 +169,8 @@ $(OPATH):
 clean:
 	$(CLEANUP) $(OBJS)
 	$(CLEANUP) $(OPATH)
-	printf "$(RED)All removed\n$(NC)"
+	$(CLEANUP) $(EXEC)
+	printf "$(RED)All objects removed\n$(NC)"
 
 fclean: clean
 	$(CLEANUP) $(NAME)
