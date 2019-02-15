@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/14 18:19:15 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/15 12:50:50 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char				*ft_llitoa_base(long long nb, int base, int lowercase);
 char				*ft_ftoa(double nb, int dec);
 char				*ft_get_f_dec(double nb, int dec);
 
+int					ft_max(int n1, int n2);
 int					ft_get_next_line(const int fd, char **line);
 int					ft_tolower(int c);
 int					ft_toupper(int c);

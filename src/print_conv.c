@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:59:56 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/14 18:51:37 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/15 13:09:31 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,26 @@ void		ft_handle_sp_p(t_conv *conv, char *output)
 void		ft_handle_di_p(t_conv *conv, char *output)
 {
 	int		len;
-	int		prec;
+	int		pr;
 
 	prec = conv->prec + conv->flag.plus;
 	len = ft_strlen(output) + conv->flag.plus;
-	if (conv->width > prec && conv->width > len)
-		if (!conv->flag.less)
-			while (--conv->width >= conv->prec && conv->width >= len)
-				conv->ret += write(1, " ", 1);
+	//si largeur est > a la prec + 1 (si flag.plus) et qu'on doit imprimer avant (!flag.less)
+	if (conv->width > ft_max(prec, len) && !conv->flag.less)
+		while (--conv->width >= ft_max(conv->prec, len))
+			conv->ret += write(1, " ", 1);
 	if (conv->flag.plus)
 		conv->ret += write(1, "+", 1);
-	if (conv->width > conv->prec + conv->flag.plus && conv->width > len)
-		if (!conv->flag.less && conv->flag.zero && conv->prec == -1)
-			while (--conv->width >= conv->prec && conv->width >= len)
-				conv->ret += write(1, "0", 1);
-	if (conv->prec != -1)
-		if (len < conv->prec)
-			while (--conv->prec >= len)
-				conv->ret += write(1, "0", 1);
+	if (conv->width > ft_max(prec, len) && !conv->flag.less && conv->flag.zero && conv->prec == -1)
+		while (--conv->width >= ft_max(conv->prec, len))
+			conv->ret += write(1, "0", 1);
+	if (conv->prec != -1 && len < conv->prec)
+		while (--conv->prec >= len)
+			conv->ret += write(1, "0", 1);
 	conv->ret += write(1, output, ft_strlen(output));
-	if (conv->width > prec + conv->flag.plus && conv->width > len)
-		if (conv->flag.less)
-			while (--conv->width >= prec && conv->width >= len)
-				conv->ret += write(1, " ", 1);
+	if (conv->width > ft_max(prec, len) && conv->flag.less)
+		while (--conv->width >= prec && conv->width >= len)
+			conv->ret += write(1, " ", 1);
 	ft_strdel(&output);
 }
 
@@ -81,7 +78,7 @@ void	ft_handle_x_p(t_conv *conv, char *output)
 	//width & flag '0' : imprimer des '0' si la precision et le flag '-' ne sont pas definis
 	if (conv->width > prec && conv->width > len && 
 	!conv->flag.less && conv->flag.zero && conv->prec == -1)
-		while (--conv->width >= len prec && conv->width >= len)
+		while (--conv->width >= len && conv->width >= len)
 			conv->ret += write(1, "0", 1);
 	//imprimer des '0' selon la precision precision
 	if (conv->prec != -1 && len < conv->prec)

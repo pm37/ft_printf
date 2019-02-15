@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/14 18:49:21 by pimichau         ###   ########.fr        #
+#    Updated: 2019/02/15 12:51:18 by pimichau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,7 +140,7 @@ SRCL += ft_putstr_fd.c
 
 #--------------------Maths-----------------------#
 SRCL += ft_recursive_power.c
-
+SRCL += ft_max.c
 
 OBJS += $(patsubst %.c, $(OPATH)%.o, $(SRCS))
 OBJS += $(patsubst %.c, $(OPATH)%.o, $(SRCL))

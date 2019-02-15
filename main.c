@@ -9,7 +9,7 @@ int		main(int ac, char **av)
 	char	str[]="hello";
 
 	c = 'd';
-	ret = printf("%0#10.5x", 20);
+	ret = ft_printf("%5d", 20);
 	//ret = ft_printf("%c\n", c);
 	if (ac == 2)
 		ret = ft_printf("%d", ft_atoi(av[1])); 
