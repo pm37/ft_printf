@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/15 13:38:53 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/15 18:14:06 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static int		ft_check_prec(char *fmt, t_conv *conv)
 		while (fmt[i] && ft_isdigit(fmt[i]))
 			i++;
 	}
+	if (conv->prec > 0)
+		conv->flag.zero = 0;
 	conv->length += i;
 	return (ft_check_size(&fmt[i], conv));
 }
@@ -84,15 +86,14 @@ int				ft_check_flags(char *fmt, t_conv *conv)
 		else if (fmt[i] == '#')
 			conv->flag.sharp = 1;
 		else if (fmt[i] == '+')
-		{
-			conv->flag.space = 0;
 			conv->flag.plus = 1;
-		}
 		else if (fmt[i] == '-')
 			conv->flag.less = 1;
 		else if (fmt[i] == '0')
 			conv->flag.zero = 1;
 	}
+	if (conv->flag.plus && conv->flag.space)
+		conv->flag.space = 0;
 	conv->length += i;
 	return (ft_check_width(&fmt[i], conv));
 }
