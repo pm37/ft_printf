@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/15 19:09:48 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:50:07 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void				print_c(t_conv *conv);
 void				print_sp(t_conv *conv, char *output);
 void				print_di(t_conv *conv, char *output);
 void				print_o(t_conv *conv, char *output);
+void				print_u(t_conv *conv, char *output);
 void				print_x(t_conv *conv, char *output);
 
 void				print_space_before(t_conv *conv, int max, char *output);

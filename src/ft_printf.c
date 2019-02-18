@@ -12,6 +12,7 @@ int		ft_printf(const char *format, ...)
 	while (format[++i])
 	{
 		
+		//debug
 		/*ft_putstr("\nwhile avec i : ");
 		ft_putnbr(i);
 		ft_putchar('\n');*/
@@ -20,6 +21,7 @@ int		ft_printf(const char *format, ...)
 			//debug
 			//ft_putendl("if % du printf");
 			i += ft_check_flags((char *)&format[i + 1], &conv);
+			ft_init_conv(&conv);
 		}
 		else
 		{

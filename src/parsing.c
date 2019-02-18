@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/15 18:14:06 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/18 14:16:18 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int				ft_check_flags(char *fmt, t_conv *conv)
 {
 	int i;
 
-	i = -1;
-	while (fmt[++i] && ft_is_flag(fmt[i]))
+	i = 0;
+	while (fmt[i] && ft_is_flag(fmt[i]))
 	{
 		if (fmt[i] == ' ')
 			conv->flag.space = 1;
@@ -91,6 +91,7 @@ int				ft_check_flags(char *fmt, t_conv *conv)
 			conv->flag.less = 1;
 		else if (fmt[i] == '0')
 			conv->flag.zero = 1;
+		i++;
 	}
 	if (conv->flag.plus && conv->flag.space)
 		conv->flag.space = 0;

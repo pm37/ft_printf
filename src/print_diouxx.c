@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/15 19:49:27 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/18 14:34:16 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,13 @@ void	print_x(t_conv *conv, char *output)
 {
 	int		len;
 	int		prec;
+	int		is_width;
 
+//	ft_putstr("conv->width: ");
+//	ft_putnbr(conv->width);
+//	ft_putendl("");
+
+	is_width = conv->width > 0 ? 1 : 0;
 	prec = conv->prec + conv->flag.sharp * 2;
 	len = ft_strlen(output) + conv->flag.sharp * 2;
 	if (!conv->flag.zero && conv->width > prec
@@ -100,7 +106,10 @@ void	print_x(t_conv *conv, char *output)
 	if (conv->prec != -1 && len < conv->prec)
 		while (--conv->prec >= len)
 			conv->ret += write(1, "0", 1);
-	conv->ret += write(1, output, ft_strlen(output));
+	if (!(ft_strequ("0", output) && conv->prec == 0))
+		conv->ret += write(1, output, ft_strlen(output));
+	else if (ft_strequ("0", output) && is_width && conv->prec == 0)
+		conv->ret += write(1, " ", 1);
 	if (conv->width > prec + conv->flag.sharp * 2 && conv->width > len && conv->flag.less)
 		while (--conv->width >= prec && conv->width >= len)
 			conv->ret += write(1, " ", 1);

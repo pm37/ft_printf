@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:03:46 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/14 15:39:25 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/18 14:16:55 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,5 @@ int				output_handler(char *fmt, t_conv *conv)
 	}
 	else if (*fmt == '%')
 		ft_handle_percent(conv);
-	else
-		ft_init_conv(conv);
 	return (conv->length + 1);
 }
