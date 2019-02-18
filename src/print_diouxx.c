@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/18 15:11:17 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/18 16:17:45 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void		print_di(t_conv *conv, char *output)
 	int		prec;
 	int		max;
 	int		digits;
+	int		is_width;
 
+	is_width = conv->width > 0 ? 1 : 0;
 	prec = *output != '-' ? conv->prec + conv->flag.plus : conv->prec + 1;
 	len = *output != '-' ? ft_strlen(output) + conv->flag.plus : ft_strlen(output);
 	max = ft_max(prec, len);
@@ -46,6 +48,8 @@ void		print_di(t_conv *conv, char *output)
 		else
 			conv->ret += write(1, output + 1, digits);
 	}
+	else if (ft_strequ("0", output) && is_width && conv->prec == 0)
+		conv->ret += write(1, " ", 1);
 	print_space_after(conv, max);
 }
 
