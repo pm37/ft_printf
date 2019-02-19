@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:03:46 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/18 14:16:55 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/19 19:07:13 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,14 @@ static void		ft_handle_percent(t_conv *conv)
 {	
 
 	if (conv->width != 0)
-		if (!conv->flag.less)
+	{
+		if (!conv->flag.less && !conv->flag.zero)
 			while (--conv->width)
 				conv->ret += write(1, " ", 1);
+		else if (conv->flag.zero && !conv->flag.less)
+			while (--conv->width)
+				conv->ret += write(1, "0", 1);
+	}
 	conv->ret += write(1, "%", 1);
 	if (conv->width != 0)
 		if (conv->flag.less)
@@ -47,5 +52,21 @@ int				output_handler(char *fmt, t_conv *conv)
 	}
 	else if (*fmt == '%')
 		ft_handle_percent(conv);
+	else if (*fmt)
+	{
+		if (conv->width != 0)
+		{
+			if (!conv->flag.less && !conv->flag.zero)
+				while (--conv->width)
+					conv->ret += write(1, " ", 1);
+			else if (conv->flag.zero && !conv->flag.less)
+				while (--conv->width)
+					conv->ret += write(1, "0", 1);
+			conv->ret += write(1, fmt, 1);
+			if (conv->flag.less)
+				while (--conv->width)
+					conv->ret += write(1, " ", 1);
+		}
+	}
 	return (conv->length + 1);
 }

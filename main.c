@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "ft_printf.h"
+#include <limits.h>
 
 int		main(int ac, char **av)
 {
-	int a = 125;
+	unsigned long a = -429496734238888;
 	int ret;
+	int ret2;
 	
-	ret =      ft_printf("%03.2d", 0);
-	printf("\nret = %d\n", ret);
+	ret =  printf("%o, %ho, %hho", -42, -42, -42);
+	printf("\n\n");
+	ret2 =   ft_printf("%o, %ho, %hho", -42, -42, -42);
+	printf("\nret = %d | ret2 = %d\n",ret, ret2);
 	return (0);
 }

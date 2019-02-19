@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/18 16:04:17 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/19 17:19:56 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int		ft_check_size(char *fmt, t_conv *conv)
 		conv->size.j = 1;
 		i++;
 	}
-	
 	conv->length += i;
 	return (output_handler(&fmt[i], conv));
 }

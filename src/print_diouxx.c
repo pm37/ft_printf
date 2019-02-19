@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/18 16:17:45 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/19 18:58:11 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void		print_u(t_conv *conv, char *output)
 	len = *output != '-' ? ft_strlen(output) + conv->flag.plus : ft_strlen(output);
 	max = ft_max(prec, len);
 	print_space_before(conv, max, output);
-	//if (conv->flag.plus && *output != '-')
-	//	conv->ret += write(1, "+", 1);	
 	digits = *output == '-' ? ft_strlen(output) - 1 : ft_strlen(output);
 	conv->ret += *output == '-' ? write(1, "-", 1) : 0;
 	if (conv->width > max)
@@ -82,15 +80,12 @@ void		print_u(t_conv *conv, char *output)
 	}
 	print_space_after(conv, max);
 }
+
 void	print_x(t_conv *conv, char *output)
 {
 	int		len;
 	int		prec;
 	int		is_width;
-
-//	ft_putstr("conv->width: ");
-//	ft_putnbr(conv->width);
-//	ft_putendl("");
 
 	is_width = conv->width > 0 ? 1 : 0;
 	prec = conv->prec + conv->flag.sharp * 2;

@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/15 16:34:32 by pimichau         ###   ########.fr        #
+#    Updated: 2019/02/19 16:44:47 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,7 @@ SRCL += ft_memset.c
 
 #--------------------Strings---------------------#
 SRCL += ft_isalnum.c
+SRCL += ft_islower.c
 SRCL += ft_isalpha.c
 SRCL += ft_isascii.c
 SRCL += ft_isdigit.c
