@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/15 19:50:07 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/18 15:13:18 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_size
 	int				hh;
 	int				l;
 	int				ll;
+	int				j;
 }					t_size;
 
 typedef struct		s_conv
