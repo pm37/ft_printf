@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:51:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/18 16:04:15 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/19 17:12:30 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ void	ft_handle_u(t_conv *conv)
 	else if (conv->size.h)
 		str = ft_strdup(ft_llitoa((unsigned short)va_arg(conv->ap, unsigned long long)));
 	else if (conv->size.ll || conv->size.j)
-		str = ft_strdup(ft_ullitoa(va_arg(conv->ap, unsigned long long)));
+	{
+		long long int nbr;
+		nbr = va_arg(conv->ap, long long);
+		str = ft_strdup(ft_ullitoa((unsigned long long)nbr));
+	}
 	else if (conv->size.l)
 		str = ft_strdup(ft_llitoa((unsigned long)va_arg(conv->ap, unsigned long long)));
 	else
