@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/19 16:44:47 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/20 17:57:25 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ SRCS += init_struct.c
 SRCS += parsing.c
 SRCS += output_handler.c
 SRCS += diouxx_conv.c
-SRCS += address_conv.c
 SRCS += print_diouxx.c
 SRCS += print_csp.c
 SRCS += print_flags.c

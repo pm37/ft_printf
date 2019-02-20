@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/19 18:58:11 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:22:38 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	print_x(t_conv *conv, char *output)
 		conv->ret += write(1, "0x", 2);
 	else if (conv->flag.sharp && !ft_strequ("0", output))
 		conv->ret += write(1, "0X", 2);
-	if (conv->width > prec && conv->width > len && 
-			!conv->flag.less && conv->flag.zero && conv->prec == -1)
+	if (conv->width > prec && conv->width > len
+	&& !conv->flag.less && conv->flag.zero && conv->prec == -1)
 		while (--conv->width >= prec && conv->width >= len)
 			conv->ret += write(1, "0", 1);
 	if (conv->prec != -1 && len < conv->prec)
@@ -127,7 +127,7 @@ void	print_o(t_conv *conv, char *output)
 			&& conv->width > len && !conv->flag.less)
 		while (--conv->width >= conv->prec && conv->width >= len)
 			conv->ret += write(1, " ", 1);
-	if (conv->flag.sharp)
+	if (conv->flag.sharp && conv->prec >= 0)
 		conv->ret += write(1, "0", 1);
 	if (conv->width > prec && conv->width > len && 
 			!conv->flag.less && conv->flag.zero && conv->prec == -1)

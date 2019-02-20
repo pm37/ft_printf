@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/19 17:19:56 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:25:49 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int		ft_check_size(char *fmt, t_conv *conv)
 		conv->size.j = 1;
 		i++;
 	}
+	if (fmt[i] == 'o' && conv->flag.sharp && conv->prec == -1)
+		conv->prec = 0;
 	conv->length += i;
 	return (output_handler(&fmt[i], conv));
 }
@@ -66,8 +68,6 @@ static int		ft_check_width(char *fmt, t_conv *conv)
 
 	i = 0;
 	conv->width = ft_atoi(fmt);
-	if (conv->width)
-		conv->flag.space = 0;
 	while (fmt[i] && ft_isdigit(fmt[i]))
 		i++;
 	conv->length += i;

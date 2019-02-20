@@ -9,9 +9,9 @@ int		main(int ac, char **av)
 	int ret;
 	int ret2;
 	
-	ret =  printf("%o, %ho, %hho", -42, -42, -42);
+	ret =  printf("{%f}", 10.0);
 	printf("\n\n");
-	ret2 =   ft_printf("%o, %ho, %hho", -42, -42, -42);
+	ret2 =   ft_printf("{%f}", 10.0);
 	printf("\nret = %d | ret2 = %d\n",ret, ret2);
 	return (0);
 }
