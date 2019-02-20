@@ -6,14 +6,14 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:46:15 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/20 15:13:51 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:19:39 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <limits.h>
 
-static int		get_str_len(unsigned long long n, int base)
+static int	get_str_len(unsigned long long n, int base)
 {
 	int		i;
 
