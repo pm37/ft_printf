@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:03:46 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 17:33:41 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:11:27 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static void		ft_handle_conv(t_conv *conv)
 }
 
 static void		ft_handle_percent(t_conv *conv)
-{	
-
+{
 	if (conv->width != 0)
 	{
 		if (!conv->flag.less && !conv->flag.zero)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/20 19:10:38 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/20 19:10:57 by bwan-nan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		ft_printf(const char *format, ...)
@@ -11,24 +23,13 @@ int		ft_printf(const char *format, ...)
 	ft_init_fp(&conv);
 	while (format[++i])
 	{
-		
-		//debug
-		/*ft_putstr("\nwhile avec i : ");
-		ft_putnbr(i);
-		ft_putchar('\n');*/
 		if (format[i] == '%')
 		{
-			//debug
-			//ft_putendl("if % du printf");
 			i += ft_check_flags((char *)&format[i + 1], &conv);
 			ft_init_conv(&conv);
 		}
 		else
-		{
 			conv.ret += write(1, &format[i], 1);
-			//debug
-			//ft_putendl("else (!%) du printf");
-		}
 		if (format[i] == '\0')
 			break ;
 	}
