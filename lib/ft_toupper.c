@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pimichau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 16:12:31 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/08 14:20:33 by pimichau         ###   ########.fr       */
+/*   Created: 2018/11/07 17:57:24 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/19 16:42:08 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+#include "ft_printf.h"
+
+void		ft_toupper(char *str)
 {
-	if (c >= 'a' && c <= 'z')
-		c = c - 32;
-	return (c);
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_islower(str[i]))
+			str[i] -= 32;
+		i++;
+	}
 }

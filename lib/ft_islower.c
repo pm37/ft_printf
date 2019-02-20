@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   address_conv.c                                     :+:      :+:    :+:   */
+/*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 11:59:12 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/15 19:26:24 by pimichau         ###   ########.fr       */
+/*   Created: 2018/11/07 17:53:01 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/19 16:42:49 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_handle_p(t_conv *conv)
+int		ft_islower(int c)
 {
-	char	*str;
-
-	str = ft_strjoin("0x7fff", ft_llitoa_base(va_arg(conv->ap, int), 16, 1));
-	print_sp(conv, str);
-	ft_strdel(&str);
+	return (c >= 97 && c <= 122);
 }
