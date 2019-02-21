@@ -6,25 +6,47 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:08:39 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/15 11:59:46 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/21 14:23:33 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-#include <limits.h>
-char	*get_dec_part(long double nb, int prec)
-{
-	char		*dec_part;
-	char		*dec_tmp;
-	int			len;
 
-	str = ft_strnew(0);
-	while (prec >= 1)
+static char	*ft_zero(int prec)
+{
+	char	*dec_part;
+	int		i;
+
+	if (!(dec_part = (char *)malloc(sizeof(char) * (prec + 1))))
+		return (0);
+	dec_part[prec] = '\0';
+	i = 0;
+	while (i < prec)
+	{
+		dec_part[i] = '0';
+		i++;
+	}
+	return (dec_part);
+}
+
+static char	*get_dec_part(double nb, int prec)
+{
+	char	*dec_part;
+	char	*dec_tmp;
+	char	*tmp;
+	int		len;
+
+	if (nb > 9223372036854775807.0)
+		return (ft_zero(prec));
+	dec_part = ft_strnew(0);
+	while (prec + 1 >= 1)
 	{
 		nb = (nb - (long long)nb) * 10;
 		dec_tmp = ft_itoa(nb);
+		tmp = dec_part;
 		dec_part = ft_strjoin(dec_part, dec_tmp);
+		free(tmp);
+		free(dec_tmp);
 		prec--;
 	}
 	len = ft_strlen(dec_part);
@@ -35,28 +57,11 @@ char	*get_dec_part(long double nb, int prec)
 	return (dec_part);
 }
 
-char	*ft_get_f_dec2(double nb, int dec)
+static char	*get_int_part(double nb)
 {
-	char		*str;
-	char		*str_tmp;
 	int			i;
-
-	str = ft_strnew(0);
-	i = dec;
-	while (i > 1)
-	{
-		nb = (nb - (long long)nb) * 10;
-		str_tmp = ft_llitoa(nb);
-		str = ft_strjoin(str, str_tmp);
-		i--;
-	}
-	return (str);
-}
-char	*get_int_part(long double nb)
-{
-	//long long n;
-	int				i;
-	char			*int_part;
+	char		*int_part;
+	char		*tmp;
 
 	i = 0;
 	while (nb > 9223372036854775807.0)
@@ -64,25 +69,38 @@ char	*get_int_part(long double nb)
 		nb /= 10;
 		i++;
 	}
-	int_part = ft_llitoa((long long)nb);
+	int_part = ft_llitoa(nb);
 	if (i)
-		int_part = ft_strjoin(int_part, get_dec_part(nb, i + 1));
+	{
+		tmp = int_part;
+		int_part = ft_strjoin(int_part, get_dec_part(nb, i));
+		free(tmp);
+	}
 	return (int_part);
 }
-char	*ft_lftoa(long double nb, int prec)
-{
-	char				*dec_part;
-	char				*int_part;
-	int					neg;
-	int					i;
 
+char	*ft_lftoa(double nb, int prec)
+{
+	char	*result;
+	char	*int_part;
+	char	*tmp;
+	int		i;
+
+	result = 0;
 	i = 1;
-	if (!prec)
-		return (ft_llitoa((long long)nb));
-	neg = (nb < 0) ? 1 : 0;
-	dec_part = get_dec_part(nb, prec + 1);
-//	printf("\n et un de plus : %f\n", nb);
+	if (prec > 0)
+	{
+		result = get_dec_part(nb, prec);
+		tmp = result;
+		result = ft_strjoin(".", result);
+		free(tmp);
+	}
+	else
+		result = ft_strnew(0);
 	int_part = get_int_part(nb);
-	printf("int_part: %s\ndec_part: %s\n", int_part, dec_part);
-	return (ft_strjoin(int_part, ft_strjoin(".", dec_part)));
+	tmp = result;
+	result = ft_strjoin(int_part, result);
+	free(int_part);
+	free(tmp);
+	return (result);
 }

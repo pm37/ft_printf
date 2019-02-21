@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/20 17:57:34 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/21 13:26:16 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char				*ft_llitoa(long long nb);
 char				*ft_ullitoa(unsigned long long nb);
 char				*ft_llitoa_base(long long nb, int base);
 char				*ft_ullitoa_base(unsigned long long nb, int base);
-char				*ft_lftoa(long double nb, int dec);
+char				*ft_lftoa(double nb, int dec);
 char				*ft_get_f_dec(double nb, int dec);
 
 int					ft_islower(int c);
