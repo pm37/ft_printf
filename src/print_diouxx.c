@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 19:34:00 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:43:06 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,20 @@ void	print_x(t_conv *conv, char *output)
 	int		len;
 	int		prec;
 	int		is_width;
+	int		max;
 
 	is_width = conv->width > 0 ? 1 : 0;
 	prec = conv->prec + conv->flag.sharp * 2;
 	len = ft_strlen(output) + conv->flag.sharp * 2;
-	if (!conv->flag.zero && conv->width > prec
-			&& conv->width > len && !conv->flag.less)
+	max = ft_max(prec, len);
+	if (!conv->flag.zero && conv->width > max && !conv->flag.less)
 		while (--conv->width >= conv->prec && conv->width >= len)
 			conv->ret += write(1, " ", 1);
 	if (conv->flag.sharp && conv->conv_type == 'x' && !ft_strequ("0", output))
 		conv->ret += write(1, "0x", 2);
 	else if (conv->flag.sharp && !ft_strequ("0", output))
 		conv->ret += write(1, "0X", 2);
-	if (conv->width > prec && conv->width > len
-			&& !conv->flag.less && conv->flag.zero && conv->prec == -1)
+	if (conv->width > max && !conv->flag.less && conv->flag.zero && conv->prec == -1)
 		while (--conv->width >= prec && conv->width >= len)
 			conv->ret += write(1, "0", 1);
 	if (conv->prec != -1 && len < conv->prec)

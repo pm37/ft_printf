@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:03:46 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 19:11:27 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/21 13:16:04 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ static void		ft_handle_percent(t_conv *conv)
 
 int				output_handler(char *fmt, t_conv *conv)
 {
-	if (*fmt == 'c' || *fmt == 's' || *fmt == 'p' || *fmt == 'd'
-	|| *fmt == 'i' || *fmt == 'o' || *fmt == 'u' || *fmt == 'x'
-	|| *fmt == 'X' || *fmt == 'f')
+	if (ft_strchr(OPTIONS, *fmt))
 	{
 		conv->conv_type = *fmt;
 		ft_handle_conv(conv);

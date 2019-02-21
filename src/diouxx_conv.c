@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   diouxx_conv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 11:51:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 16:54:17 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/13 11:51:24 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/21 17:35:00 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_handle_di(t_conv *conv)
 	else if (conv->size.ll || conv->size.j)
 		str = ft_llitoa(va_arg(conv->ap, long long));
 	else if (conv->size.l)
-		str = ft_llitoa((long)va_arg(conv->ap, long long));
+		str = ft_llitoa(va_arg(conv->ap, long long));
 	else
 		str = ft_llitoa(va_arg(conv->ap, int));
 	print_di(conv, str);
@@ -79,7 +79,7 @@ void	ft_handle_xx(t_conv *conv)
 	else
 		str = ft_ullitoa_base((unsigned int)va_arg(conv->ap, int), 16);
 	if (conv->conv_type == 'X')
-		ft_toupper(str);
+		ft_strtoupper(str);
 	print_x(conv, str);
 	ft_strdel(&str);
 }

@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/20 17:57:25 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/21 17:37:45 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ YELLOW=\033[0;33m
 BLUE=\033[0;34m
 PURPLE=\033[0;35m
 CYAN=\033[0;36m
-WHITE=\033[0;37m
+GREY=\033[0;37m
 
 MKDIR = mkdir -p
 CLEANUP = rm -rf
@@ -62,6 +62,8 @@ SRCS += print_diouxx.c
 SRCS += print_csp.c
 SRCS += print_flags.c
 SRCS += float_conv.c
+SRCS += bk_conv.c
+SRCS += colors.c
 
 
 #--------------------Memory--------------------#
@@ -109,6 +111,9 @@ SRCL += ft_strsplit.c
 SRCL += ft_strsub.c
 SRCL += ft_tolower.c
 SRCL += ft_toupper.c
+SRCL += ft_strtoupper.c
+SRCL += ft_strtolower.c
+SRCL += ft_strchr_index.c
 
 #--------------------Conversion------------------#
 SRCL += ft_atoi.c

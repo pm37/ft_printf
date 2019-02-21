@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/20 19:10:38 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 19:10:57 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/20 19:10:38 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/21 16:47:16 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		ft_printf(const char *format, ...)
 			i += ft_check_flags((char *)&format[i + 1], &conv);
 			ft_init_conv(&conv);
 		}
+		else if (format[i] == '{')
+			color_check(&conv, &format[i], &i);
 		else
 			conv.ret += write(1, &format[i], 1);
 		if (format[i] == '\0')

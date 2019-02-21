@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strtolower.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:57:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 17:37:26 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/21 17:38:07 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/21 17:38:45 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_toupper(int c)
+void	ft_strtolower(char *str)
 {
-	if (ft_islower(c))
-		c -= 32;
-	return (c);
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		str[i] = ft_tolower(str[i]);
+		i++;
+	}
 }

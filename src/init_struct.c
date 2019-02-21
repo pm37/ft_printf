@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:20:17 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/19 17:53:58 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/21 17:03:12 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_init_conv(t_conv *conv)
 	conv->length = 0;
 	conv->prec = -1;
 	conv->width = -1;
+	conv->style = NULL;
 }
 
 void	ft_init_fp(t_conv *conv)
@@ -47,4 +48,8 @@ void	ft_init_fp(t_conv *conv)
 	conv->type[8] = 'X';
 	conv->f[9] = ft_handle_f;
 	conv->type[9] = 'f';
+	conv->f[10] = ft_handle_b;
+	conv->type[10] = 'b';
+	conv->f[11] = ft_handle_k;
+	conv->type[11] = 'k';
 }

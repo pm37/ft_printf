@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/20 17:57:34 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/21 17:35:18 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,21 @@
 
 # define BUFF_SIZE	1024
 # define OPEN_MAXI	1024
+
+# define OPTIONS	"cspdiouxXfbk"
 # define ULL		unsigned long long
+
+# define BLACK		"{black}"
+# define RED		"{red}"
+# define GREEN		"{green}"
+# define YELLOW		"{yellow}"
+# define BLUE		"{blue}"
+# define PURPLE		"{purple}"
+# define CYAN		"{cyan}"
+# define GREY		"{grey}"
+# define BOLD		"{bold}"
+# define UNDERLINED	"{ul}"
+# define NC			"{nc}"
 
 typedef struct		s_flag
 {
@@ -47,11 +61,12 @@ typedef struct		s_conv
 	int				width;
 	int				prec;
 	t_size			size;
-	char			conv_type;
-	char			type[10];
-	void			(*f[10])(struct s_conv *conv);
+	void			(*f[12])(struct s_conv *conv);
 	int				length;
 	size_t			ret;
+	char			*style;
+	char			conv_type;
+	char			type[12];
 }					t_conv;
 
 typedef struct		s_list
@@ -86,10 +101,15 @@ void				ft_handle_s(t_conv *conv);
 void				ft_handle_p(t_conv *conv);
 void				ft_handle_f(t_conv *conv);
 
+void				ft_handle_b(t_conv *conv);
+void				ft_handle_k(t_conv *conv);
+
 int					output_handler(char *fmt, t_conv *conv);
 
 void				ft_init_fp(t_conv *conv);
 void				ft_init_conv(t_conv *conv);
+
+void				color_check(t_conv *conv, const char *format, int *i);	
 
 char				*ft_llitoa(long long nb);
 char				*ft_ullitoa(unsigned long long nb);
@@ -98,8 +118,11 @@ char				*ft_ullitoa_base(unsigned long long nb, int base);
 char				*ft_ftoa(double nb, int dec);
 char				*ft_get_f_dec(double nb, int dec);
 
+int					ft_count_occurence(char *str, char c);
+int					ft_strchr_index(const char *str, char c);
 int					ft_islower(int c);
-void				ft_toupper(char *str);
+void				ft_strtoupper(char *str);
+int					ft_toupper(int c);
 int					ft_max(int n1, int n2);
 int					ft_get_next_line(const int fd, char **line);
 int					ft_tolower(int c);

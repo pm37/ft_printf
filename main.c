@@ -1,17 +1,15 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include "ft_printf.h"
 #include <limits.h>
+#include "ft_printf.h"
 
 int		main(int ac, char **av)
 {
-	unsigned long a = -429496734238888;
 	int ret;
-	int ret2;
+
+	ret = 0;
 	
-	ret =  printf("{%d}", 1003);
-	printf("\n\n");
-	ret2 =   ft_printf("{%d}", 1003);
-	printf("\nret = %d | ret2 = %d\n",ret, ret2);
+	ret =   ft_printf("%k", 324324234);
+	printf("\nret = %d\n",ret);
 	return (0);
 }
