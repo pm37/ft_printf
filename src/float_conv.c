@@ -18,7 +18,7 @@ void	ft_handle_f(t_conv *conv)
 
 	if (conv->prec == -1)
 		conv->prec = 6;
-	str = ft_ftoa(va_arg(conv->ap, double), conv->prec);
+	str = ft_lftoa(va_arg(conv->ap, double), conv->prec);
 	print_di(conv, str);
 	ft_strdel(&str);
 }
