@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:32:37 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 16:24:50 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:34:34 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_space_before(t_conv *conv, int max, char *output)
 void	print_space_after(t_conv *conv, int max)
 {
 	if (conv->width > max && conv->flag.less)
-		while (--conv->width >= max) 
+		while (--conv->width >= max)
 			conv->ret += write(1, " ", 1);
 }
 

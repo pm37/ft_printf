@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 17:25:49 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:32:00 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,14 @@ static int		ft_check_size(char *fmt, t_conv *conv)
 	int i;
 
 	i = 0;
-	if (fmt[0] == 'h')
-	{
-		if (fmt[1] == 'h')
-			conv->size.hh = 1;
-		else
-			conv->size.h = 1;
-		i = (conv->size.h == 1) ? i + 1 : i + 2;
-	}
-	else if (fmt[0] == 'l')
-	{
-		if (fmt[1] == 'l')
-			conv->size.ll = 1;
-		else
-			conv->size.l = 1;
-		i = (conv->size.l == 1) ? i + 1 : i + 2;
-	}
-	else if (fmt[0] == 'j')
-	{
-		conv->size.j = 1;
-		i++;
-	}
+	conv->size.hh = *fmt == 'h' && fmt[1] == 'h' ? 1 : 0;
+	conv->size.h = *fmt == 'h' && fmt[1] != 'h' ? 1 : 0;
+	conv->size.ll = *fmt == 'l' && fmt[1] == 'l' ? 1 : 0;
+	conv->size.l = *fmt == 'l' && fmt[1] != 'l' ? 1 : 0;
+	conv->size.j = *fmt == 'j' ? 1 : 0;
+	if (conv->size.h || conv->size.hh || conv->size.l
+	|| conv->size.ll || conv->size.j)
+		i += conv->size.hh == 1 || conv->size.ll == 1 ? 2 : 1;
 	if (fmt[i] == 'o' && conv->flag.sharp && conv->prec == -1)
 		conv->prec = 0;
 	conv->length += i;
