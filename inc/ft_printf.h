@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/21 13:26:16 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/22 18:12:08 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "float.h"
 
 # define BUFF_SIZE	1024
 # define OPEN_MAXI	1024
@@ -98,6 +99,15 @@ char				*ft_ullitoa_base(unsigned long long nb, int base);
 char				*ft_lftoa(double nb, int dec);
 char				*ft_get_f_dec(double nb, int dec);
 
+char				*get_bits(void *octet);
+int					ft_binatoi(char *str);
+void				str_addition(char **result, char *add);
+void				str_mult_by_two(char **str);
+void				str_div_by_two(char **str);
+char				*round_float(char *number, int precision);
+
+int					ft_strchr_index(char *str, char c);
+char				*ft_str_notchr(char *str, char c);
 int					ft_islower(int c);
 void				ft_toupper(char *str);
 int					ft_max(int n1, int n2);

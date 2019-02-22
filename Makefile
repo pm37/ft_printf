@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/21 12:54:10 by pimichau         ###   ########.fr        #
+#    Updated: 2019/02/22 18:11:37 by pimichau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ SRCS += diouxx_conv.c
 SRCS += print_diouxx.c
 SRCS += print_csp.c
 SRCS += print_flags.c
-SRCS += print_lf.c
+SRCS += float_conv.c
+SRCS += float_operations.c
 
 
 #--------------------Memory--------------------#
@@ -109,6 +110,8 @@ SRCL += ft_strsplit.c
 SRCL += ft_strsub.c
 SRCL += ft_tolower.c
 SRCL += ft_toupper.c
+SRCL += ft_str_notchr.c
+SRCL += ft_strchr_index.c
 
 #--------------------Conversion------------------#
 SRCL += ft_atoi.c
@@ -119,6 +122,8 @@ SRCL += ft_llitoa_base.c
 SRCL += ft_ullitoa.c
 SRCL += ft_ullitoa_base.c
 SRCL += ft_ftoa.c
+SRCL += get_bits.c
+SRCL += ft_binatoi.c
 
 #----------------------Tab-----------------------#
 
@@ -157,6 +162,7 @@ run: $(OPATH) $(EXEC)
 
 $(NAME): $(OBJS)
 	ar -rusc $@ $^ 
+	ranlib $@
 	printf "$(GREEN)$@ is ready.\n$(NC)"
 
 $(OBJS): $(OPATH)%.o : %.c $(INCS)

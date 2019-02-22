@@ -3,16 +3,17 @@
 #include "ft_printf.h"
 #include <limits.h>
 
+#define INIT "00000000000000000000000000000000000000000000000000.0000000000000000000000000000000000000000000000000"
+
 int		main(int ac, char **av)
 {
 	unsigned long a = -429496734238888;
 	int ret;
 	int ret2;
-	double	nb = 123456789012345678901.123456789;
+	float	nb = 12341.123456789;
+	char	*result;
 	
-	ret =  printf("le vrai:\n%.011lf", nb);
-	printf("\n\n");
-	ret2 =   ft_printf("le mien:\n%.011lf", nb);
-	printf("\n\nret = %d | ret2 = %d\n",ret, ret2);
+	ret = ft_printf("%f\n", nb);
+	ret2 = printf("%f\n", nb);
 	return (0);
 }

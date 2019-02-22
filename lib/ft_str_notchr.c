@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_str_notchr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pimichau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 11:49:14 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/22 16:02:23 by pimichau         ###   ########.fr       */
+/*   Created: 2019/02/22 17:59:51 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/22 18:01:43 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_str_notchr(char *str, char c)
 {
-	char	*dest;
-	int		i;
+	int 	i;
 
 	i = 0;
-	while (s1[i])
+	while (str[i] && str[i] == c)
 		i++;
-	if (!(dest = (char *)malloc(sizeof(char) * (i + 1))))
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	return (str + i);
 }

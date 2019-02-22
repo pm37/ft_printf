@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   float_conv.c                                       :+:      :+:    :+:   */
+/*   ft_binatoi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/13 12:07:19 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 14:23:35 by pimichau         ###   ########.fr       */
+/*   Created: 2019/02/22 17:37:52 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/22 17:38:54 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			ft_handle_f(t_conv *conv)
+int		ft_binatoi(char *binary)
 {
-	char		*output;
+	int i;
+	int	len;
+	int	result;
 
-	if (conv->prec == -1)
-		conv->prec = 6;
-	output = ft_lftoa(va_arg(conv->ap, double), conv->prec);
-	conv->ret += write(1, output, ft_strlen(output));
-	ft_strdel(&output);
+	i = 0;
+	result = 0;
+	len = ft_strlen(binary);
+	while (i < len)
+	{
+		if (binary[len - 1 - i] == '1')
+			result += ft_recursive_power(2, i);
+		i++;
+	}
+	return (result);
 }

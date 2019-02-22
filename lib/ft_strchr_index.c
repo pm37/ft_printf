@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strchr_index.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pimichau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 11:49:14 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/22 16:02:23 by pimichau         ###   ########.fr       */
+/*   Created: 2019/02/22 18:12:16 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/22 18:12:56 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_strdup(const char *s1)
+int		ft_strchr_index(char *str, char c)
 {
-	char	*dest;
 	int		i;
 
 	i = 0;
-	while (s1[i])
-		i++;
-	if (!(dest = (char *)malloc(sizeof(char) * (i + 1))))
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	while (str[i])
 	{
-		dest[i] = s1[i];
+		if (str[i] == c)
+			return (i);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (0);
 }
