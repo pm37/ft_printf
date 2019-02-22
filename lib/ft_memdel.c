@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 15:31:02 by pimichau          #+#    #+#             */
-/*   Updated: 2018/11/14 16:17:12 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/22 12:48:06 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_memdel(void **ap)
 {
-	if (ap == NULL)
+	if (!ap || !*ap)
 		return ;
 	free(*ap);
 	*ap = NULL;

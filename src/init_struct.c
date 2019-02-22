@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:20:17 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 17:03:12 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/22 13:20:56 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_init_fp(t_conv *conv)
 	conv->type[9] = 'f';
 	conv->f[10] = ft_handle_b;
 	conv->type[10] = 'b';
-	conv->f[11] = ft_handle_k;
+	conv->f[11] = timestamp_to_date;
 	conv->type[11] = 'k';
+	conv->f[12] = date_to_timestamp;
+	conv->type[12] = 'K';
 }

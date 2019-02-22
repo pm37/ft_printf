@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/21 17:35:18 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/22 13:20:32 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define BUFF_SIZE	1024
 # define OPEN_MAXI	1024
 
-# define OPTIONS	"cspdiouxXfbk"
+# define OPTIONS	"cspdiouxXfbkK"
 # define ULL		unsigned long long
 
 # define BLACK		"{black}"
@@ -61,12 +61,12 @@ typedef struct		s_conv
 	int				width;
 	int				prec;
 	t_size			size;
-	void			(*f[12])(struct s_conv *conv);
+	void			(*f[13])(struct s_conv *conv);
 	int				length;
 	size_t			ret;
 	char			*style;
 	char			conv_type;
-	char			type[12];
+	char			type[13];
 }					t_conv;
 
 typedef struct		s_list
@@ -102,7 +102,8 @@ void				ft_handle_p(t_conv *conv);
 void				ft_handle_f(t_conv *conv);
 
 void				ft_handle_b(t_conv *conv);
-void				ft_handle_k(t_conv *conv);
+void				timestamp_to_date(t_conv *conv);
+void				date_to_timestamp(t_conv *conv);
 
 int					output_handler(char *fmt, t_conv *conv);
 
