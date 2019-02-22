@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_index.c                                  :+:      :+:    :+:   */
+/*   ft_str_notchr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 18:58:29 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/22 18:58:50 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/22 17:59:51 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/22 19:10:58 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_strchr_index(const char *str, char c)
+char	*ft_str_notchr(char *str, char c)
 {
-	int		i;
+	int 	i;
 
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (i);
+	while (str[i] && str[i] == c)
 		i++;
-	}
-	return (0);
+	return (str + i);
 }

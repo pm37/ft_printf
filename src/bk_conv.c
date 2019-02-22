@@ -6,14 +6,15 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:44:40 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/22 13:37:11 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/22 19:38:55 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <time.h>
+#include <stdio.h>
 
-char	*get_bits(long value)
+char	*get_bits2(long value)
 {
 	unsigned char	bit;
 	int				i;
@@ -41,7 +42,7 @@ void	ft_handle_b(t_conv *conv)
 	char	*str;
 	int		len;
 
-	str = get_bits(va_arg(conv->ap, ULL));
+	str = get_bits2(va_arg(conv->ap, ULL));
 	len = ft_strlen(str);
 	if (conv->width > len)
 	{
@@ -98,19 +99,17 @@ void	timestamp_to_date(t_conv *conv)
 
 void	date_to_timestamp(t_conv *conv)
 {
-	struct tm	*ptm;
+	struct tm	*time_pointer;
 	char		*full_date;
-	char		*result;
-	char		*buf;
+	char		*time_gmt1;
 
-	buf = ft_strnew(256);
-	ptm = ft_memalloc(sizeof(ptm));
+	time_gmt1 = ft_strnew(256);
+	if (!(time_pointer = ft_memalloc(sizeof(struct tm))))
+		return ;
 	full_date = va_arg(conv->ap, char *);
-	strptime(full_date, "%b %d %H:%M:%S %Y", ptm);
-	strftime(buf, 256, "%s", ptm);
-	result = ft_llitoa(ft_atoi(buf) - 3600);
-	conv->ret += write(1, result, ft_strlen(result));
-	ft_strdel(&result);
-	ft_strdel(&buf);
-	ft_memdel((void **)&ptm);
+	strptime(full_date, "%b  %d %H:%M:%S %Y", time_pointer);
+	strftime(time_gmt1, 256, "%s", time_pointer);
+	ft_memdel((void **)&time_pointer);
+	conv->ret += write(1, time_gmt1, ft_strlen(time_gmt1));
+	ft_strdel(&time_gmt1);
 }

@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_index.c                                  :+:      :+:    :+:   */
+/*   get_bits.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 18:58:29 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/22 18:58:50 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/22 17:31:38 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/22 17:34:25 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_strchr_index(const char *str, char c)
+char	*get_bits(void *octet)
 {
-	int		i;
+	int				i;
+	int				j;
+	unsigned char	bit;
+	int				*ptr;
+	char			*str;
 
-	i = 0;
-	while (str[i])
+
+	str = (char *)malloc(sizeof(*str) * 33);
+	ptr = octet;
+	i = 32;
+	j = 0;
+	while (i--)
 	{
-		if (str[i] == c)
-			return (i);
-		i++;
+		bit = (*ptr >> i & 1) + '0';
+		str[j] = bit;
+		j++;
 	}
-	return (0);
+	str[j] = '\0';
+	return (str);
 }

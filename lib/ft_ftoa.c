@@ -6,99 +6,101 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 18:08:39 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/15 11:59:46 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/21 14:23:33 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_get_f_dec(double nb, int dec)
+static char	*ft_zero(int prec)
 {
-	char		*str;
-	char		*str_tmp;
-	int			i;
-	int			len;
-
-	str = ft_strnew(0);
-	i = dec;
-	while (i >= 1)
-	{
-		nb = (nb - (long long)nb) * 10;
-		str_tmp = ft_llitoa(nb);
-		str = ft_strjoin(str, str_tmp);
-		i--;
-	}
-	len = ft_strlen(str);
-	if (len - 2 >= 0)
-		if (str[len - 1] > '4')
-			str[len - 2]++;
-	str[len - 1] = '\0';
-	return (str);
-}
-
-char	*ft_get_f_dec2(double nb, int dec)
-{
-	char		*str;
-	char		*str_tmp;
-	int			i;
-
-	str = ft_strnew(0);
-	i = dec;
-	while (i > 1)
-	{
-		nb = (nb - (long long)nb) * 10;
-		str_tmp = ft_llitoa(nb);
-		str = ft_strjoin(str, str_tmp);
-		i--;
-	}
-	return (str);
-}
-char	*ft_get_f_int(double nb)
-{
-	char	*str;
-	char	*str_tmp;
+	char	*dec_part;
 	int		i;
-	double	nbr;
 
-	nbr = nb;
+	if (!(dec_part = (char *)malloc(sizeof(char) * (prec + 1))))
+		return (0);
+	dec_part[prec] = '\0';
 	i = 0;
-	str = ft_strnew(0);
-	while (nb > 1)
+	while (i < prec)
 	{
-		nb /= 2;
+		dec_part[i] = '0';
 		i++;
 	}
-	//str = ft_llitoa(nb);
-	//printf("\ni vaut :%d\n", i);
-	//printf("nb vaut : %f", nb);	
-	//nbr = nbr - ((long long)nb * 100.0);
-	//printf("nbr vaut : %f", nbr);	
-	//nb *= 100;
-	//printf("nb vaut : %f", nb);	
-	while (i--)
-	{
-		nb = nb * 2;
-		str_tmp = ft_llitoa(nb);
-		str = ft_strjoin(str, str_tmp);
-		nb = nb - (long)nb;
-	}
-	//str = ft_strjoin(str, ft_get_f_dec2(nb, i));
-	
-	return (str);
+	return (dec_part);
 }
-char	*ft_ftoa(double nb, int dec)
-{
-	char				*str;
-	char				*str_int;
-	int					neg;
-	int					i;
 
+static char	*get_dec_part(double nb, int prec)
+{
+	char	*dec_part;
+	char	*dec_tmp;
+	char	*tmp;
+	int		len;
+
+	if (nb > 9223372036854775807.0)
+		return (ft_zero(prec));
+	dec_part = ft_strnew(0);
+	while (prec + 1 >= 1)
+	{
+		nb = (nb - (long long)nb) * 10;
+		dec_tmp = ft_itoa(nb);
+		tmp = dec_part;
+		dec_part = ft_strjoin(dec_part, dec_tmp);
+		free(tmp);
+		free(dec_tmp);
+		prec--;
+	}
+	len = ft_strlen(dec_part);
+	if (len - 2 >= 0)
+		if (dec_part[len - 1] > '4')
+			dec_part[len - 2]++;
+	dec_part[len - 1] = '\0';
+	return (dec_part);
+}
+
+static char	*get_int_part(double nb)
+{
+	int			i;
+	char		*int_part;
+	char		*tmp;
+
+	i = 0;
+	while (nb > 9223372036854775807.0)
+	{
+		nb /= 10;
+		i++;
+	}
+	int_part = ft_llitoa(nb);
+	if (i)
+	{
+		tmp = int_part;
+		int_part = ft_strjoin(int_part, get_dec_part(nb, i));
+		free(tmp);
+	}
+	return (int_part);
+}
+
+char	*ft_lftoa(double nb, int prec)
+{
+	char	*result;
+	char	*int_part;
+	char	*tmp;
+	int		i;
+
+	result = 0;
 	i = 1;
-	if (!dec)
-		return (ft_strdup(ft_itoa((int)nb)));
-	neg = (nb < 0) ? 1 : 0;
-	str = ft_get_f_dec(nb, dec + 1);
-//	printf("\n et un de plus : %f\n", nb);
-	str_int = ft_get_f_int(nb);
-	return (ft_strjoin(str_int, ft_strjoin(".", str)));
+	if (prec > 0)
+	{
+		result = get_dec_part(nb, prec);
+		tmp = result;
+		result = ft_strjoin(".", result);
+		free(tmp);
+	}
+	else
+		result = ft_strnew(0);
+	int_part = get_int_part(nb);
+	tmp = result;
+	result = ft_strjoin(int_part, result);
+	free(int_part);
+	free(tmp);
+	return (result);
 }
