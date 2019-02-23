@@ -6,23 +6,57 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/22 18:19:02 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/23 17:01:49 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*round_float(char *number, int precision)
+void	round_float(char *number, int ret)
+{
+	int	len;
+	int	i;
+
+	len = ft_strlen(number);
+	i = len;
+	while (i--)
+	{
+		if (number[i] - 48 + ret > 9 && number[i] != '.')
+		{
+			number[i] = '0';
+			ret = 1;
+		}
+		else if (number[i] != '.')
+		{
+			number[i] = number[i] + ret;
+			ret = 0;
+		}
+	}
+}
+
+char	*format_float(char *number, int precision)
 {
 	int		len;
 	char	*result;
+	char	*tmp;
+	int	ret;
+	int	i;
 
+	ret = 0;
 	if (precision > 49)
 		precision = 49;
 	len = ft_strchr_index(number, '.') + 1 + precision;
+	len += precision == 0 ? -1 : 0;
+	if ((number[len] == '.' && number[len + 1] - 48 >= 5)
+	|| (number[len - 1] - 48 >= 5 && number[len] - 48 >= 5))
+		ret = 1;
 	result = ft_strsub(number, 0, len);
-	if (number[len] - 48 >= 5)
-		result[len - 1]++;
+	if (ret)
+		round_float(result, ret);
+	tmp = result;
+	i = *(ft_str_notchr(result, '0')) == '.' ? 1 : 0;
+	result = ft_strdup(ft_str_notchr(result, '0') - i);
+	ft_strdel(&tmp);
 	return (result);
 }
 

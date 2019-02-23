@@ -7,14 +7,80 @@ int		main(int ac, char **av)
 {
 	int ret;
 	int ret2;
-	float	nb = 150555555555555555555555555555.123456789;
+	float	nb = 0.7634;
 	char	*result;
+	float positive_inf = 90000000000000000000000000000000000000000.0;
+	float negative_inf = -positive_inf;
+	float tricky = 999.9999;
+
+
+	//ZERO PRECISION TEST
+	ft_printf("{purple}{bold}0 Precision test:\n{nc}");
+	ret = ft_printf("{cyan}%.0f\n{nc}", nb);
+	ret2 = printf("%.0f\n", nb);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	//1 PRECISION TEST
+	ft_printf("{purple}{bold}1 Precision test:\n{nc}");
+	ret = ft_printf("{cyan}%.1f\n{nc}", nb);
+	ret2 = printf("%.1f\n", nb);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	//2 PRECISION TEST
+	ft_printf("{purple}{bold}2 Precision test:\n{nc}");
+	ret = ft_printf("{cyan}%.2f\n{nc}", nb);
+	ret2 = printf("%.2f\n", nb);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
 	
-	ret = ft_printf("{cyan}%f\n{nc}", nb);
-	ret2 = printf("%f\n", nb);
+	//3 PRECISION TEST
+	ft_printf("{purple}{bold}3 Precision test:\n{nc}");
+	ret = ft_printf("{cyan}%.3f\n{nc}", nb);
+	ret2 = printf("%.3f\n", nb);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	//4 PRECISION TEST
+	ft_printf("{purple}{bold}4 Precision test:\n{nc}");
+	ret = ft_printf("{cyan}%.4f\n{nc}", nb);
+	ret2 = printf("%.4f\n", nb);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	//POSITIVE ZERO TEST
+	ft_printf("{purple}{bold}Positive 0 test:\n{nc}");
+	ret = ft_printf("{cyan}%.0f\n{nc}", 0.0);
+	ret2 = printf("%.0f\n", 0.0);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	//NEGATIVE ZERO TEST
+	ft_printf("{purple}{bold}Negative 0 test:\n{nc}");
+	ret = ft_printf("{cyan}%.0f\n{nc}", -0.0);
+	ret2 = printf("%.0f\n", -0.0);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	//INFINITY TEST 1
+	ft_printf("{purple}{bold}Positive Infinity test:\n{nc}");
+	ret = ft_printf("{cyan}%f\n{nc}", positive_inf);
+	ret2 = printf("%f\n", positive_inf);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);	
+	
+	//INFINITY TEST 2
+	ft_printf("{purple}{bold}Negative Infinity test:\n{nc}");
+	ret = ft_printf("{cyan}%f\n{nc}", negative_inf);
+	ret2 = printf("%f\n", negative_inf);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	//TRICKY TEST 1
+	ft_printf("{purple}{bold}Tricky 999.9999 with %%.0 flag test 1:\n{nc}");
+	ret = ft_printf("{cyan}%.0f\n{nc}", tricky);
+	ret2 = printf("%.0f\n", tricky);
 	printf("ret = %d | ret2 = %d\n", ret, ret2);
-	ft_printf("The full date of today's timestamp (1550860755) is : %k\n", 1550860755);
-	ft_printf("%K\n", "Feb 22 19:39:15 2019");
+
+	//TRICKY TEST 2
+	ft_printf("{purple}{bold}Tricky -959.5 with %%.0 flag test 2:\n{nc}");
+	ret = ft_printf("{cyan}%.0f\n{nc}", -959.5);
+	ret2 = printf("%.0f\n", -959.5);
+	printf("ret = %d | ret2 = %d\n", ret, ret2);
+	//ft_printf("The full date of today's timestamp (1550860755) is : %k\n", 1550860755);
+	//ft_printf("%K\n", "Feb 22 19:39:15 2019");
 	return (0);
 
 }

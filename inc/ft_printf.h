@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/22 19:11:18 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/23 15:10:42 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ int					ft_binatoi(char *str);
 void				str_addition(char **result, char *add);
 void				str_mult_by_two(char **str);
 void				str_div_by_two(char **str);
-char				*round_float(char *number, int precision);
+char				*format_float(char *number, int precision);
+void				*ft_realloc(void *ptr, size_t size);
 
 int					ft_strchr_index(const char *str, char c);
 char				*ft_str_notchr(char *str, char c);

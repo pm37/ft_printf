@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/22 18:57:25 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/23 15:09:09 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRCL += ft_memcpy.c
 SRCL += ft_memccpy.c
 SRCL += ft_memdel.c
 SRCL += ft_memset.c
+SRCL += ft_realloc.c
 
 #--------------------Strings---------------------#
 SRCL += ft_isalnum.c
