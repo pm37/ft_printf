@@ -6,11 +6,29 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/23 17:01:13 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/24 21:32:11 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int		handle_edge_cases(t_conv *conv, char *mantissa, int exp)
+{
+	if (exp == 128)
+	{
+		if (!(ft_strchr(mantissa, '1')))
+			conv->ret += write(1, "inf", 3);
+		else
+			conv->ret += write(1, "nan", 3);
+		return (1);
+	}
+	if (exp == -127 && conv->prec == 0)
+	{
+		conv->ret += write(1, "0", 1);
+		return (1);
+	}
+	return (0);
+}
 
 static char		*set_min(int exp)
 {
@@ -81,19 +99,8 @@ static void		float_conv(t_conv *conv, float number)
 	ft_strdel(&tmp);
 	ft_strdel(&binary);
 	conv->ret += is_neg ? write(1, "-", 1) : 0;
-	if (exp == 128)
-	{
-		if (!(ft_strchr(mantissa, '1')))
-			conv->ret += write(1, "inf", 3);
-		else
-			conv->ret += write(1, "nan", 3);
-		return ;
-	}
-	if (exp == -127 && conv->prec == 0)
-	{
-		conv->ret += write(1, "0", 1);
-		return ;
-	}
+	if (handle_edge_cases(conv, mantissa, exp))
+		return ; 
 	print_float(conv, mantissa, &exp);
 	ft_strdel(&mantissa);
 }
@@ -101,10 +108,10 @@ static void		float_conv(t_conv *conv, float number)
 void			ft_handle_f(t_conv *conv)
 {
 	/*
-	if (conv->size.l)
-		double_conv(conv->ap, long double));
-	else if (conv->size.ll)
-		long_double_conv(conv->ap, double));*/
+	   if (conv->size.l)
+	   double_conv(conv->ap, long double));
+	   else if (conv->size.ll)
+	   long_double_conv(conv->ap, double));*/
 	if (conv->prec == -1)
 		conv->prec = 6;
 	float_conv(conv, va_arg(conv->ap, double));
