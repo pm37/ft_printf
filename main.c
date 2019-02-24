@@ -7,7 +7,7 @@ int		main(int ac, char **av)
 {
 	int ret;
 	int ret2;
-	float	nb = 0.7634;
+	float	nb = 0.7637;
 	char	*result;
 	float positive_inf = 90000000000000000000000000000000000000000.0;
 	float negative_inf = -positive_inf;
@@ -72,7 +72,7 @@ int		main(int ac, char **av)
 	ft_printf("{purple}{bold}Tricky 999.9999 with %%.0 flag test 1:\n{nc}");
 	ret = ft_printf("{cyan}%.0f\n{nc}", tricky);
 	ret2 = printf("%.0f\n", tricky);
-	printf("ret = %d | ret2 = %d\n", ret, ret2);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
 
 	//TRICKY TEST 2
 	ft_printf("{purple}{bold}Tricky -959.5 with %%.0 flag test 2:\n{nc}");
@@ -81,6 +81,10 @@ int		main(int ac, char **av)
 	printf("ret = %d | ret2 = %d\n", ret, ret2);
 	//ft_printf("The full date of today's timestamp (1550860755) is : %k\n", 1550860755);
 	//ft_printf("%K\n", "Feb 22 19:39:15 2019");
+
+	ft_printf("%.-100f", -1.0);
+	ft_putchar('\n');
+	printf("%.-100f", -1.0);
 	return (0);
 
 }

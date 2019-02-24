@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/23 17:01:49 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/24 04:00:11 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*format_float(char *number, int precision)
 	len = ft_strchr_index(number, '.') + 1 + precision;
 	len += precision == 0 ? -1 : 0;
 	if ((number[len] == '.' && number[len + 1] - 48 >= 5)
-	|| (number[len - 1] - 48 >= 5 && number[len] - 48 >= 5))
+	|| (number[len] != '.' && number[len] - 48 >= 5))
 		ret = 1;
 	result = ft_strsub(number, 0, len);
 	if (ret)
