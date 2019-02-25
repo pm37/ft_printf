@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:44:40 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 19:25:02 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 22:41:03 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_bits2(long value)
 		return (NULL);
 	}
 	ft_strdel(&tmp);
-	return (tmp);
+	return (binary_form);
 }
 
 int		handle_b(t_conv *conv)

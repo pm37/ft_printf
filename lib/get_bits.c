@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:31:38 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 18:00:09 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 22:08:46 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*get_bits(void *octet, int size)
 	int				j;
 	char			*ptr;
 	char			*str;
-
 
 	if (!(str = (char *)malloc(sizeof(*str) * (size * 8 + 1))))
 		return (NULL);

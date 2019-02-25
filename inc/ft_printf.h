@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 19:39:44 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 22:05:09 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,12 @@ void				init_conv(t_conv *conv);
 int					init_floats(t_conv *conv);
 void				del_floats(t_conv *conv);
 
-int					color_check(t_conv *conv, const char *format, int *i);	
+int					color_check(t_conv *conv, const char *format, int *i);
 
 char				*ft_llitoa(long long nb);
 char				*ft_ullitoa(unsigned long long nb);
 char				*ft_llitoa_base(long long nb, int base);
 char				*ft_ullitoa_base(unsigned long long nb, int base);
-char				*ft_lftoa(double nb, int dec);
 char				*ft_get_f_dec(double nb, int dec);
 
 int					ft_count_occurence(char *str, char c);
@@ -163,11 +162,7 @@ int					ft_islower(int c);
 void				ft_strtoupper(char *str);
 int					ft_toupper(int c);
 int					ft_max(int n1, int n2);
-int					ft_get_next_line(const int fd, char **line);
 int					ft_tolower(int c);
-int					ft_isprint(int c);
-int					ft_isascii(int c);
-int					ft_isalnum(int c);
 int					ft_isdigit(int c);
 int					ft_isalpha(int c);
 int					ft_sqrt(int nb);
@@ -200,26 +195,17 @@ char				**ft_strsplit(char const *s, char c);
 void				ft_lstdelone(t_list **alst, void(*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void(*del)(void*, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
-void				ft_lstiter(t_list *lst, void(*f)(t_list *elem));
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
 void				ft_putnbr(long long n);
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char const *s, int fd);
-void				ft_putendl_fd(char const *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
 void				ft_memdel(void **ap);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
-void				ft_striter(char *s, void (*f)(char *));
-void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *restrict dst, const void *restrict src,
 					size_t n);
-void				*ft_memccpy(void *restrict dst, const void *restrict src,
-					int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memalloc(size_t size);
@@ -227,5 +213,4 @@ size_t				ft_strlen(const char *s);
 size_t				ft_strlcat(char *restrict dst, const char *restrict src,
 					size_t size);
 t_list				*ft_lstnew(void const *content, size_t content_size);
-t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 #endif

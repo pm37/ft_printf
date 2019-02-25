@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 19:39:32 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 21:48:18 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int		format_float(t_conv *conv, char *number)
 {
 	int		len;
 	char	*tmp;
-	int	ret;
-	int	i;
+	int		ret;
+	int		i;
 
 	ret = 0;
 	len = ft_strchr_index(number, '.') + (!conv->prec ? 0 : 1) + conv->prec;
@@ -54,7 +54,8 @@ int		format_float(t_conv *conv, char *number)
 	if (ft_strlen(FLOATS->result) > 1)
 	{
 		tmp = FLOATS->result;
-		if (!(FLOATS->result = ft_strdup(ft_str_notchr(FLOATS->result, '0') - i)))
+		FLOATS->result = ft_strdup(ft_str_notchr(FLOATS->result, '0') - i);
+		if (!FLOATS->result)
 			return (-1);
 		ft_strdel(&tmp);
 	}
@@ -65,20 +66,23 @@ void	str_mult_by_two(char **str)
 {
 	int i;
 	int len;
-	int	ret = 0;
+	int	ret;
+	int	j;
 
 	i = 0;
+	ret = 0;
 	len = ft_strlen(*str);
 	while (i < len)
 	{
-		if (str[0][len - 1 - i] < '5' && str[0][len - 1 - i] >= '0')
+		j = len - 1 - i;
+		if (str[0][j] < '5' && str[0][j] >= '0')
 		{
-			str[0][len - 1 - i] = str[0][len - 1 - i] + str[0][len - 1 - i] - 48 + ret;
+			str[0][j] = str[0][j] + str[0][j] - 48 + ret;
 			ret = 0;
 		}
-		else if (str[0][len - 1 - i] <= '9' && str[0][len - 1 - i] >= '5')
+		else if (str[0][j] <= '9' && str[0][j] >= '5')
 		{
-			str[0][len - 1 - i] = ((str[0][len - 1 - i] - 48) * 2) % 10 + 48 + ret;
+			str[0][j] = ((str[0][j] - 48) * 2) % 10 + 48 + ret;
 			ret = 1;
 		}
 		i++;
@@ -89,9 +93,11 @@ void	str_div_by_two(char **str)
 {
 	int len;
 	int	tmp;
-	int	i = 0;
-	int	ret = 0;
+	int	i;
+	int	ret;
 
+	i = 0;
+	ret = 0;
 	len = ft_strlen(*str);
 	while (i < len)
 	{
@@ -110,9 +116,10 @@ void	str_addition(char **result, char *add)
 	int i;
 	int len;
 	int j;
-	int	ret = 0;
+	int	ret;
 
 	i = 0;
+	ret = 0;
 	len = ft_strlen(*result);
 	while (i < len)
 	{

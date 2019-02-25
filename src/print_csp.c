@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:59:56 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 17:45:43 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 21:51:58 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			print_c(t_conv *conv)
 	return (0);
 }
 
-int		handle_p(t_conv *conv)
+int			handle_p(t_conv *conv)
 {
 	char	*str;
 	char	*tmp;

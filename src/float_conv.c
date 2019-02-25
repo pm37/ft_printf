@@ -6,31 +6,62 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 19:41:14 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 21:43:56 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		handle_edge_cases(t_conv *conv)
+static int		long_double_edge_cases(t_conv *conv)
 {
-	if (FLOATS->v_exp == FLOATS->bias + 1)
+	if (!ft_strchr(FLOATS->exp, '0'))
 	{
-		if (!(ft_strchr(FLOATS->mant, '1')))
-			conv->ret += write(1, "inf", 3);
-		else
+		if (FLOATS->binary[16] == '0')
+		{
+			if (FLOATS->binary[17] == '0'
+			&& !ft_strchr(FLOATS->binary + 18, '1'))
+				conv->ret += write(1, "inf", 3);
+			else if (FLOATS->binary[17] == '1')
+				conv->ret += write(1, "nan", 3);
+		}
+		else if (FLOATS->binary[16] == '1' && FLOATS->binary[17] == '0')
+		{
+			if (!ft_strchr(FLOATS->binary + 18, '1'))
+				conv->ret += write(1, "inf", 3);
+			else
+				conv->ret += write(1, "nan", 3);
+		}
+		else if (FLOATS->binary[16] == '1' && FLOATS->binary[17] == '1')
 			conv->ret += write(1, "nan", 3);
-		return (1);
-	}
-	if (FLOATS->v_exp == -FLOATS->bias && conv->prec == 0)
-	{
-		conv->ret += write(1, "0", 1);
 		return (1);
 	}
 	return (0);
 }
 
-char		*set_min(t_conv *conv, int exp)
+static int		handle_edge_cases(t_conv *conv)
+{
+	if (conv->size.lf)
+		return (long_double_edge_cases(conv));
+	else
+	{
+		if (FLOATS->v_exp == FLOATS->bias + 1)
+		{
+			if (!(ft_strchr(FLOATS->mant, '1')))
+				conv->ret += write(1, "inf", 3);
+			else
+				conv->ret += write(1, "nan", 3);
+			return (1);
+		}
+		if (FLOATS->v_exp == -FLOATS->bias && conv->prec == 0)
+		{
+			conv->ret += write(1, "0", 1);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+char			*set_min(t_conv *conv, int exp)
 {
 	char	*min;
 	int		i;
@@ -70,11 +101,8 @@ static int		print_float(t_conv *conv)
 	}
 	tmp = FLOATS->result;
 	p_max = ft_strlen(ft_strchr(FLOATS->result, '.') + 1);
-	if (conv->prec > p_max)
-	{
+	if (conv->prec > p_max && (p_diff = conv->prec - p_max))
 		conv->prec = p_max;
-		p_diff = conv->prec - p_max; 
-	}
 	if (format_float(conv, ft_str_notchr(FLOATS->result, '0') - 1) == -1)
 		return (-1);
 	conv->ret += write(1, FLOATS->result, ft_strlen(FLOATS->result));
@@ -92,9 +120,14 @@ int				handle_f(t_conv *conv)
 		return (-1);
 	if (init_floats(conv) == -1)
 		return (-1);
-	conv->ret += FLOATS->is_neg ? write(1, "-", 1) : 0;
+	if ((!conv->size.lf && FLOATS->is_neg)
+	|| (conv->size.lf && FLOATS->binary[0] == '1'))
+		conv->ret += write(1, "-", 1);
 	if (handle_edge_cases(conv))
+	{
+		del_floats(conv);
 		return (0);
+	}
 	if (print_float(conv) == -1)
 	{
 		del_floats(conv);

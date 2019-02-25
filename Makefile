@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/25 19:41:40 by pimichau         ###   ########.fr        #
+#    Updated: 2019/02/25 22:06:37 by bwan-nan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ SRCS += float_conv.c
 SRCS += bk_conv.c
 SRCS += colors.c
 SRCS += float_operations.c
-SRCS += del_floats.c
+SRCS += init_floats.c
 
 #--------------------Memory--------------------#
 SRCL += ft_bzero.c
@@ -74,24 +74,19 @@ SRCL += ft_memmove.c
 SRCL += ft_memchr.c
 SRCL += ft_memcmp.c
 SRCL += ft_memcpy.c
-SRCL += ft_memccpy.c
 SRCL += ft_memdel.c
 SRCL += ft_memset.c
 SRCL += ft_realloc.c
 
 #--------------------Strings---------------------#
-SRCL += ft_isalnum.c
 SRCL += ft_islower.c
 SRCL += ft_isalpha.c
-SRCL += ft_isascii.c
 SRCL += ft_isdigit.c
-SRCL += ft_isprint.c
 SRCL += ft_strcat.c
 SRCL += ft_strchr.c
 SRCL += ft_strcmp.c
 SRCL += ft_strcpy.c
 SRCL += ft_strdup.c
-SRCL += ft_strlcat.c
 SRCL += ft_strlen.c
 SRCL += ft_strncat.c
 SRCL += ft_strncmp.c
@@ -99,14 +94,9 @@ SRCL += ft_strncpy.c
 SRCL += ft_strnstr.c
 SRCL += ft_strrchr.c
 SRCL += ft_strstr.c
-SRCL += ft_strclr.c
 SRCL += ft_strdel.c
 SRCL += ft_strequ.c
-SRCL += ft_striter.c
-SRCL += ft_striteri.c
 SRCL += ft_strjoin.c
-SRCL += ft_strmap.c
-SRCL += ft_strmapi.c
 SRCL += ft_strnequ.c
 SRCL += ft_strnew.c
 SRCL += ft_strsplit.c
@@ -121,34 +111,24 @@ SRCL += ft_strchr_index.c
 #--------------------Conversion------------------#
 SRCL += ft_atoi.c
 SRCL += ft_itoa.c
-SRCL += ft_uitoa_base.c
 SRCL += ft_llitoa.c
 SRCL += ft_llitoa_base.c
 SRCL += ft_ullitoa.c
 SRCL += ft_ullitoa_base.c
-SRCL += ft_ftoa.c
 SRCL += get_bits.c
 SRCL += ft_binatoi.c
-
-#----------------------Tab-----------------------#
 
 #--------------------Lists-----------------------#
 SRCL += ft_lstadd.c
 SRCL += ft_lstdel.c
 SRCL += ft_lstdelone.c
-SRCL += ft_lstiter.c
-SRCL += ft_lstmap.c
 SRCL += ft_lstnew.c
 
 #--------------------Output----------------------#
 SRCL += ft_putchar.c
-SRCL += ft_putchar_fd.c
 SRCL += ft_putendl.c
-SRCL += ft_putendl_fd.c
 SRCL += ft_putnbr.c
-SRCL += ft_putnbr_fd.c
 SRCL += ft_putstr.c
-SRCL += ft_putstr_fd.c
 
 #--------------------Maths-----------------------#
 SRCL += ft_recursive_power.c

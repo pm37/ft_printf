@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:54:36 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/19 19:20:31 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/25 22:08:07 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ char			*ft_llitoa_base(long long nb, int base)
 	char				base_string[17];
 	int					len;
 	unsigned long long	tmp;
-	
+
 	ft_strcpy(base_string, "0123456789abcdef");
 	if (base < 2 || base > 16)
 		return (0);
 	if (base == 10)
 		return (ft_llitoa(nb));
-	tmp = nb < 0 ? ULLONG_MAX + nb + 1 : nb; 
+	tmp = nb < 0 ? ULLONG_MAX + nb + 1 : nb;
 	len = get_str_len(tmp, base);
 	if (!(str = ft_strnew(len)))
 		return (0);

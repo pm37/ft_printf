@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 13:14:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 19:53:07 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 21:40:47 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		apply_color(t_conv *conv, char c, char *style, int *i)
 		conv->ret += write(1, &c, 1);
 }
 
-int			color_check(t_conv *conv, const char *format, int *i)
+int				color_check(t_conv *conv, const char *format, int *i)
 {
 	int		stop;
 
