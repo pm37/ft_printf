@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/23 15:10:42 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/25 15:21:49 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,30 @@ typedef struct		s_size
 	int				l;
 	int				ll;
 	int				j;
+	int				lf;
 }					t_size;
+
+typedef union		u_ftype
+{
+	float			f_num;
+	double			d_num;
+	long double		ld_num;
+	unsigned char	tab[16];
+}					t_ftype;
+
+typedef struct		s_float
+{
+	int				e_len;
+	int				m_len;
+	int				is_neg;
+	int				bias;
+	int				v_exp;
+	t_ftype			f_value;
+	char			*binary;
+	char			*mant;
+	char			*exp;
+	char			*result;
+}					t_float;
 
 typedef struct		s_conv
 {
@@ -68,6 +91,7 @@ typedef struct		s_conv
 	char			*style;
 	char			conv_type;
 	char			type[13];
+	t_float			*floats;
 }					t_conv;
 
 typedef struct		s_list
@@ -110,6 +134,8 @@ int					output_handler(char *fmt, t_conv *conv);
 
 void				ft_init_fp(t_conv *conv);
 void				ft_init_conv(t_conv *conv);
+void				init_floats(t_conv *conv);
+void				del_floats(t_conv *conv);
 
 void				color_check(t_conv *conv, const char *format, int *i);	
 
@@ -121,7 +147,8 @@ char				*ft_lftoa(double nb, int dec);
 char				*ft_get_f_dec(double nb, int dec);
 
 int					ft_count_occurence(char *str, char c);
-char				*get_bits(void *octet);
+char				*get_bits(void *octet, int size);
+char				*get_bits2(long value);
 int					ft_binatoi(char *str);
 void				str_addition(char **result, char *add);
 void				str_mult_by_two(char **str);

@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:44:40 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/22 19:38:55 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/25 13:35:40 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_bits2(long value)
 	int				i;
 	int				k;
 	char			*tmp;
-	char			*binary_form;
+	//char			*binary_form;
 
 	i = 64;
 	if (!(tmp = ft_strnew(i)))
@@ -32,9 +32,9 @@ char	*get_bits2(long value)
 		tmp[k] = bit;
 		k++;
 	}
-	binary_form = ft_strdup(ft_strchr(tmp, '1'));
-	ft_strdel(&tmp);
-	return (binary_form);
+	//binary_form = ft_strdup(ft_strchr(tmp, '1'));
+	//ft_strdel(&tmp);
+	return (tmp);
 }
 
 void	ft_handle_b(t_conv *conv)

@@ -6,11 +6,49 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:20:17 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/24 21:21:02 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/25 15:58:30 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void		del_floats(t_conv *conv)
+{
+	ft_strdel(&FLOATS->binary);
+	ft_strdel(&FLOATS->mant);
+	ft_strdel(&FLOATS->exp);
+	ft_strdel(&FLOATS->result);
+	ft_memdel((void **)&conv->floats);
+}
+
+void		init_floats(t_conv *conv)
+{
+	FLOATS->e_len = conv->size.l ? 11 : 15;
+	FLOATS->m_len = conv->size.l ? 52 : 63;
+	FLOATS->bias = conv->size.l ? 1023 : 16383;
+	if (conv->size.l)
+	{
+		FLOATS->f_value.d_num = va_arg(conv->ap, double);
+		FLOATS->binary = get_bits(&FLOATS->f_value.d_num, 8);
+		FLOATS->result = ft_strdup(INITD0);
+	}
+	else if (conv->size.lf)
+	{
+
+		FLOATS->f_value.ld_num = va_arg(conv->ap, long double);	
+		FLOATS->binary = get_bits(&FLOATS->f_value.ld_num, 10);
+		FLOATS->result = ft_strdup(INITLD0);
+	}
+	else
+	{
+		FLOATS->e_len = 8;
+		FLOATS->m_len = 23;
+		FLOATS->bias = 127; 
+		FLOATS->f_value.f_num = (float)va_arg(conv->ap, double);
+		FLOATS->binary = get_bits(&FLOATS->f_value.f_num, 4);
+		FLOATS->result = ft_strdup(INITF0);
+	}
+}
 
 void		ft_init_conv(t_conv *conv)
 {
@@ -19,6 +57,7 @@ void		ft_init_conv(t_conv *conv)
 	conv->size.l = 0;
 	conv->size.ll = 0;
 	conv->size.j = 0;
+	conv->size.lf = 0;
 	conv->length = 0;
 	conv->prec = -1;
 	conv->width = -1;

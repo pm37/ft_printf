@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/24 03:52:38 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/25 14:36:14 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ static int		ft_check_size(char *fmt, t_conv *conv)
 	conv->size.h = *fmt == 'h' && fmt[1] != 'h' ? 1 : 0;
 	conv->size.ll = *fmt == 'l' && fmt[1] == 'l' ? 1 : 0;
 	conv->size.l = *fmt == 'l' && fmt[1] != 'l' ? 1 : 0;
+	conv->size.lf = *fmt == 'L' ? 1 : 0;
 	conv->size.j = *fmt == 'j' ? 1 : 0;
 	if (conv->size.h || conv->size.hh || conv->size.l
-	|| conv->size.ll || conv->size.j)
+	|| conv->size.ll || conv->size.j || conv->size.lf)
 		i += conv->size.hh == 1 || conv->size.ll == 1 ? 2 : 1;
 	if (fmt[i] == 'o' && conv->flag.sharp && conv->prec == -1)
 		conv->prec = 0;

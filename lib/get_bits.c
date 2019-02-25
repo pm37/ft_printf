@@ -6,31 +6,31 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:31:38 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/22 17:34:25 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 15:28:37 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*get_bits(void *octet)
+char	*get_bits(void *octet, int size)
 {
 	int				i;
 	int				j;
-	unsigned char	bit;
-	int				*ptr;
+	char			*ptr;
 	char			*str;
 
 
-	str = (char *)malloc(sizeof(*str) * 33);
-	ptr = octet;
-	i = 32;
-	j = 0;
-	while (i--)
+	if (!(str = (char *)malloc(sizeof(*str) * (size * 8 + 1))))
+		return (NULL);
+	j = size;
+	ptr = (char *)octet;
+	while (j--)
 	{
-		bit = (*ptr >> i & 1) + '0';
-		str[j] = bit;
-		j++;
+		i = 8;
+		while (i--)
+			str[j * 8 + 8 - (i + 1)] = (*ptr >> i & 1) + '0';
+		ptr++;
 	}
-	str[j] = '\0';
+	str[size * 8] = '\0';
 	return (str);
 }
