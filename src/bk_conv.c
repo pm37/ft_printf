@@ -6,13 +6,12 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:44:40 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 13:35:40 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 19:25:02 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <time.h>
-#include <stdio.h>
 
 char	*get_bits2(long value)
 {
@@ -20,7 +19,7 @@ char	*get_bits2(long value)
 	int				i;
 	int				k;
 	char			*tmp;
-	//char			*binary_form;
+	char			*binary_form;
 
 	i = 64;
 	if (!(tmp = ft_strnew(i)))
@@ -32,17 +31,22 @@ char	*get_bits2(long value)
 		tmp[k] = bit;
 		k++;
 	}
-	//binary_form = ft_strdup(ft_strchr(tmp, '1'));
-	//ft_strdel(&tmp);
+	if (!(binary_form = ft_strdup(ft_strchr(tmp, '1'))))
+	{
+		ft_strdel(&tmp);
+		return (NULL);
+	}
+	ft_strdel(&tmp);
 	return (tmp);
 }
 
-void	ft_handle_b(t_conv *conv)
+int		handle_b(t_conv *conv)
 {
 	char	*str;
 	int		len;
 
-	str = get_bits2(va_arg(conv->ap, ULL));
+	if (!(str = get_bits2(va_arg(conv->ap, ULL))))
+		return (-1);
 	len = ft_strlen(str);
 	if (conv->width > len)
 	{
@@ -58,6 +62,7 @@ void	ft_handle_b(t_conv *conv)
 		while (--conv->width >= len)
 			conv->ret += write(1, " ", 1);
 	ft_strdel(&str);
+	return (0);
 }
 
 void	print_date(t_conv *conv, char *full_date, int len)
@@ -70,7 +75,7 @@ void	print_date(t_conv *conv, char *full_date, int len)
 		conv->ret += write(1, full_date, len);
 }
 
-void	timestamp_to_date(t_conv *conv)
+int		timestamp_to_date(t_conv *conv)
 {
 	char	*full_date;
 	time_t	timestamp;
@@ -95,21 +100,27 @@ void	timestamp_to_date(t_conv *conv)
 	if (conv->width > len && conv->flag.less)
 		while (--conv->width >= len)
 			conv->ret += write(1, " ", 1);
+	return (0);
 }
 
-void	date_to_timestamp(t_conv *conv)
+int		date_to_timestamp(t_conv *conv)
 {
 	struct tm	*time_pointer;
 	char		*full_date;
 	char		*time_gmt1;
 
-	time_gmt1 = ft_strnew(256);
+	if (!(time_gmt1 = ft_strnew(256)))
+		return (-1);
 	if (!(time_pointer = ft_memalloc(sizeof(struct tm))))
-		return ;
+	{
+		ft_strdel(&time_gmt1);
+		return (-1);
+	}
 	full_date = va_arg(conv->ap, char *);
 	strptime(full_date, "%b  %d %H:%M:%S %Y", time_pointer);
 	strftime(time_gmt1, 256, "%s", time_pointer);
 	ft_memdel((void **)&time_pointer);
 	conv->ret += write(1, time_gmt1, ft_strlen(time_gmt1));
 	ft_strdel(&time_gmt1);
+	return (0);
 }

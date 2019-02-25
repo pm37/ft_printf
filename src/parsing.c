@@ -6,13 +6,13 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 14:36:14 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 19:23:43 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		ft_check_size(char *fmt, t_conv *conv)
+static int		check_size(char *fmt, t_conv *conv)
 {
 	int i;
 
@@ -32,7 +32,7 @@ static int		ft_check_size(char *fmt, t_conv *conv)
 	return (output_handler(&fmt[i], conv));
 }
 
-static int		ft_check_prec(char *fmt, t_conv *conv)
+static int		check_prec(char *fmt, t_conv *conv)
 {
 	int i;
 
@@ -49,10 +49,10 @@ static int		ft_check_prec(char *fmt, t_conv *conv)
 	else if (conv->prec < -1)
 		conv->prec = 0;
 	conv->length += i;
-	return (ft_check_size(&fmt[i], conv));
+	return (check_size(&fmt[i], conv));
 }
 
-static int		ft_check_width(char *fmt, t_conv *conv)
+static int		check_width(char *fmt, t_conv *conv)
 {
 	int i;
 
@@ -61,20 +61,20 @@ static int		ft_check_width(char *fmt, t_conv *conv)
 	while (fmt[i] && ft_isdigit(fmt[i]))
 		i++;
 	conv->length += i;
-	return (ft_check_prec(&fmt[i], conv));
+	return (check_prec(&fmt[i], conv));
 }
 
-static int		ft_is_flag(char c)
+static int		is_flag(char c)
 {
 	return (c == ' ' || c == '#' || c == '+' || c == '-' || c == '0');
 }
 
-int				ft_check_flags(char *fmt, t_conv *conv)
+int				check_flags(char *fmt, t_conv *conv)
 {
 	int i;
 
 	i = 0;
-	while (fmt[i] && ft_is_flag(fmt[i]))
+	while (fmt[i] && is_flag(fmt[i]))
 	{
 		if (fmt[i] == ' ')
 			conv->flag.space = 1;
@@ -91,5 +91,5 @@ int				ft_check_flags(char *fmt, t_conv *conv)
 	if (conv->flag.plus && conv->flag.space)
 		conv->flag.space = 0;
 	conv->length += i;
-	return (ft_check_width(&fmt[i], conv));
+	return (check_width(&fmt[i], conv));
 }

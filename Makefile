@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/23 15:09:09 by bwan-nan         ###   ########.fr        #
+#    Updated: 2019/02/25 19:41:40 by pimichau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRCS += float_conv.c
 SRCS += bk_conv.c
 SRCS += colors.c
 SRCS += float_operations.c
+SRCS += del_floats.c
 
 #--------------------Memory--------------------#
 SRCL += ft_bzero.c

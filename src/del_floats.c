@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_bits.c                                         :+:      :+:    :+:   */
+/*   del_floats.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 17:31:38 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 18:00:09 by pimichau         ###   ########.fr       */
+/*   Created: 2019/02/25 18:37:15 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/25 18:37:47 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*get_bits(void *octet, int size)
+void			del_floats(t_conv *conv)
 {
-	int				i;
-	int				j;
-	char			*ptr;
-	char			*str;
-
-
-	if (!(str = (char *)malloc(sizeof(*str) * (size * 8 + 1))))
-		return (NULL);
-	j = size;
-	ptr = (char *)octet;
-	while (j--)
-	{
-		i = 8;
-		while (i--)
-			str[j * 8 + 8 - (i + 1)] = (*ptr >> i & 1) + '0';
-		ptr++;
-	}
-	str[size * 8] = '\0';
-	return (str);
+	ft_strdel(&FLOATS->binary);
+	ft_strdel(&FLOATS->mant);
+	ft_strdel(&FLOATS->exp);
+	ft_strdel(&FLOATS->result);
+	ft_memdel((void **)&conv->floats);
 }

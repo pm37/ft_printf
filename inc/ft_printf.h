@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 15:21:49 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 19:39:44 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_float
 	char			*mant;
 	char			*exp;
 	char			*result;
+	char			*min;
 }					t_float;
 
 typedef struct		s_conv
@@ -85,7 +86,7 @@ typedef struct		s_conv
 	int				width;
 	int				prec;
 	t_size			size;
-	void			(*f[13])(struct s_conv *conv);
+	int				(*f[13])(struct s_conv *conv);
 	int				length;
 	size_t			ret;
 	char			*style;
@@ -103,9 +104,9 @@ typedef struct		s_list
 
 int					ft_printf(const char *format, ...);
 
-int					ft_check_flags(char *fmt, t_conv *conv);
+int					check_flags(char *fmt, t_conv *conv);
 
-void				print_c(t_conv *conv);
+int					print_c(t_conv *conv);
 void				print_sp(t_conv *conv, char *output);
 void				print_di(t_conv *conv, char *output);
 void				print_o(t_conv *conv, char *output);
@@ -116,28 +117,27 @@ void				print_space_before(t_conv *conv, int max, char *output);
 void				print_space_after(t_conv *conv, int max);
 void				print_zeros(t_conv *conv, int digits);
 
-void				ft_handle_di(t_conv *conv);
-void				ft_handle_o(t_conv *conv);
-void				ft_handle_u(t_conv *conv);
-void				ft_handle_xx(t_conv *conv);
+int					handle_di(t_conv *conv);
+int					handle_o(t_conv *conv);
+int					handle_u(t_conv *conv);
+int					handle_xx(t_conv *conv);
 
-void				ft_handle_c(t_conv *conv);
-void				ft_handle_s(t_conv *conv);
-void				ft_handle_p(t_conv *conv);
-void				ft_handle_f(t_conv *conv);
+int					handle_s(t_conv *conv);
+int					handle_p(t_conv *conv);
+int					handle_f(t_conv *conv);
 
-void				ft_handle_b(t_conv *conv);
-void				timestamp_to_date(t_conv *conv);
-void				date_to_timestamp(t_conv *conv);
+int					handle_b(t_conv *conv);
+int					timestamp_to_date(t_conv *conv);
+int					date_to_timestamp(t_conv *conv);
 
 int					output_handler(char *fmt, t_conv *conv);
 
-void				ft_init_fp(t_conv *conv);
-void				ft_init_conv(t_conv *conv);
-void				init_floats(t_conv *conv);
+void				init_fp(t_conv *conv);
+void				init_conv(t_conv *conv);
+int					init_floats(t_conv *conv);
 void				del_floats(t_conv *conv);
 
-void				color_check(t_conv *conv, const char *format, int *i);	
+int					color_check(t_conv *conv, const char *format, int *i);	
 
 char				*ft_llitoa(long long nb);
 char				*ft_ullitoa(unsigned long long nb);
@@ -153,7 +153,8 @@ int					ft_binatoi(char *str);
 void				str_addition(char **result, char *add);
 void				str_mult_by_two(char **str);
 void				str_div_by_two(char **str);
-char				*format_float(char *number, int precision);
+int					format_float(t_conv *conv, char *number);
+char				*set_min(t_conv *conv, int exp);
 void				*ft_realloc(void *ptr, size_t size);
 
 int					ft_strchr_index(const char *str, char c);

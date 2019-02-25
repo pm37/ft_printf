@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:59:56 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/20 19:32:56 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/25 17:45:43 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		print_sp(t_conv *conv, char *output)
 				conv->ret += write(1, " ", 1);
 }
 
-void		print_c(t_conv *conv)
+int			print_c(t_conv *conv)
 {
 	if (conv->width != 0)
 	{
@@ -57,22 +57,29 @@ void		print_c(t_conv *conv)
 		if (conv->flag.less)
 			while (--conv->width)
 				conv->ret += write(1, " ", 1);
+	return (0);
 }
 
-void		ft_handle_p(t_conv *conv)
+int		handle_p(t_conv *conv)
 {
 	char	*str;
 	char	*tmp;
 
-	str = ft_ullitoa_base((uintptr_t)va_arg(conv->ap, void *), 16);
+	if (!(str = ft_ullitoa_base((uintptr_t)va_arg(conv->ap, void *), 16)))
+		return (-1);
 	tmp = str;
-	str = ft_strjoin("0x", str);
+	if (!(str = ft_strjoin("0x", str)))
+	{
+		ft_strdel(&tmp);
+		return (-1);
+	}
 	ft_strdel(&tmp);
 	print_sp(conv, str);
 	ft_strdel(&str);
+	return (0);
 }
 
-void		ft_handle_s(t_conv *conv)
+int			handle_s(t_conv *conv)
 {
 	char	*str;
 	char	*tmp;
@@ -80,10 +87,12 @@ void		ft_handle_s(t_conv *conv)
 	tmp = va_arg(conv->ap, char *);
 	if (tmp)
 	{
-		str = ft_strdup(tmp);
+		if (!(str = ft_strdup(tmp)))
+			return (-1);
 		print_sp(conv, str);
 		ft_strdel(&str);
 	}
 	else
 		conv->ret += write(1, "(null)", 6);
+	return (0);
 }

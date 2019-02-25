@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 15:57:35 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 19:41:14 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		handle_edge_cases(t_conv *conv)
 	return (0);
 }
 
-static char		*set_min(t_conv *conv, int exp)
+char		*set_min(t_conv *conv, int exp)
 {
 	char	*min;
 	int		i;
@@ -41,6 +41,8 @@ static char		*set_min(t_conv *conv, int exp)
 		min = ft_strdup(INITLD1);
 	else
 		min = ft_strdup(INITF1);
+	if (!min)
+		return (NULL);
 	i = -1;
 	if (exp >= FLOATS->m_len)
 		while (++i < exp - FLOATS->m_len - 1)
@@ -51,53 +53,53 @@ static char		*set_min(t_conv *conv, int exp)
 	return (min);
 }
 
-static void		print_float(t_conv *conv)
+static int		print_float(t_conv *conv)
 {
-	char	*min;
 	char	*tmp;
 	int		i;
+	int		p_max;
+	int		p_diff;
 
-	i = 0;
-	min = set_min(conv, FLOATS->v_exp);
-	tmp = FLOATS->mant;
-	FLOATS->mant = ft_strjoin("1", FLOATS->mant);
-	ft_strdel(&tmp);
-	while (i < FLOATS->m_len + 1)
+	i = -1;
+	p_diff = 0;
+	while (++i < FLOATS->m_len + 1)
 	{
-		str_mult_by_two(&min);
+		str_mult_by_two(&FLOATS->min);
 		if (FLOATS->mant[FLOATS->m_len - i] == '1')
-			str_addition(&FLOATS->result, min);
-		i++;
+			str_addition(&FLOATS->result, FLOATS->min);
 	}
-	ft_strdel(&min);
 	tmp = FLOATS->result;
-	FLOATS->result = format_float(ft_str_notchr(FLOATS->result, '0') - 1, conv->prec);
+	p_max = ft_strlen(ft_strchr(FLOATS->result, '.') + 1);
+	if (conv->prec > p_max)
+	{
+		conv->prec = p_max;
+		p_diff = conv->prec - p_max; 
+	}
+	if (format_float(conv, ft_str_notchr(FLOATS->result, '0') - 1) == -1)
+		return (-1);
 	conv->ret += write(1, FLOATS->result, ft_strlen(FLOATS->result));
+	while (p_diff--)
+		conv->ret += write(1, "0", 1);
 	ft_strdel(&tmp);
+	return (0);
 }
 
-static void		float_conv(t_conv *conv)
-{
-	int		i;
-
-	i = conv->size.lf ? 2 : 1;
-	FLOATS->is_neg = *FLOATS->binary - 48;
-	FLOATS->mant = ft_strsub(FLOATS->binary, i + FLOATS->e_len, FLOATS->m_len);
-	FLOATS->exp = ft_strsub(FLOATS->binary, 1, FLOATS->e_len);
-	FLOATS->v_exp = ft_binatoi(FLOATS->exp) - FLOATS->bias;
-	conv->ret += FLOATS->is_neg ? write(1, "-", 1) : 0;
-	if (handle_edge_cases(conv))
-		return ;
-	print_float(conv);
-}
-
-void			ft_handle_f(t_conv *conv)
+int				handle_f(t_conv *conv)
 {
 	if (conv->prec == -1)
 		conv->prec = 6;
 	if (!(conv->floats = ft_memalloc(sizeof(t_float))))
-		return ;
-	init_floats(conv);
-	float_conv(conv);
+		return (-1);
+	if (init_floats(conv) == -1)
+		return (-1);
+	conv->ret += FLOATS->is_neg ? write(1, "-", 1) : 0;
+	if (handle_edge_cases(conv))
+		return (0);
+	if (print_float(conv) == -1)
+	{
+		del_floats(conv);
+		return (-1);
+	}
 	del_floats(conv);
+	return (0);
 }

@@ -6,23 +6,25 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:03:46 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 13:16:04 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/25 19:24:19 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_handle_conv(t_conv *conv)
+static int		handle_conv(t_conv *conv)
 {
 	int i;
 
 	i = 0;
 	while (conv->conv_type != conv->type[i])
 		i++;
-	conv->f[i](conv);
+	if (conv->f[i](conv) == -1)
+		return (-1);
+	return (0);
 }
 
-static void		ft_handle_percent(t_conv *conv)
+static void		handle_percent(t_conv *conv)
 {
 	if (conv->width != 0)
 	{
@@ -45,10 +47,11 @@ int				output_handler(char *fmt, t_conv *conv)
 	if (ft_strchr(OPTIONS, *fmt))
 	{
 		conv->conv_type = *fmt;
-		ft_handle_conv(conv);
+		if (handle_conv(conv) == -1)
+			return (-1);
 	}
 	else if (*fmt == '%')
-		ft_handle_percent(conv);
+		handle_percent(conv);
 	else if (*fmt)
 	{
 		if (!conv->flag.less && !conv->flag.zero)

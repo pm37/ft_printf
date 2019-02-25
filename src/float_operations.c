@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 11:41:44 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/25 19:39:32 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,31 @@ void	round_float(char *number, int ret)
 	}
 }
 
-char	*format_float(char *number, int precision)
+int		format_float(t_conv *conv, char *number)
 {
 	int		len;
-	char	*result;
 	char	*tmp;
 	int	ret;
 	int	i;
 
 	ret = 0;
-	if (precision > PREC_MAX)
-		precision = PREC_MAX;
-	len = ft_strchr_index(number, '.') + 1 + precision;
-	len += precision == 0 ? -1 : 0;
+	len = ft_strchr_index(number, '.') + (!conv->prec ? 0 : 1) + conv->prec;
 	if ((number[len] == '.' && number[len + 1] - 48 >= 5)
 	|| (number[len] != '.' && number[len] - 48 >= 5))
 		ret = 1;
-	result = ft_strsub(number, 0, len);
+	if (!(FLOATS->result = ft_strsub(number, 0, len)))
+		return (-1);
 	if (ret)
-		round_float(result, ret);
-	i = *(ft_str_notchr(result, '0')) == '.' ? 1 : 0;
-	if (ft_strlen(result) > 1)
+		round_float(FLOATS->result, ret);
+	i = *(ft_str_notchr(FLOATS->result, '0')) == '.' ? 1 : 0;
+	if (ft_strlen(FLOATS->result) > 1)
 	{
-		tmp = result;
-		result = ft_strdup(ft_str_notchr(result, '0') - i);
+		tmp = FLOATS->result;
+		if (!(FLOATS->result = ft_strdup(ft_str_notchr(FLOATS->result, '0') - i)))
+			return (-1);
 		ft_strdel(&tmp);
 	}
-	return (result);
+	return (0);
 }
 
 void	str_mult_by_two(char **str)
