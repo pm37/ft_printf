@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/26 16:42:24 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/26 18:13:26 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "float.h"
 
 # define BUFF_SIZE	1024
 # define OPEN_MAXI	1024
@@ -40,6 +39,8 @@
 # define FLAG		conv->flag
 # define SIZE		conv->size
 # define TYPE		conv->conv_type
+# define FLOATS		conv->floats
+
 # define RESULT		conv->floats->result
 # define LEN		conv->floats->len
 # define RESULT		conv->floats->result
@@ -47,8 +48,6 @@
 # define P_DIFF		conv->floats->p_diff
 # define SIGN		conv->floats->sign
 # define EDGE		conv->floats->edge
-
-
 
 typedef struct		s_flag
 {

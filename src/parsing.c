@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/26 15:15:50 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/26 18:11:27 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static int		check_prec(char *fmt, t_conv *conv)
 		while (fmt[i] && (ft_isdigit(fmt[i]) || fmt[i] == '-'))
 			i++;
 	}
-
-
 	conv->length += i;
 	return (check_size(&fmt[i], conv));
 }

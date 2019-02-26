@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binary_conv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/26 15:26:49 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/26 15:26:51 by pimichau         ###   ########.fr       */
+/*   Created: 2019/02/26 19:46:18 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/26 19:46:19 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static int	get_simple_binary(t_conv *conv, char **str)
 {
 	t_ftype	type;
 
-	if (conv->size.l || conv->size.ll )
+	if (conv->size.l || conv->size.ll)
 	{
 		type.l_num = va_arg(conv->ap, long);
-		*str = get_bits(&type.l_num,  8);
+		*str = get_bits(&type.l_num, 8);
 	}
-	else if (conv->size.h) 
+	else if (conv->size.h)
 	{
 		type.i_num = va_arg(conv->ap, int);
-		*str = get_bits(&type.i_num, 2); 
+		*str = get_bits(&type.i_num, 2);
 	}
 	else if (conv->size.hh)
 	{
@@ -62,9 +62,9 @@ static char	*get_binary(t_conv *conv)
 	return (str);
 }
 
-int		handle_b(t_conv *conv)
+int			handle_b(t_conv *conv)
 {
-	int	len;
+	int		len;
 	char	*str;
 
 	if (!(str = get_binary(conv)))
@@ -86,5 +86,3 @@ int		handle_b(t_conv *conv)
 	ft_strdel(&str);
 	return (0);
 }
-
-
