@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 21:48:18 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 14:32:36 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ int		format_float(t_conv *conv, char *number)
 	if ((number[len] == '.' && number[len + 1] - 48 >= 5)
 	|| (number[len] != '.' && number[len] - 48 >= 5))
 		ret = 1;
-	if (!(FLOATS->result = ft_strsub(number, 0, len)))
+	if (!(RESULT = ft_strsub(number, 0, len)))
 		return (-1);
 	if (ret)
-		round_float(FLOATS->result, ret);
-	i = *(ft_str_notchr(FLOATS->result, '0')) == '.' ? 1 : 0;
-	if (ft_strlen(FLOATS->result) > 1)
+		round_float(RESULT, ret);
+	i = *(ft_str_notchr(RESULT, '0')) == '.' ? 1 : 0;
+	if (ft_strlen(RESULT) > 1)
 	{
-		tmp = FLOATS->result;
-		FLOATS->result = ft_strdup(ft_str_notchr(FLOATS->result, '0') - i);
-		if (!FLOATS->result)
+		tmp = RESULT;
+		RESULT = ft_strdup(ft_str_notchr(RESULT, '0') - i);
+		if (!RESULT)
 			return (-1);
 		ft_strdel(&tmp);
 	}

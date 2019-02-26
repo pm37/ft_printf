@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 21:50:02 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/26 10:49:02 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 16:42:08 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ void			del_floats(t_conv *conv)
 	ft_strdel(&FLOATS->result);
 	ft_strdel(&FLOATS->min);
 	ft_memdel((void **)&conv->floats);
+}
+
+char			*init_str(int size, char c)
+{
+	char	*str;
+	int		i;
+
+	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	str[size] = '\0';
+	i = -1;
+	while (++i < size)
+		str[i] = '0';
+	str[(size - 1) / 2 - 1] = c;
+	str[(size - 1) / 2] = '.';
+	return (str);
 }
 
 static int		init_float_extensions(t_conv *conv)
@@ -52,7 +68,7 @@ static void		init_simple_float(t_conv *conv)
 	FLOATS->bias = 127;
 	FLOATS->f_value.f_num = (float)va_arg(conv->ap, double);
 	FLOATS->binary = get_bits(&FLOATS->f_value.f_num, 4);
-	FLOATS->result = ft_strdup(INITF0);
+	FLOATS->result = init_str(101, '0');
 }
 
 int				init_floats(t_conv *conv)
@@ -65,13 +81,13 @@ int				init_floats(t_conv *conv)
 	{
 		FLOATS->f_value.d_num = va_arg(conv->ap, double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.d_num, 8);
-		FLOATS->result = ft_strdup(INITD0);
+		FLOATS->result = init_str(315, '0');
 	}
 	else if (conv->size.lf)
 	{
 		FLOATS->f_value.ld_num = va_arg(conv->ap, long double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.ld_num, 10);
-		FLOATS->result = ft_strdup(INITLD0);
+		FLOATS->result = init_str(10001, '0');
 	}
 	else
 		init_simple_float(conv);

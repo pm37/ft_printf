@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/26 11:10:43 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 16:42:24 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 # define OPTIONS	"cspdiouxXfbkK"
 # define ULL		unsigned long long
-# define TYPE		conv->conv_type
 
 # define BLACK		"{black}"
 # define RED		"{red}"
@@ -37,6 +36,19 @@
 # define BOLD		"{bold}"
 # define UNDERLINED	"{ul}"
 # define NC			"{nc}"
+
+# define FLAG		conv->flag
+# define SIZE		conv->size
+# define TYPE		conv->conv_type
+# define RESULT		conv->floats->result
+# define LEN		conv->floats->len
+# define RESULT		conv->floats->result
+# define IS_NEG		conv->floats->is_neg
+# define P_DIFF		conv->floats->p_diff
+# define SIGN		conv->floats->sign
+# define EDGE		conv->floats->edge
+
+
 
 typedef struct		s_flag
 {
@@ -63,7 +75,7 @@ typedef union		u_ftype
 	double			d_num;
 	long double		ld_num;
 	long			l_num;
-	int			i_num;
+	int				i_num;
 	short			s_num;
 	char			character;
 }					t_ftype;
@@ -75,6 +87,10 @@ typedef struct		s_float
 	int				is_neg;
 	int				bias;
 	int				v_exp;
+	int				len;
+	int				p_diff;
+	int				sign;
+	int				edge;
 	t_ftype			f_value;
 	char			*binary;
 	char			*mant;
@@ -116,7 +132,7 @@ void				print_di(t_conv *conv, char *output);
 void				print_o(t_conv *conv, char *output);
 void				print_u(t_conv *conv, char *output);
 void				print_x(t_conv *conv, char *output);
-
+void				print_float(t_conv *conv);
 void				print_space_before(t_conv *conv, int max, char *output);
 void				print_space_after(t_conv *conv, int max);
 void				print_zeros(t_conv *conv, int digits);
@@ -139,6 +155,7 @@ int					output_handler(char *fmt, t_conv *conv);
 void				init_fp(t_conv *conv);
 void				init_conv(t_conv *conv);
 int					init_floats(t_conv *conv);
+char				*init_str(int size, char c);
 void				del_floats(t_conv *conv);
 
 int					color_check(t_conv *conv, const char *format, int *i);

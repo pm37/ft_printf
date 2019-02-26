@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:03:46 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 19:24:19 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/26 15:15:45 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ int				output_handler(char *fmt, t_conv *conv)
 		conv->conv_type = *fmt;
 		if (handle_conv(conv) == -1)
 			return (-1);
+		if (conv->prec > 0 && TYPE != 'f')
+			FLAG.zero = 0;
+		else if (conv->prec < -1)
+			conv->prec = 0;
 	}
 	else if (*fmt == '%')
 		handle_percent(conv);

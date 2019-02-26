@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/26 11:12:13 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 14:00:10 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_output(t_conv *conv, char *output, int digits, int is_width)
 {
-	if (TYPE == 'd' || TYPE == 'i' || TYPE == 'f')
+	if (TYPE == 'd' || TYPE == 'i')
 	{
 		if (!(ft_strequ(output, "0") && conv->prec == 0) && *output != '-')
 			conv->ret += write(1, output, digits);
