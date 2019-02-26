@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 22:05:09 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 03:43:43 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ typedef union		u_ftype
 	float			f_num;
 	double			d_num;
 	long double		ld_num;
-	unsigned char	tab[16];
+	long			l_num;
+	int			i_num;
+	short			s_num;
+	char			character;
 }					t_ftype;
 
 typedef struct		s_float

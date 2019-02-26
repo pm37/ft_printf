@@ -95,6 +95,7 @@ int		main(int ac, char **av)
 	ret2 = printf("%Lf\n", a);
 	printf("ret = %d | ret2 = %d\n", ret, ret2);
 	*/
-	ft_printf("%b\n", 2124);
+	unsigned char  a = 255;
+	ft_printf("%hhb\n", a);
 	return (0);
 }

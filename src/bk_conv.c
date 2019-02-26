@@ -6,46 +6,68 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:44:40 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 22:41:03 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 10:40:14 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <time.h>
 
-char	*get_bits2(long value)
+static int	get_simple_binary(t_conv *conv, char **str)
 {
-	unsigned char	bit;
-	int				i;
-	int				k;
-	char			*tmp;
-	char			*binary_form;
+	t_ftype	type;
 
-	i = 64;
-	if (!(tmp = ft_strnew(i)))
-		return (NULL);
-	k = 0;
-	while (i--)
+	if (conv->size.l || conv->size.ll )
 	{
-		bit = (value >> i & 1) + 48;
-		tmp[k] = bit;
-		k++;
+		type.l_num = va_arg(conv->ap, long);
+		*str = get_bits(&type.l_num,  8);
 	}
-	if (!(binary_form = ft_strdup(ft_strchr(tmp, '1'))))
+	else if (conv->size.h) 
 	{
-		ft_strdel(&tmp);
-		return (NULL);
+		type.i_num = va_arg(conv->ap, int);
+		*str = get_bits(&type.i_num, 2); 
 	}
-	ft_strdel(&tmp);
-	return (binary_form);
+	else if (conv->size.hh)
+	{
+		type.i_num = va_arg(conv->ap, int);
+		*str = get_bits(&type.i_num, 1);
+	}
+	else
+	{
+		type.i_num = va_arg(conv->ap, int);
+		*str = get_bits(&type.i_num, 4);
+	}
+	if (*str == NULL)
+		return (-1);
+	return (0);
+}
+
+static char	*get_binary(t_conv *conv)
+{
+	char	*str;
+
+	if (conv->flag.sharp)
+	{
+		if (!(conv->floats = ft_memalloc(sizeof(t_float))))
+			return (NULL);
+		if (init_floats(conv) == -1)
+			return (NULL);
+		if (!(str = ft_strdup(FLOATS->binary)))
+			return (NULL);
+		del_floats(conv);
+	}
+	else if (get_simple_binary(conv, &str) == -1)
+		return (NULL);
+	if (!str)
+		return (NULL);
+	return (str);
 }
 
 int		handle_b(t_conv *conv)
 {
+	int	len;
 	char	*str;
-	int		len;
 
-	if (!(str = get_bits2(va_arg(conv->ap, ULL))))
+	if (!(str = get_binary(conv)))
 		return (-1);
 	len = ft_strlen(str);
 	if (conv->width > len)
@@ -65,62 +87,4 @@ int		handle_b(t_conv *conv)
 	return (0);
 }
 
-void	print_date(t_conv *conv, char *full_date, int len)
-{
-	if (conv->flag.sharp && conv->prec != 4)
-		conv->ret += write(1, full_date + 4, len);
-	else if (conv->flag.sharp && conv->prec == 4)
-		conv->ret += write(1, full_date + 20, len);
-	else
-		conv->ret += write(1, full_date, len);
-}
 
-int		timestamp_to_date(t_conv *conv)
-{
-	char	*full_date;
-	time_t	timestamp;
-	int		len;
-
-	timestamp = va_arg(conv->ap, time_t);
-	full_date = ctime(&timestamp);
-	len = ft_strlen(full_date);
-	len = conv->flag.sharp ? 12 : len - 1;
-	len = conv->flag.sharp && conv->prec == 4 ? 4 : len;
-	len = conv->flag.sharp && conv->prec == 3 ? 3 : len;
-	if (conv->width > len)
-	{
-		if (!conv->flag.less && !conv->flag.zero)
-			while (--conv->width >= len)
-				conv->ret += write(1, " ", 1);
-		else if (conv->flag.zero && !conv->flag.less)
-			while (--conv->width >= len)
-				conv->ret += write(1, "0", 1);
-	}
-	print_date(conv, full_date, len);
-	if (conv->width > len && conv->flag.less)
-		while (--conv->width >= len)
-			conv->ret += write(1, " ", 1);
-	return (0);
-}
-
-int		date_to_timestamp(t_conv *conv)
-{
-	struct tm	*time_pointer;
-	char		*full_date;
-	char		*time_gmt1;
-
-	if (!(time_gmt1 = ft_strnew(256)))
-		return (-1);
-	if (!(time_pointer = ft_memalloc(sizeof(struct tm))))
-	{
-		ft_strdel(&time_gmt1);
-		return (-1);
-	}
-	full_date = va_arg(conv->ap, char *);
-	strptime(full_date, "%b  %d %H:%M:%S %Y", time_pointer);
-	strftime(time_gmt1, 256, "%s", time_pointer);
-	ft_memdel((void **)&time_pointer);
-	conv->ret += write(1, time_gmt1, ft_strlen(time_gmt1));
-	ft_strdel(&time_gmt1);
-	return (0);
-}
