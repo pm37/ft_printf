@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 21:43:56 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 10:54:24 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ static int		print_float(t_conv *conv)
 		conv->prec = p_max;
 	if (format_float(conv, ft_str_notchr(FLOATS->result, '0') - 1) == -1)
 		return (-1);
-	conv->ret += write(1, FLOATS->result, ft_strlen(FLOATS->result));
+	//conv->ret += write(1, FLOATS->result, ft_strlen(FLOATS->result));
+	print_di(conv, FLOATS->result);
 	while (p_diff--)
 		conv->ret += write(1, "0", 1);
 	ft_strdel(&tmp);
@@ -114,8 +115,6 @@ static int		print_float(t_conv *conv)
 
 int				handle_f(t_conv *conv)
 {
-	if (conv->prec == -1)
-		conv->prec = 6;
 	if (!(conv->floats = ft_memalloc(sizeof(t_float))))
 		return (-1);
 	if (init_floats(conv) == -1)

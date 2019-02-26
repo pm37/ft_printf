@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 21:50:02 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 22:17:31 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 10:49:02 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void		init_simple_float(t_conv *conv)
 
 int				init_floats(t_conv *conv)
 {
+	conv->prec = conv->prec == -1 ? 6 : conv->prec;
 	FLOATS->e_len = conv->size.l ? 11 : 15;
 	FLOATS->m_len = conv->size.l ? 52 : 63;
 	FLOATS->bias = conv->size.l ? 1023 : 16383;

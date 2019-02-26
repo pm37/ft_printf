@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/26 03:43:43 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 11:10:43 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define OPTIONS	"cspdiouxXfbkK"
 # define ULL		unsigned long long
+# define TYPE		conv->conv_type
 
 # define BLACK		"{black}"
 # define RED		"{red}"

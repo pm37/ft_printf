@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/22 19:04:42 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/26 11:12:13 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_output(t_conv *conv, char *output, int digits, int is_width)
 {
-	if (conv->conv_type == 'd' || conv->conv_type == 'i')
+	if (TYPE == 'd' || TYPE == 'i' || TYPE == 'f')
 	{
 		if (!(ft_strequ(output, "0") && conv->prec == 0) && *output != '-')
 			conv->ret += write(1, output, digits);
@@ -23,14 +23,14 @@ static void	print_output(t_conv *conv, char *output, int digits, int is_width)
 		else if (ft_strequ("0", output) && is_width && conv->prec == 0)
 			conv->ret += write(1, " ", 1);
 	}
-	else if (conv->conv_type == 'o')
+	else if (TYPE == 'o')
 	{
 		if (!(ft_strequ("0", output) && conv->prec == 0))
 			conv->ret += write(1, output, ft_strlen(output));
 		else if (ft_strequ("0", output) && is_width && conv->prec == 0)
 			conv->ret += write(1, " ", 1);
 	}
-	else if (conv->conv_type == 'x' || conv->conv_type == 'X')
+	else if (TYPE == 'x' || TYPE == 'X')
 	{
 		if (!(ft_strequ("0", output) && conv->prec == 0))
 			conv->ret += write(1, output, ft_strlen(output));
@@ -49,17 +49,18 @@ void		print_di(t_conv *conv, char *output)
 
 	is_width = conv->width > 0 ? 1 : 0;
 	prec = *output != '-' ?
-	conv->prec + conv->flag.plus : conv->prec + 1;
+		conv->prec + conv->flag.plus : conv->prec + 1;
 	len = *output != '-' ? ft_strlen(output)
-	+ conv->flag.plus : ft_strlen(output);
+		+ conv->flag.plus : ft_strlen(output);
 	max = ft_max(prec, len);
 	print_space_before(conv, max, output);
 	if (conv->flag.plus && *output != '-')
 		conv->ret += write(1, "+", 1);
 	digits = *output == '-' ? ft_strlen(output) - 1 : ft_strlen(output);
 	conv->ret += *output == '-' ? write(1, "-", 1) : 0;
+	conv->width -= TYPE == 'f' ? 1 : 0;
 	if (conv->width > max)
-		if (!conv->flag.less && conv->flag.zero && conv->prec == -1)
+		if (!conv->flag.less && conv->flag.zero)
 			while (--conv->width >= conv->prec && conv->width >= len)
 				conv->ret += write(1, "0", 1);
 	print_zeros(conv, digits);
@@ -76,7 +77,7 @@ void		print_u(t_conv *conv, char *output)
 
 	prec = *output != '-' ? conv->prec + conv->flag.plus : conv->prec + 1;
 	len = *output != '-' ?
-	ft_strlen(output) + conv->flag.plus : ft_strlen(output);
+		ft_strlen(output) + conv->flag.plus : ft_strlen(output);
 	max = ft_max(prec, len);
 	print_space_before(conv, max, output);
 	digits = *output == '-' ? ft_strlen(output) - 1 : ft_strlen(output);
@@ -108,12 +109,12 @@ void		print_x(t_conv *conv, char *output)
 	if (!conv->flag.zero && conv->width > ft_max(prec, len) && !conv->flag.less)
 		while (--conv->width >= conv->prec && conv->width >= len)
 			conv->ret += write(1, " ", 1);
-	if (conv->flag.sharp && conv->conv_type == 'x' && !ft_strequ("0", output))
+	if (conv->flag.sharp && TYPE == 'x' && !ft_strequ("0", output))
 		conv->ret += write(1, "0x", 2);
 	else if (conv->flag.sharp && !ft_strequ("0", output))
 		conv->ret += write(1, "0X", 2);
 	if (conv->width > ft_max(prec, len)
-	&& !conv->flag.less && conv->flag.zero && conv->prec == -1)
+			&& !conv->flag.less && conv->flag.zero && conv->prec == -1)
 		while (--conv->width >= prec && conv->width >= len)
 			conv->ret += write(1, "0", 1);
 	if (conv->prec != -1 && len < conv->prec)
@@ -140,7 +141,7 @@ void		print_o(t_conv *conv, char *output)
 	if (conv->flag.sharp && conv->prec >= 0)
 		conv->ret += write(1, "0", 1);
 	if (conv->width > ft_max(prec, len) && !conv->flag.less
-	&& conv->flag.zero && conv->prec == -1)
+			&& conv->flag.zero && conv->prec == -1)
 		while (--conv->width >= prec && conv->width >= len)
 			conv->ret += write(1, "0", 1);
 	if (conv->prec != -1 && len < conv->prec)
