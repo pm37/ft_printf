@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/27 13:06:48 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 18:07:34 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@
 # define P_DIFF		conv->floats->p_diff
 # define SIGN		conv->floats->sign
 # define EDGE		conv->floats->edge
+# define B_SIZE		conv->floats->b_size
+# define INDEX		conv->floats->max_index
+# define F_LEN		conv->floats->f_len
 
 typedef struct		s_flag
 {
@@ -89,6 +92,7 @@ typedef struct		s_float
 {
 	int				e_len;
 	int				m_len;
+	int				f_len;
 	int				is_neg;
 	int				bias;
 	int				v_exp;
@@ -96,6 +100,8 @@ typedef struct		s_float
 	int				p_diff;
 	int				sign;
 	int				edge;
+	int				b_size;
+	int				max_index;
 	t_ftype			f_value;
 	char			*binary;
 	char			*mant;
@@ -176,12 +182,16 @@ char				*get_bits(void *octet, int size);
 char				*get_bits2(long value);
 int					ft_binatoi(char *str);
 void				str_addition(char **result, char *add);
-void				str_mult_by_two(char **str);
+void				str_mult_by_two(char **str, t_conv *conv);
 void				str_div_by_two(char **str);
+void				str_div_by_two2(char **str, t_conv *conv);
 int					format_float(t_conv *conv, char *number);
 char				*set_min(t_conv *conv, int exp);
+int					get_float_len(char *str);
 void				*ft_realloc(void *ptr, size_t size);
 
+int					ft_str_notchr_index(char *str, char a, char b);
+int					ft_strr_notchr_index(char *str, char a, char b);
 int					ft_strchr_index(const char *str, char c);
 char				*ft_str_notchr(char *str, char c);
 int					ft_islower(int c);

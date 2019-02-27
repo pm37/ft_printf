@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/27 13:02:10 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 18:22:40 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		format_float(t_conv *conv, char *number)
 	ret = 0;
 	len = ft_strchr_index(number, '.') + (!PREC ? 0 : 1) + PREC;
 	if ((number[len] == '.' && number[len + 1] - 48 >= 5)
-	|| (number[len] != '.' && number[len] - 48 >= 5))
+			|| (number[len] != '.' && number[len] - 48 >= 5))
 		ret = 1;
 	if (!(RESULT = ft_strsub(number, 0, len)))
 		return (-1);
@@ -62,19 +62,15 @@ int		format_float(t_conv *conv, char *number)
 	return (0);
 }
 
-void	str_mult_by_two(char **str)
+void	str_mult_by_two(char **str, t_conv *conv)
 {
-	int i;
-	int len;
-	int	ret;
-	int	j;
+	int			j;
+	int			ret;
 
-	i = 0;
 	ret = 0;
-	len = ft_strlen(*str);
-	while (i < len)
+	j = INDEX;
+	while (j > INDEX - LEN)
 	{
-		j = len - 1 - i;
 		if (str[0][j] < '5' && str[0][j] >= '0')
 		{
 			str[0][j] = str[0][j] + str[0][j] - 48 + ret;
@@ -84,9 +80,44 @@ void	str_mult_by_two(char **str)
 		{
 			str[0][j] = ((str[0][j] - 48) * 2) % 10 + 48 + ret;
 			ret = 1;
+			if (j == INDEX - LEN + 1)
+				LEN++;
+		}
+		if (str[0][j] == '.')
+			LEN += 1;
+		j--;
+	}
+}
+
+void	str_div_by_two2(char **str, t_conv *conv)
+{
+	int	i;
+	int	tmp;
+	int	ret;
+
+	ret = 0;
+	i = INDEX;
+	//ft_putchar(str[0][INDEX]);
+	//ft_putchar('\n');
+	while (i < INDEX + LEN)
+	{
+		if (str[0][i] != '.')
+		{
+			tmp = (str[0][i] - 48) % 2;
+			str[0][i] = ((str[0][i] - 48) / 2 + ret) + 48;
+			ret = tmp == 0 ? 0 : 5;
+			if (ret && i == INDEX + LEN - 1 && str[0][i + 1] != '.')
+				LEN++;
 		}
 		i++;
 	}
+	if (str[0][INDEX] == '0' && str[0][INDEX + 1] == '.')
+		INDEX += 2;
+	else if (str[0][INDEX] == '0')
+		INDEX++;
+	//ft_putchar(str[0][INDEX]);
+	//ft_putchar('\n');
+	//exit(1);
 }
 
 void	str_div_by_two(char **str)

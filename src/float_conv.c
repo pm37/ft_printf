@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/27 13:08:51 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 18:22:38 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,23 @@ char			*set_min(t_conv *conv, int exp)
 	char	*min;
 	int		i;
 
-	if (SIZE.l)
-		min = init_str(315, '1');
-	else if (SIZE.lf)
-		min = init_str(10001, '1');
-	else
-		min = init_str(101, '1');
+	min = init_str(B_SIZE, '1');
+//	INDEX = ft_strr_notchr_index(min, '0', '.');
+	INDEX = (B_SIZE - 1) / 2 - 1;
+	LEN = 1;
 	if (!min)
 		return (NULL);
 	i = -1;
 	if (exp >= FLOATS->m_len)
-		while (++i < exp - FLOATS->m_len - 1)
-			str_mult_by_two(&min);
+		while (++i <= exp - FLOATS->m_len - 1)
+			str_mult_by_two(&min, conv);
 	else
-		while (++i < FLOATS->m_len - exp + 1)
-			str_div_by_two(&min);
+	{
+		while (++i < FLOATS->m_len - exp)
+			str_div_by_two2(&min, conv);
+		INDEX = ft_strr_notchr_index(min, '0', '.');
+		LEN = INDEX - ft_str_notchr_index(min, '0', '.') + 1;
+	}
 	return (min);
 }
 
@@ -102,10 +104,13 @@ static int		format_result(t_conv *conv)
 	i = -1;
 	while (++i < FLOATS->m_len + 1)
 	{
-		str_mult_by_two(&FLOATS->min);
 		if (FLOATS->mant[FLOATS->m_len - i] == '1')
 			str_addition(&RESULT, FLOATS->min);
+		if (i != FLOATS->m_len)
+			str_mult_by_two(&FLOATS->min, conv);
 	}
+//	str_mult_by_two(&RESULT, conv);
+//	str_mult_by_two(&RESULT, conv);
 	tmp = RESULT;
 	p_max = ft_strlen(ft_strchr(RESULT, '.') + 1);
 	if (PREC > p_max && (P_DIFF = PREC - p_max))

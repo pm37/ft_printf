@@ -6,7 +6,7 @@
 #    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
-#    Updated: 2019/02/26 16:18:35 by pimichau         ###   ########.fr        #
+#    Updated: 2019/02/27 16:57:43 by pimichau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,9 @@ SRCL += ft_strtoupper.c
 SRCL += ft_strtolower.c
 SRCL += ft_str_notchr.c
 SRCL += ft_strchr_index.c
+SRCL += ft_str_notchr_index.c
+SRCL += ft_strr_notchr_index.c
+SRCL += get_float_len.c
 
 #--------------------Conversion------------------#
 SRCL += ft_atoi.c
