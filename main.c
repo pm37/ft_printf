@@ -4,7 +4,7 @@
 #include "ft_printf.h"
 
 int		main(int ac, char **av)
-{
+{/*
 	int ret;
 	int ret2;
 	float	nb = 0.7637;
@@ -31,7 +31,7 @@ int		main(int ac, char **av)
 	ret = ft_printf("{cyan}%.2f\n{nc}", nb);
 	ret2 = printf("%.2f\n", nb);
 	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
-	
+
 	//3 PRECISION TEST
 	ft_printf("{purple}{bold}3 Precision test:\n{nc}");
 	ret = ft_printf("{cyan}%.3f\n{nc}", nb);
@@ -61,7 +61,7 @@ int		main(int ac, char **av)
 	ret = ft_printf("{cyan}%f\n{nc}", positive_inf);
 	ret2 = printf("%f\n", positive_inf);
 	printf("ret = %d | ret2 = %d\n\n", ret, ret2);	
-	
+
 	//INFINITY TEST 2
 	ft_printf("{purple}{bold}Negative Infinity test:\n{nc}");
 	ret = ft_printf("{cyan}%f\n{nc}", negative_inf);
@@ -102,6 +102,71 @@ int		main(int ac, char **av)
 	ret = ft_printf("%-15.8f\n", d);
 	ret2 = printf("%-15.8f\n", d);
 	printf("ret = %d | ret2 = %d\n", ret, ret2);
+	*/
+	int ret;
+	int ret2;
+	float c = 10.77777777777777777777777777777777777777777777777777777777777777777777777777777777;
+	float d = 0.0;
 
+	ft_printf("Long double test1\n");
+	ret = ft_printf("% -015.8f\n", c);
+	ret2 = printf("% -015.8f\n", c);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test2\n");
+	ret = ft_printf("% 015.8f\n", c);
+	ret2 = printf("% 015.8f\n", c);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test3\n");
+	ret = ft_printf("% -015.8f\n", c/d);
+	ret2 = printf("% -015.8f\n", c/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test4\n");
+	ret = ft_printf("% +15.8f\n", c/d);
+	ret2 = printf("% +15.8f\n", c/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test5\n");
+	ret = ft_printf("% -+015.8f\n", c);
+	ret2 = printf("% -+015.8f\n", c);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test6\n");
+	ret = ft_printf("% 15.8f\n", c);
+	ret2 = printf("% 15.8f\n", c);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test7\n");
+	ret = ft_printf("% -+015.8f\n", c/d);
+	ret2 = printf("% -+015.8f\n", c/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test8\n");
+	ret = ft_printf("%15.8f\n", c/d);
+	ret2 = printf("%15.8f\n", c/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+
+	ft_printf("Long double test9\n");
+	ret = ft_printf("% -+015.8f\n", d/d);
+	ret2 = printf("% -+015.8f\n", d/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test10\n");
+	ret = ft_printf("%15.8f\n", d/d);
+	ret2 = printf("%15.8f\n", d/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test11\n");
+	ret = ft_printf("% +15.8f\n", d/d);
+	ret2 = printf("% +15.8f\n", d/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+
+	ft_printf("Long double test12\n");
+	ret = ft_printf("%15.8f\n", d/d);
+	ret2 = printf("%15.8f\n", d/d);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
 	return (0);
 }
