@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 19:46:18 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/26 19:46:19 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 12:46:44 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ static int	get_simple_binary(t_conv *conv, char **str)
 {
 	t_ftype	type;
 
-	if (conv->size.l || conv->size.ll)
+	if (SIZE.l || SIZE.ll)
 	{
-		type.l_num = va_arg(conv->ap, long);
+		type.l_num = va_arg(ARG, long);
 		*str = get_bits(&type.l_num, 8);
 	}
-	else if (conv->size.h)
+	else if (SIZE.h)
 	{
-		type.i_num = va_arg(conv->ap, int);
+		type.i_num = va_arg(ARG, int);
 		*str = get_bits(&type.i_num, 2);
 	}
-	else if (conv->size.hh)
+	else if (SIZE.hh)
 	{
-		type.i_num = va_arg(conv->ap, int);
+		type.i_num = va_arg(ARG, int);
 		*str = get_bits(&type.i_num, 1);
 	}
 	else
 	{
-		type.i_num = va_arg(conv->ap, int);
+		type.i_num = va_arg(ARG, int);
 		*str = get_bits(&type.i_num, 4);
 	}
 	if (*str == NULL)
@@ -45,9 +45,9 @@ static char	*get_binary(t_conv *conv)
 {
 	char	*str;
 
-	if (conv->flag.sharp)
+	if (FLAG.sharp)
 	{
-		if (!(conv->floats = ft_memalloc(sizeof(t_float))))
+		if (!(FLOATS = ft_memalloc(sizeof(t_float))))
 			return (NULL);
 		if (init_floats(conv) == -1)
 			return (NULL);
@@ -70,19 +70,19 @@ int			handle_b(t_conv *conv)
 	if (!(str = get_binary(conv)))
 		return (-1);
 	len = ft_strlen(str);
-	if (conv->width > len)
+	if (WIDTH > len)
 	{
-		if (!conv->flag.less && !conv->flag.zero)
-			while (--conv->width >= len)
-				conv->ret += write(1, " ", 1);
-		else if (conv->flag.zero && !conv->flag.less)
-			while (--conv->width >= len)
-				conv->ret += write(1, "0", 1);
+		if (!FLAG.less && !FLAG.zero)
+			while (--WIDTH >= len)
+				RET += write(1, " ", 1);
+		else if (FLAG.zero && !FLAG.less)
+			while (--WIDTH >= len)
+				RET += write(1, "0", 1);
 	}
-	conv->ret += write(1, str, len);
-	if (conv->width > len && conv->flag.less)
-		while (--conv->width >= len)
-			conv->ret += write(1, " ", 1);
+	RET += write(1, str, len);
+		if (WIDTH > len && FLAG.less)
+			while (--WIDTH >= len)
+				RET += write(1, " ", 1);
 	ft_strdel(&str);
 	return (0);
 }

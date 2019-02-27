@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/26 18:06:33 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 13:08:51 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		long_double_edge_cases(t_conv *conv)
 
 static int		handle_edge_cases(t_conv *conv)
 {
-	if (conv->size.lf)
+	if (SIZE.lf)
 		return (long_double_edge_cases(conv));
 	else
 	{
@@ -58,7 +58,7 @@ static int		handle_edge_cases(t_conv *conv)
 			EDGE = 1;
 			return (!RESULT ? -1 : 1);
 		}
-		if (FLOATS->v_exp == -FLOATS->bias && conv->prec == 0)
+		if (FLOATS->v_exp == -FLOATS->bias && PREC == 0)
 		{
 			ft_strdel(&RESULT);
 			RESULT = ft_strdup("0");
@@ -75,9 +75,9 @@ char			*set_min(t_conv *conv, int exp)
 	char	*min;
 	int		i;
 
-	if (conv->size.l)
+	if (SIZE.l)
 		min = init_str(315, '1');
-	else if (conv->size.lf)
+	else if (SIZE.lf)
 		min = init_str(10001, '1');
 	else
 		min = init_str(101, '1');
@@ -108,8 +108,8 @@ static int		format_result(t_conv *conv)
 	}
 	tmp = RESULT;
 	p_max = ft_strlen(ft_strchr(RESULT, '.') + 1);
-	if (conv->prec > p_max && (P_DIFF = conv->prec - p_max))
-		conv->prec = p_max;
+	if (PREC > p_max && (P_DIFF = PREC - p_max))
+		PREC = p_max;
 	if (format_float(conv, ft_str_notchr(RESULT, '0') - 1) == -1)
 		return (-1);
 	LEN = ft_strlen(RESULT);
@@ -119,12 +119,12 @@ static int		format_result(t_conv *conv)
 
 int				handle_f(t_conv *conv)
 {
-	if (!(conv->floats = ft_memalloc(sizeof(t_float))))
+	if (!(FLOATS = ft_memalloc(sizeof(t_float))))
 		return (-1);
 	if (init_floats(conv) == -1)
 		return (-1);
-	if ((!conv->size.lf && FLOATS->is_neg)
-	|| (conv->size.lf && FLOATS->binary[0] == '1') || FLAG.plus)
+	if ((!SIZE.lf && FLOATS->is_neg)
+	|| (SIZE.lf && FLOATS->binary[0] == '1') || FLAG.plus)
 		SIGN = 1;
 	if (handle_edge_cases(conv))
 	{

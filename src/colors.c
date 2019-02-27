@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 13:14:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 21:40:47 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 12:48:20 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		apply_color(t_conv *conv, char c, char *style, int *i)
 	else if (ft_strequ(style, NC) && (*i += ft_strlen(NC) - 1))
 		ft_putstr("\033[0m");
 	else
-		conv->ret += write(1, &c, 1);
+		RET += write(1, &c, 1);
 }
 
 int				color_check(t_conv *conv, const char *format, int *i)
@@ -43,10 +43,10 @@ int				color_check(t_conv *conv, const char *format, int *i)
 	int		stop;
 
 	stop = ft_strchr_index(format, '}');
-	if (!(conv->style = ft_strsub(format, 0, stop + 1)))
+	if (!(STYLE = ft_strsub(format, 0, stop + 1)))
 		return (-1);
-	apply_color(conv, *format, conv->style, i);
-	if (conv->style)
-		ft_strdel(&conv->style);
+	apply_color(conv, *format, STYLE, i);
+	if (STYLE)
+		ft_strdel(&STYLE);
 	return (0);
 }

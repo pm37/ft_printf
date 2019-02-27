@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 19:10:38 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/25 20:14:10 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/27 13:01:41 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		print_format(t_conv *conv, const char *format, int i)
 		i += check_flags((char *)&format[i + 1], conv);
 		if (i == tmp - 1)
 		{
-			va_end(conv->ap);
+			va_end(ARG);
 			return (-1);
 		}
 		init_conv(conv);
@@ -31,12 +31,12 @@ static int		print_format(t_conv *conv, const char *format, int i)
 	{
 		if (color_check(conv, &format[i], &i) == -1)
 		{
-			va_end(conv->ap);
+			va_end(ARG);
 			return (-1);
 		}
 	}
 	else
-		conv->ret += write(1, &format[i], 1);
+		RET += write(1, &format[i], 1);
 	return (i);
 }
 

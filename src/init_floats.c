@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 21:50:02 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/26 16:42:08 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/27 13:07:50 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		init_float_extensions(t_conv *conv)
 	int		i;
 	char	*tmp;
 
-	i = conv->size.lf ? 2 : 1;
+	i = SIZE.lf ? 2 : 1;
 	FLOATS->mant = ft_strsub(FLOATS->binary, i + FLOATS->e_len, FLOATS->m_len);
 	FLOATS->exp = ft_strsub(FLOATS->binary, 1, FLOATS->e_len);
 	if (!FLOATS->mant || !FLOATS->exp)
@@ -66,7 +66,7 @@ static void		init_simple_float(t_conv *conv)
 	FLOATS->e_len = 8;
 	FLOATS->m_len = 23;
 	FLOATS->bias = 127;
-	FLOATS->f_value.f_num = (float)va_arg(conv->ap, double);
+	FLOATS->f_value.f_num = (float)va_arg(ARG, double);
 	FLOATS->binary = get_bits(&FLOATS->f_value.f_num, 4);
 	FLOATS->result = init_str(101, '0');
 }
@@ -74,18 +74,18 @@ static void		init_simple_float(t_conv *conv)
 int				init_floats(t_conv *conv)
 {
 	conv->prec = conv->prec == -1 ? 6 : conv->prec;
-	FLOATS->e_len = conv->size.l ? 11 : 15;
-	FLOATS->m_len = conv->size.l ? 52 : 63;
-	FLOATS->bias = conv->size.l ? 1023 : 16383;
-	if (conv->size.l)
+	FLOATS->e_len = SIZE.l ? 11 : 15;
+	FLOATS->m_len = SIZE.l ? 52 : 63;
+	FLOATS->bias = SIZE.l ? 1023 : 16383;
+	if (SIZE.l)
 	{
-		FLOATS->f_value.d_num = va_arg(conv->ap, double);
+		FLOATS->f_value.d_num = va_arg(ARG, double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.d_num, 8);
 		FLOATS->result = init_str(315, '0');
 	}
-	else if (conv->size.lf)
+	else if (SIZE.lf)
 	{
-		FLOATS->f_value.ld_num = va_arg(conv->ap, long double);
+		FLOATS->f_value.ld_num = va_arg(ARG, long double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.ld_num, 10);
 		FLOATS->result = init_str(10001, '0');
 	}

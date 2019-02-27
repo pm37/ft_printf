@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/26 18:13:26 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 13:06:48 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,14 @@
 
 # define FLAG		conv->flag
 # define SIZE		conv->size
+# define WIDTH		conv->width
+# define PREC		conv->prec
 # define TYPE		conv->conv_type
 # define FLOATS		conv->floats
+# define RET		conv->ret
+# define ARG		conv->ap
+# define STYLE		conv->style
+# define OFFSET		conv->offset
 
 # define RESULT		conv->floats->result
 # define LEN		conv->floats->len
@@ -106,7 +112,7 @@ typedef struct		s_conv
 	int				prec;
 	t_size			size;
 	int				(*f[13])(struct s_conv *conv);
-	int				length;
+	int				offset;
 	size_t			ret;
 	char			*style;
 	char			conv_type;

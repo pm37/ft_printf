@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_conv.c                                      :+:      :+:    :+:   */
+/*   print_csp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:59:56 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/27 12:17:24 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/27 12:44:02 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,45 @@ void		print_sp(t_conv *conv, char *output)
 	int		i;
 
 	len = ft_strlen(output);
-	if (conv->prec != -1 && conv->prec < len)
+	if (PREC != -1 && PREC < len)
 	{
-		i = conv->conv_type == 'p' ? (int)conv->prec + 2 : (int)conv->prec;
+		i = conv->conv_type == 'p' ? (int)PREC + 2 : (int)PREC;
 		output[i] = '\0';
 	}
 	len = ft_strlen(output);
-	if (conv->width > len)
+	if (WIDTH > len)
 	{
-		if (!conv->flag.less && !conv->flag.zero)
-			while (--conv->width >= len)
-				conv->ret += write(1, " ", 1);
-		else if (conv->flag.zero && !conv->flag.less)
-			while (--conv->width >= len)
-				conv->ret += write(1, "0", 1);
+		if (!FLAG.less && !FLAG.zero)
+			while (--WIDTH >= len)
+				RET += write(1, " ", 1);
+		else if (FLAG.zero && !FLAG.less)
+			while (--WIDTH >= len)
+				RET += write(1, "0", 1);
 	}
-	conv->ret += write(1, output, len);
-	if (conv->width > len)
-		if (conv->flag.less)
-			while (--conv->width >= len)
-				conv->ret += write(1, " ", 1);
+	RET += write(1, output, len);
+	if (WIDTH > len)
+		if (FLAG.less)
+			while (--WIDTH >= len)
+				RET += write(1, " ", 1);
 }
 
 int			print_c(t_conv *conv)
 {
-	if (conv->width != 0)
+	if (WIDTH != 0)
 	{
-		if (!conv->flag.less && !conv->flag.zero)
-			while (--conv->width)
-				conv->ret += write(1, " ", 1);
-		else if (conv->flag.zero && !conv->flag.less)
-			while (--conv->width)
-				conv->ret += write(1, "0", 1);
+		if (!FLAG.less && !FLAG.zero)
+			while (--WIDTH)
+				RET += write(1, " ", 1);
+		else if (FLAG.zero && !FLAG.less)
+			while (--WIDTH)
+				RET += write(1, "0", 1);
 	}
-	ft_putchar(va_arg(conv->ap, int));
-	conv->ret++;
-	if (conv->width != 0)
-		if (conv->flag.less)
-			while (--conv->width)
-				conv->ret += write(1, " ", 1);
+	ft_putchar(va_arg(ARG, int));
+	RET++;
+	if (WIDTH != 0)
+		if (FLAG.less)
+			while (--WIDTH)
+				RET += write(1, " ", 1);
 	return (0);
 }
 
@@ -65,7 +65,7 @@ int			handle_p(t_conv *conv)
 	char	*str;
 	char	*tmp;
 
-	if (!(str = ft_ullitoa_base((uintptr_t)va_arg(conv->ap, void *), 16)))
+	if (!(str = ft_ullitoa_base((uintptr_t)va_arg(ARG, void *), 16)))
 		return (-1);
 	tmp = str;
 	if (!(str = ft_strjoin("0x", str)))
@@ -84,7 +84,7 @@ int			handle_s(t_conv *conv)
 	char	*str;
 	char	*tmp;
 
-	tmp = va_arg(conv->ap, char *);
+	tmp = va_arg(ARG, char *);
 	if (tmp)
 	{
 		if (!(str = ft_strdup(tmp)))
@@ -93,6 +93,6 @@ int			handle_s(t_conv *conv)
 		ft_strdel(&str);
 	}
 	else
-		conv->ret += write(1, "(null)", 6);
+		RET += write(1, "(null)", 6);
 	return (0);
 }

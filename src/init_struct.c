@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:20:17 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/25 21:50:41 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 12:59:03 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void			init_conv(t_conv *conv)
 {
-	conv->size.h = 0;
-	conv->size.hh = 0;
-	conv->size.l = 0;
-	conv->size.ll = 0;
-	conv->size.j = 0;
-	conv->size.lf = 0;
-	conv->length = 0;
-	conv->prec = -1;
-	conv->width = -1;
-	conv->flag.zero = 0;
-	conv->flag.space = 0;
-	conv->flag.sharp = 0;
-	conv->flag.plus = 0;
-	conv->flag.less = 0;
-	conv->style = NULL;
+	SIZE.h = 0;
+	SIZE.hh = 0;
+	SIZE.l = 0;
+	SIZE.ll = 0;
+	SIZE.j = 0;
+	SIZE.lf = 0;
+	OFFSET = 0;
+	PREC = -1;
+	WIDTH = -1;
+	FLAG.zero = 0;
+	FLAG.space = 0;
+	FLAG.sharp = 0;
+	FLAG.plus = 0;
+	FLAG.less = 0;
+	STYLE = NULL;
 }
 
 static void		init_types(t_conv *conv)
@@ -50,7 +50,7 @@ static void		init_types(t_conv *conv)
 
 void			init_fp(t_conv *conv)
 {
-	conv->ret = 0;
+	RET = 0;
 	init_types(conv);
 	conv->f[0] = print_c;
 	conv->f[1] = handle_s;

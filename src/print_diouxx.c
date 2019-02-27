@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/26 14:00:10 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/27 12:42:17 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@ static void	print_output(t_conv *conv, char *output, int digits, int is_width)
 {
 	if (TYPE == 'd' || TYPE == 'i')
 	{
-		if (!(ft_strequ(output, "0") && conv->prec == 0) && *output != '-')
-			conv->ret += write(1, output, digits);
-		else if (!(ft_strequ(output, "0") && conv->prec == 0))
-			conv->ret += write(1, output + 1, digits);
-		else if (ft_strequ("0", output) && is_width && conv->prec == 0)
-			conv->ret += write(1, " ", 1);
+		if (!(ft_strequ(output, "0") && PREC == 0) && *output != '-')
+			RET += write(1, output, digits);
+		else if (!(ft_strequ(output, "0") && PREC == 0))
+			RET += write(1, output + 1, digits);
+		else if (ft_strequ("0", output) && is_width && PREC == 0)
+			RET += write(1, " ", 1);
 	}
 	else if (TYPE == 'o')
 	{
-		if (!(ft_strequ("0", output) && conv->prec == 0))
-			conv->ret += write(1, output, ft_strlen(output));
-		else if (ft_strequ("0", output) && is_width && conv->prec == 0)
-			conv->ret += write(1, " ", 1);
+		if (!(ft_strequ("0", output) && PREC == 0))
+			RET += write(1, output, ft_strlen(output));
+		else if (ft_strequ("0", output) && is_width && PREC == 0)
+			RET += write(1, " ", 1);
 	}
 	else if (TYPE == 'x' || TYPE == 'X')
 	{
-		if (!(ft_strequ("0", output) && conv->prec == 0))
-			conv->ret += write(1, output, ft_strlen(output));
-		else if (ft_strequ("0", output) && is_width && conv->prec == 0)
-			conv->ret += write(1, " ", 1);
+		if (!(ft_strequ("0", output) && PREC == 0))
+			RET += write(1, output, ft_strlen(output));
+		else if (ft_strequ("0", output) && is_width && PREC == 0)
+			RET += write(1, " ", 1);
 	}
 }
 
@@ -47,22 +47,22 @@ void		print_di(t_conv *conv, char *output)
 	int		digits;
 	int		is_width;
 
-	is_width = conv->width > 0 ? 1 : 0;
+	is_width = WIDTH > 0 ? 1 : 0;
 	prec = *output != '-' ?
-		conv->prec + conv->flag.plus : conv->prec + 1;
+		PREC + FLAG.plus : PREC + 1;
 	len = *output != '-' ? ft_strlen(output)
-		+ conv->flag.plus : ft_strlen(output);
+		+ FLAG.plus : ft_strlen(output);
 	max = ft_max(prec, len);
 	print_space_before(conv, max, output);
-	if (conv->flag.plus && *output != '-')
-		conv->ret += write(1, "+", 1);
+	if (FLAG.plus && *output != '-')
+		RET += write(1, "+", 1);
 	digits = *output == '-' ? ft_strlen(output) - 1 : ft_strlen(output);
-	conv->ret += *output == '-' ? write(1, "-", 1) : 0;
-	conv->width -= TYPE == 'f' ? 1 : 0;
-	if (conv->width > max)
-		if (!conv->flag.less && conv->flag.zero)
-			while (--conv->width >= conv->prec && conv->width >= len)
-				conv->ret += write(1, "0", 1);
+	RET += *output == '-' ? write(1, "-", 1) : 0;
+	WIDTH -= TYPE == 'f' ? 1 : 0;
+	if (WIDTH > max)
+		if (!FLAG.less && FLAG.zero)
+			while (--WIDTH >= PREC && WIDTH >= len)
+				RET += write(1, "0", 1);
 	print_zeros(conv, digits);
 	print_output(conv, output, digits, is_width);
 	print_space_after(conv, max);
@@ -75,24 +75,24 @@ void		print_u(t_conv *conv, char *output)
 	int		max;
 	int		digits;
 
-	prec = *output != '-' ? conv->prec + conv->flag.plus : conv->prec + 1;
+	prec = *output != '-' ? PREC + FLAG.plus : PREC + 1;
 	len = *output != '-' ?
-		ft_strlen(output) + conv->flag.plus : ft_strlen(output);
+		ft_strlen(output) + FLAG.plus : ft_strlen(output);
 	max = ft_max(prec, len);
 	print_space_before(conv, max, output);
 	digits = *output == '-' ? ft_strlen(output) - 1 : ft_strlen(output);
-	conv->ret += *output == '-' ? write(1, "-", 1) : 0;
-	if (conv->width > max)
-		if (!conv->flag.less && conv->flag.zero && conv->prec == -1)
-			while (--conv->width >= conv->prec && conv->width >= len)
-				conv->ret += write(1, "0", 1);
+	RET += *output == '-' ? write(1, "-", 1) : 0;
+	if (WIDTH > max)
+		if (!FLAG.less && FLAG.zero && PREC == -1)
+			while (--WIDTH >= PREC && WIDTH >= len)
+				RET += write(1, "0", 1);
 	print_zeros(conv, digits);
-	if (!(ft_strequ(output, "0") && conv->prec == 0))
+	if (!(ft_strequ(output, "0") && PREC == 0))
 	{
 		if (*output != '-')
-			conv->ret += write(1, output, digits);
+			RET += write(1, output, digits);
 		else
-			conv->ret += write(1, output + 1, digits);
+			RET += write(1, output + 1, digits);
 	}
 	print_space_after(conv, max);
 }
@@ -103,27 +103,27 @@ void		print_x(t_conv *conv, char *output)
 	int		prec;
 	int		is_width;
 
-	is_width = conv->width > 0 ? 1 : 0;
-	prec = conv->prec + conv->flag.sharp * 2;
-	len = ft_strlen(output) + conv->flag.sharp * 2;
-	if (!conv->flag.zero && conv->width > ft_max(prec, len) && !conv->flag.less)
-		while (--conv->width >= conv->prec && conv->width >= len)
-			conv->ret += write(1, " ", 1);
-	if (conv->flag.sharp && TYPE == 'x' && !ft_strequ("0", output))
-		conv->ret += write(1, "0x", 2);
-	else if (conv->flag.sharp && !ft_strequ("0", output))
-		conv->ret += write(1, "0X", 2);
-	if (conv->width > ft_max(prec, len)
-			&& !conv->flag.less && conv->flag.zero && conv->prec == -1)
-		while (--conv->width >= prec && conv->width >= len)
-			conv->ret += write(1, "0", 1);
-	if (conv->prec != -1 && len < conv->prec)
-		while (--conv->prec >= len)
-			conv->ret += write(1, "0", 1);
+	is_width = WIDTH > 0 ? 1 : 0;
+	prec = PREC + FLAG.sharp * 2;
+	len = ft_strlen(output) + FLAG.sharp * 2;
+	if (!FLAG.zero && WIDTH > ft_max(prec, len) && !FLAG.less)
+		while (--WIDTH >= PREC && WIDTH >= len)
+			RET += write(1, " ", 1);
+	if (FLAG.sharp && TYPE == 'x' && !ft_strequ("0", output))
+		RET += write(1, "0x", 2);
+	else if (FLAG.sharp && !ft_strequ("0", output))
+		RET += write(1, "0X", 2);
+	if (WIDTH > ft_max(prec, len)
+			&& !FLAG.less && FLAG.zero && PREC == -1)
+		while (--WIDTH >= prec && WIDTH >= len)
+			RET += write(1, "0", 1);
+	if (PREC != -1 && len < PREC)
+		while (--PREC >= len)
+			RET += write(1, "0", 1);
 	print_output(conv, output, 0, is_width);
-	if (conv->width > ft_max(prec, len) && conv->flag.less)
-		while (--conv->width >= prec && conv->width >= len)
-			conv->ret += write(1, " ", 1);
+	if (WIDTH > ft_max(prec, len) && FLAG.less)
+		while (--WIDTH >= prec && WIDTH >= len)
+			RET += write(1, " ", 1);
 }
 
 void		print_o(t_conv *conv, char *output)
@@ -132,23 +132,23 @@ void		print_o(t_conv *conv, char *output)
 	int		prec;
 	int		is_width;
 
-	is_width = conv->width > 0 ? 1 : 0;
-	prec = conv->prec + conv->flag.sharp;
-	len = ft_strlen(output) + conv->flag.sharp;
-	if (!conv->flag.zero && conv->width > ft_max(prec, len) && !conv->flag.less)
-		while (--conv->width >= conv->prec && conv->width >= len)
-			conv->ret += write(1, " ", 1);
-	if (conv->flag.sharp && conv->prec >= 0)
-		conv->ret += write(1, "0", 1);
-	if (conv->width > ft_max(prec, len) && !conv->flag.less
-			&& conv->flag.zero && conv->prec == -1)
-		while (--conv->width >= prec && conv->width >= len)
-			conv->ret += write(1, "0", 1);
-	if (conv->prec != -1 && len < conv->prec)
-		while (--conv->prec >= len)
-			conv->ret += write(1, "0", 1);
+	is_width = WIDTH > 0 ? 1 : 0;
+	prec = PREC + FLAG.sharp;
+	len = ft_strlen(output) + FLAG.sharp;
+	if (!FLAG.zero && WIDTH > ft_max(prec, len) && !FLAG.less)
+		while (--WIDTH >= PREC && WIDTH >= len)
+			RET += write(1, " ", 1);
+	if (FLAG.sharp && PREC >= 0)
+		RET += write(1, "0", 1);
+	if (WIDTH > ft_max(prec, len) && !FLAG.less
+			&& FLAG.zero && PREC == -1)
+		while (--WIDTH >= prec && WIDTH >= len)
+			RET += write(1, "0", 1);
+	if (PREC != -1 && len < PREC)
+		while (--PREC >= len)
+			RET += write(1, "0", 1);
 	print_output(conv, output, 0, is_width);
-	if (conv->width > ft_max(prec, len) && conv->flag.less)
-		while (--conv->width >= prec && conv->width >= len)
-			conv->ret += write(1, " ", 1);
+	if (WIDTH > ft_max(prec, len) && FLAG.less)
+		while (--WIDTH >= prec && WIDTH >= len)
+			RET += write(1, " ", 1);
 }

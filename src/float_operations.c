@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/26 14:32:36 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/27 13:02:10 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		format_float(t_conv *conv, char *number)
 	int		i;
 
 	ret = 0;
-	len = ft_strchr_index(number, '.') + (!conv->prec ? 0 : 1) + conv->prec;
+	len = ft_strchr_index(number, '.') + (!PREC ? 0 : 1) + PREC;
 	if ((number[len] == '.' && number[len + 1] - 48 >= 5)
 	|| (number[len] != '.' && number[len] - 48 >= 5))
 		ret = 1;

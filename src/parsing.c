@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 20:37:41 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/26 18:11:27 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/27 12:58:42 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,17 @@ static int		check_size(char *fmt, t_conv *conv)
 	int i;
 
 	i = 0;
-	conv->size.hh = *fmt == 'h' && fmt[1] == 'h' ? 1 : 0;
-	conv->size.h = *fmt == 'h' && fmt[1] != 'h' ? 1 : 0;
-	conv->size.ll = *fmt == 'l' && fmt[1] == 'l' ? 1 : 0;
-	conv->size.l = *fmt == 'l' && fmt[1] != 'l' ? 1 : 0;
-	conv->size.lf = *fmt == 'L' ? 1 : 0;
-	conv->size.j = *fmt == 'j' ? 1 : 0;
-	if (conv->size.h || conv->size.hh || conv->size.l
-	|| conv->size.ll || conv->size.j || conv->size.lf)
-		i += conv->size.hh == 1 || conv->size.ll == 1 ? 2 : 1;
-	if (fmt[i] == 'o' && conv->flag.sharp && conv->prec == -1)
-		conv->prec = 0;
-	conv->length += i;
+	SIZE.hh = *fmt == 'h' && fmt[1] == 'h' ? 1 : 0;
+	SIZE.h = *fmt == 'h' && fmt[1] != 'h' ? 1 : 0;
+	SIZE.ll = *fmt == 'l' && fmt[1] == 'l' ? 1 : 0;
+	SIZE.l = *fmt == 'l' && fmt[1] != 'l' ? 1 : 0;
+	SIZE.lf = *fmt == 'L' ? 1 : 0;
+	SIZE.j = *fmt == 'j' ? 1 : 0;
+	if (SIZE.h || SIZE.hh || SIZE.l || SIZE.ll || SIZE.j || SIZE.lf)
+		i += SIZE.hh == 1 || SIZE.ll == 1 ? 2 : 1;
+	if (fmt[i] == 'o' && FLAG.sharp && PREC == -1)
+		PREC = 0;
+	OFFSET += i;
 	return (output_handler(&fmt[i], conv));
 }
 
@@ -40,11 +39,11 @@ static int		check_prec(char *fmt, t_conv *conv)
 	if (fmt[i] == '.')
 	{
 		i++;
-		conv->prec = ft_atoi(&fmt[i]);
+		PREC = ft_atoi(&fmt[i]);
 		while (fmt[i] && (ft_isdigit(fmt[i]) || fmt[i] == '-'))
 			i++;
 	}
-	conv->length += i;
+	OFFSET += i;
 	return (check_size(&fmt[i], conv));
 }
 
@@ -56,7 +55,7 @@ static int		check_width(char *fmt, t_conv *conv)
 	conv->width = ft_atoi(fmt);
 	while (fmt[i] && ft_isdigit(fmt[i]))
 		i++;
-	conv->length += i;
+	OFFSET += i;
 	return (check_prec(&fmt[i], conv));
 }
 
@@ -73,19 +72,19 @@ int				check_flags(char *fmt, t_conv *conv)
 	while (fmt[i] && is_flag(fmt[i]))
 	{
 		if (fmt[i] == ' ')
-			conv->flag.space = 1;
+			FLAG.space = 1;
 		else if (fmt[i] == '#')
-			conv->flag.sharp = 1;
+			FLAG.sharp = 1;
 		else if (fmt[i] == '+')
-			conv->flag.plus = 1;
+			FLAG.plus = 1;
 		else if (fmt[i] == '-')
-			conv->flag.less = 1;
+			FLAG.less = 1;
 		else if (fmt[i] == '0')
-			conv->flag.zero = 1;
+			FLAG.zero = 1;
 		i++;
 	}
-	if (conv->flag.plus && conv->flag.space)
-		conv->flag.space = 0;
-	conv->length += i;
+	if (FLAG.plus && FLAG.space)
+		FLAG.space = 0;
+	OFFSET += i;
 	return (check_width(&fmt[i], conv));
 }
