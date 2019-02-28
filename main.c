@@ -6,13 +6,13 @@
 int		main(int ac, char **av)
 {
 	long double ld;
+	int ret, ret2;
 
 	ld = 0.3442932409320239840982309840923804982309842903;
-ft_printf("% 0+50.30Lf\n", ld);
-printf("% 0+50.30Lf\n", ld);
-
-	int ret;
-	int ret2;
+	ret = ft_printf("% 0+50.30Lf\n", ld);
+	ret2 = printf("% 0+50.30Lf\n", ld);
+	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+	
 	float	nb = 0.7637;
 	char	*result;
 	float positive_inf = 90000000000000000000000000000000000000000.0;
