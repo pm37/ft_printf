@@ -6,16 +6,15 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:32:37 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 16:21:48 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 16:28:22 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-void	print_space_before(t_conv *conv, int max, char *output)
+void    print_space_before(t_conv *conv, int max, char *output)
 {
-	int		tmp;
+	int        tmp;
 
 	tmp = WIDTH;
 	if (FLAG.space && *output != '-' && TYPE != 'u')
@@ -26,11 +25,12 @@ void	print_space_before(t_conv *conv, int max, char *output)
 	if (WIDTH > max && !FLAG.less && !(FLAG.zero && PREC == -1))
 		while (--tmp >= max)
 			RET += write(1, " ", 1);
+
 }
 
-	void	print_space_after(t_conv *conv, int max)
-	{
-		if (WIDTH > max && FLAG.less)
+void	print_space_after(t_conv *conv, int max)
+{
+	if (WIDTH > max && FLAG.less)
 		while (--WIDTH >= max)
 			RET += write(1, " ", 1);
 }
