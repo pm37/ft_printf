@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 10:55:31 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 18:13:40 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int		handle_edge_cases(t_conv *conv)
 			ft_strdel(&RESULT);
 			RESULT = ft_strdup("0");
 			LEN = 1;
-			EDGE = 1;
 			return (!RESULT ? -1 : 1);
 		}
 	}
