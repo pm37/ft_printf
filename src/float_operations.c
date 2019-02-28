@@ -6,12 +6,11 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 10:23:05 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 11:15:08 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	round_float(char *number, int ret)
 {
@@ -45,7 +44,7 @@ int		format_float(t_conv *conv, char *number)
 	ret = 0;
 	len = ft_strchr_index(number, '.') + (!PREC ? 0 : 1) + PREC;
 	if ((number[len] == '.' && number[len + 1] - 48 >= 5)
-	|| (number[len] != '.' && number[len] - 48 >= 5))
+			|| (number[len] != '.' && number[len] - 48 >= 5))
 		ret = 1;
 	if (!(RESULT = ft_strsub(number, 0, len)))
 		return (-1);
@@ -90,7 +89,7 @@ void	str_mult_by_two(char **str, t_conv *conv)
 	}
 }
 
-void	str_div_by_two(char **str, t_conv *conv)
+void	str_div_by_two2(char **str, t_conv *conv)
 {
 	int	i;
 	int	tmp;
@@ -98,17 +97,46 @@ void	str_div_by_two(char **str, t_conv *conv)
 
 	ret = 0;
 	i = INDEX;
-	while (i < INDEX + LEN)
+	//ft_putchar(str[0][INDEX]);
+	//ft_putchar('\n');
+	while (i < INDEX + LEN && str[0][i])
 	{
-		if (str[0][i] == '.')
-			LEN++;
-		else
+		if (str[0][i] != '.')
 		{
 			tmp = (str[0][i] - 48) % 2;
 			str[0][i] = ((str[0][i] - 48) / 2 + ret) + 48;
 			ret = tmp == 0 ? 0 : 5;
-			if (ret && i == INDEX + LEN - 1)
+			if (ret && i == INDEX + LEN - 1 && str[0][i + 1] != '.')
 				LEN++;
+		}
+		i++;
+	}
+	if (str[0][INDEX] == '0' && str[0][INDEX + 1] == '.')
+		INDEX += 2;
+	else if (str[0][INDEX] == '0')
+		INDEX++;
+	//ft_putchar(str[0][INDEX]);
+	//ft_putchar('\n');
+	//exit(1);
+}
+
+void	str_div_by_two(char **str)
+{
+	int len;
+	int	tmp;
+	int	i;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	len = ft_strlen(*str);
+	while (i < len)
+	{
+		if (str[0][i] != '.')
+		{
+			tmp = (str[0][i] - 48) % 2;
+			str[0][i] = ((str[0][i] - 48) / 2 + ret) + 48;
+			ret = tmp == 0 ? 0 : 5;
 		}
 		i++;
 	}

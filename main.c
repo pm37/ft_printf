@@ -44,15 +44,15 @@ printf("% 0+50.30Lf\n", ld);
 	ret2 = printf("%.4f\n", nb);
 	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
 	//POSITIVE ZERO TEST
-	ft_printf("{purple}{bold}Positive 0 test:\n{nc}");
-	ret = ft_printf("{cyan}%.0f\n{nc}", 0.0);
-	ret2 = printf("%.0f\n", 0.0);
-	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+//	ft_printf("{purple}{bold}Positive 0 test:\n{nc}");
+//	ret = ft_printf("{cyan}%.0f\n{nc}", 0.0);
+//	ret2 = printf("%.0f\n", 0.0);
+//	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
 	//NEGATIVE ZERO TEST
-	ft_printf("{purple}{bold}Negative 0 test:\n{nc}");
-	ret = ft_printf("{cyan}%.0f\n{nc}", -0.0);
-	ret2 = printf("%.0f\n", -0.0);
-	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+//	ft_printf("{purple}{bold}Negative 0 test:\n{nc}");
+//	ret = ft_printf("{cyan}%.0f\n{nc}", -0.0);
+//	ret2 = printf("%.0f\n", -0.0);
+//	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
 	//INFINITY TEST 1
 	ft_printf("{purple}{bold}Positive Infinity test:\n{nc}");
 	ret = ft_printf("{cyan}%f\n{nc}", positive_inf);
@@ -85,10 +85,10 @@ printf("% 0+50.30Lf\n", ld);
 	ft_printf("%#Lb\n", c);
 	ft_printf("%b\n", 5);
 	ft_printf("%hhb\n", c);
-	ft_printf("Long double test\n");
-	ret = ft_printf("%-15.8f\n", d);
-	ret2 = printf("%-15.8f\n", d);
-	printf("ret = %d | ret2 = %d\n", ret, ret2);
+//	ft_printf("Long double test\n");
+//	ret = ft_printf("%-15.8f\n", d);
+//	ret2 = printf("%-15.8f\n", d);
+//	printf("ret = %d | ret2 = %d\n", ret, ret2);
 
 	ft_printf("Long double test1\n");
 	ret = ft_printf("% -015.8f\n", c);
