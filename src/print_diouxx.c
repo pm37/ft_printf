@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 13:15:28 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:47:00 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,27 +103,31 @@ void		print_x(t_conv *conv, char *output)
 	int		len;
 	int		prec;
 	int		is_width;
+	int		r_len;
 
 	is_width = WIDTH > 0 ? 1 : 0;
-	prec = PREC + FLAG.sharp * 2;
-	len = ft_strlen(output) + FLAG.sharp * 2;
-	if (!FLAG.zero && WIDTH > ft_max(prec, len) && !FLAG.less)
-		while (--WIDTH >= PREC && WIDTH >= len)
+	prec = PREC == -1 ? PREC + FLAG.sharp * 2 : PREC;
+	len = PREC == -1 ? ft_strlen(output) + FLAG.sharp * 2 : ft_strlen(output);
+	r_len = PREC > (int)ft_strlen(output) ?
+	PREC + FLAG.sharp * 2 : ft_strlen(output) + FLAG.sharp * 2;
+	if ((!FLAG.zero || (FLAG.zero && PREC != -1 && WIDTH != -1))
+	&& WIDTH > ft_max(prec, len) && !FLAG.less)
+		while (--WIDTH >= r_len)
 			RET += write(1, " ", 1);
 	if (FLAG.sharp && TYPE == 'x' && !ft_strequ("0", output))
 		RET += write(1, "0x", 2);
 	else if (FLAG.sharp && !ft_strequ("0", output))
 		RET += write(1, "0X", 2);
 	if (WIDTH > ft_max(prec, len)
-			&& !FLAG.less && FLAG.zero && PREC == -1)
+	&& !FLAG.less && FLAG.zero && PREC == -1)
 		while (--WIDTH >= prec && WIDTH >= len)
 			RET += write(1, "0", 1);
 	if (PREC != -1 && len < PREC)
-		while (--PREC >= len)
+		while (PREC-- > len)
 			RET += write(1, "0", 1);
 	print_output(conv, output, 0, is_width);
 	if (WIDTH > ft_max(prec, len) && FLAG.less)
-		while (--WIDTH >= prec && WIDTH >= len)
+		while (--WIDTH >= prec && WIDTH >= r_len)
 			RET += write(1, " ", 1);
 }
 
