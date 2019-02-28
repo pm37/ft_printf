@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   get_bits.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 15:31:02 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/22 12:48:06 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/22 17:31:38 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/28 10:37:12 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "ft_printf.h"
 
-void	ft_memdel(void **ap)
+char	*get_bits(void *octet, int size)
 {
-	if (!ap || !*ap)
-		return ;
-	free(*ap);
-	*ap = NULL;
+	int				i;
+	int				j;
+	char			*ptr;
+	char			*str;
+
+	if (!(str = (char *)malloc(sizeof(*str) * (size * 8 + 1))))
+		return (NULL);
+	j = size;
+	ptr = (char *)octet;
+	while (j--)
+	{
+		i = 8;
+		while (i--)
+			str[j * 8 + 8 - (i + 1)] = (*ptr >> i & 1) + '0';
+		ptr++;
+	}
+	str[size * 8] = '\0';
+	return (str);
 }

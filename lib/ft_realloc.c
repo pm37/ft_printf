@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:57:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 17:37:26 by bwan-nan         ###   ########.fr       */
+/*   Created: 2018/12/05 19:32:09 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/23 15:10:04 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdlib.h>
 
-int		ft_toupper(int c)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	if (ft_islower(c))
-		c -= 32;
-	return (c);
+	char	*newptr;
+
+	if (!size && ptr)
+	{
+		if (!(newptr = (char *)malloc(1)))
+			return (NULL);
+		ft_memdel(&ptr);
+		return (newptr);
+	}
+	if (!(newptr = (char *)malloc(size)))
+		return (NULL);
+	if (ptr)
+	{
+		ft_memcpy(newptr, ptr, size);
+		ft_memdel(&ptr);
+	}
+	return (newptr);
 }

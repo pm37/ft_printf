@@ -1,24 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_llitoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 15:16:07 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/22 13:21:17 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/13 14:15:18 by bwan-nan          #+#    #+#             */
+/*   Updated: 2019/02/19 18:38:21 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "ft_printf.h"
+#include <stdio.h>
 
-void	*ft_memalloc(size_t size)
+static int		get_str_len(long long n)
 {
-	char *str;
+	int		i;
 
-	if (!(str = (void *)malloc(sizeof(void) * size)))
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
+}
+
+char			*ft_llitoa(long long nb)
+{
+	char				*str;
+	int					sign;
+	int					str_len;
+
+	sign = 1;
+	str_len = get_str_len(nb);
+	if (nb < 0)
+	{
+		sign = -1;
+		str_len++;
+	}
+	if (!(str = ft_strnew(str_len)))
 		return (NULL);
-	ft_bzero(str, size);
+	str[--str_len] = nb % 10 * sign + 48;
+	while (nb /= 10)
+		str[--str_len] = nb % 10 * sign + 48;
+	if (sign == -1)
+		str[0] = '-';
 	return (str);
 }

@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strr_notchr_index.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:57:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 17:37:26 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/27 16:55:55 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/27 16:57:23 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_toupper(int c)
+int		ft_strr_notchr_index(char *str, char a, char b)
 {
-	if (ft_islower(c))
-		c -= 32;
-	return (c);
+	int		i;
+
+	i = ft_strlen(str) - 1;
+	while (i--)
+	{
+		if (str[i] != a && str[i] != b)
+			return (i);
+	}
+	return (0);
 }

@@ -3,136 +3,177 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pimichau <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/06 13:12:08 by pimichau          #+#    #+#              #
-#    Updated: 2019/02/08 14:58:52 by pimichau         ###   ########.fr        #
+#    Created: 2019/02/11 20:52:36 by bwan-nan          #+#    #+#              #
+#    Updated: 2019/02/27 16:57:43 by pimichau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re norme
-
-CC = gcc
-
-FLAGS = -Wall -Wextra -Werror
-
-CPP_FLAGS = -Iinclude
-
 NAME = libftprintf.a
+LIB = $(LPATH)libft.a
+LIBDB = $(LPATH)libftdb.a
+EXEC = ft_printf
 
-SRC_PATH = ./src
-LIB_PATH = ./lib
-INC_PATH = ./inc
-OBJ_PATH = ./obj
-OBJLIB_PATH = ./obj
+CC = Clang
+COMPILE = $(CC) -c
 
-SRC_NAME =	ft_ftoa.c		\
-			ft_llitoa.c		\
-			ft_llitoa_base.c	\
-			ft_print_s.c	\
-			ft_printf.c		\
-			ft_ullitoa.c	\
-			ft_ullitoa_base.c
+vpath %.c src/
+vpath %.h inc/
+vpath %.c lib/
 
-LIB_NAME = 	ft_atoi.c		\
-			ft_bzero.c		\
-			ft_isalnum.c	\
-			ft_isalpha.c	\
-			ft_isascii.c	\
-			ft_isdigit.c	\
-			ft_isprint.c	\
-			ft_itoa.c		\
-			ft_lstadd.c		\
-			ft_lstdel.c		\
-			ft_lstdelone.c	\
-			ft_lstiter.c	\
-			ft_lstmap.c		\
-			ft_lstnew.c		\
-			ft_memalloc.c	\
-			ft_memccpy.c	\
-			ft_memchr.c		\
-			ft_memcmp.c		\
-			ft_memcpy.c		\
-			ft_memdel.c		\
-			ft_memmove.c	\
-			ft_memset.c		\
-			ft_putchar.c	\
-			ft_putchar_fd.c	\
-			ft_putendl.c	\
-			ft_putendl_fd.c	\
-			ft_putnbr.c		\
-			ft_putnbr_fd.c	\
-			ft_putstr.c		\
-			ft_putstr_fd.c	\
-			ft_strcat.c		\
-			ft_strchr.c		\
-			ft_strclr.c		\
-			ft_strcmp.c		\
-			ft_strcpy.c		\
-			ft_strdel.c		\
-			ft_strdup.c		\
-			ft_strequ.c		\
-			ft_striter.c	\
-			ft_striteri.c	\
-			ft_strjoin.c	\
-			ft_strlcat.c	\
-			ft_strlen.c		\
-			ft_strmap.c		\
-			ft_strmapi.c	\
-			ft_strncat.c	\
-			ft_strncmp.c	\
-			ft_strncpy.c	\
-			ft_strnequ.c	\
-			ft_strnew.c		\
-			ft_strnstr.c	\
-			ft_strrchr.c	\
-			ft_strsplit.c	\
-			ft_strstr.c		\
-			ft_strsub.c		\
-			ft_strtrim.c	\
-			ft_tolower.c	\
-			ft_toupper.c	\
-			ft_recursive_power.c \
-			ft_sqrt.c		\
-			ft_pstrlen.c	\
-			ft_get_next_line.c
+#Reset
+NC=\033[0m
 
-INC_NAME = ft_printf.h
+# Regular Colors
+BLACK=\033[0;30m
+RED=\033[0;31m
+GREEN =\033[32m
+YELLOW=\033[0;33m
+BLUE=\033[0;34m
+PURPLE=\033[0;35m
+CYAN=\033[0;36m
+GREY=\033[0;37m
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJLIB_NAME = $(LIB_NAME:.c=.o)
+MKDIR = mkdir -p
+CLEANUP = rm -rf
 
-SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
-LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
-INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
+WFLAGS += -Wall
+WFLAGS += -Werror
+WFLAGS += -Wextra
+DFLAGS = -fsanitize=address
+IFLAGS = -I $(IPATH)
+CFLAGS = $(WFLAGS) $(IFLAGS)
 
-all: $(NAME)
+OPATH = obj/
+SPATH = src/
+IPATH = inc/
+LPATH = lib/
 
-$(NAME): $(OBJ) $(OBJLIB)
-	@ar rc $(NAME) $(OBJ) $(OBJLIB)
-	@ranlib $(NAME)
-	@echo "\033[1;34mft_printf\t\033[1;33mCompilation\t\033[0;32m[OK]\033[0m"
+INCS = ft_printf.h
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) -o $@ -c $<
+SRCM = main.c
+SRCS += ft_printf.c
+SRCS += init_struct.c
+SRCS += parsing.c
+SRCS += output_handler.c
+SRCS += diouxx_conv.c
+SRCS += print_diouxx.c
+SRCS += print_csp.c
+SRCS += print_flags.c
+SRCS += float_conv.c
+SRCS += binary_conv.c
+SRCS += colors.c
+SRCS += float_operations.c
+SRCS += init_floats.c
+SRCS += date_conv.c
+SRCS += print_float.c
 
-$(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
-	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
-	@$(CC) -o $@ -c $<
+#--------------------Memory--------------------#
+SRCL += ft_bzero.c
+SRCL += ft_memalloc.c
+SRCL += ft_memmove.c
+SRCL += ft_memchr.c
+SRCL += ft_memcmp.c
+SRCL += ft_memcpy.c
+SRCL += ft_memdel.c
+SRCL += ft_memset.c
+SRCL += ft_realloc.c
+
+#--------------------Strings---------------------#
+SRCL += ft_islower.c
+SRCL += ft_isalpha.c
+SRCL += ft_isdigit.c
+SRCL += ft_strcat.c
+SRCL += ft_strchr.c
+SRCL += ft_strcmp.c
+SRCL += ft_strcpy.c
+SRCL += ft_strdup.c
+SRCL += ft_strlen.c
+SRCL += ft_strncat.c
+SRCL += ft_strncmp.c
+SRCL += ft_strncpy.c
+SRCL += ft_strnstr.c
+SRCL += ft_strrchr.c
+SRCL += ft_strstr.c
+SRCL += ft_strdel.c
+SRCL += ft_strequ.c
+SRCL += ft_strjoin.c
+SRCL += ft_strnequ.c
+SRCL += ft_strnew.c
+SRCL += ft_strsplit.c
+SRCL += ft_strsub.c
+SRCL += ft_tolower.c
+SRCL += ft_toupper.c
+SRCL += ft_strtoupper.c
+SRCL += ft_strtolower.c
+SRCL += ft_str_notchr.c
+SRCL += ft_strchr_index.c
+SRCL += ft_str_notchr_index.c
+SRCL += ft_strr_notchr_index.c
+SRCL += get_float_len.c
+
+#--------------------Conversion------------------#
+SRCL += ft_atoi.c
+SRCL += ft_itoa.c
+SRCL += ft_llitoa.c
+SRCL += ft_llitoa_base.c
+SRCL += ft_ullitoa.c
+SRCL += ft_ullitoa_base.c
+SRCL += get_bits.c
+SRCL += ft_binatoi.c
+
+#--------------------Lists-----------------------#
+SRCL += ft_lstadd.c
+SRCL += ft_lstdel.c
+SRCL += ft_lstdelone.c
+SRCL += ft_lstnew.c
+
+#--------------------Output----------------------#
+SRCL += ft_putchar.c
+SRCL += ft_putendl.c
+SRCL += ft_putnbr.c
+SRCL += ft_putstr.c
+
+#--------------------Maths-----------------------#
+SRCL += ft_recursive_power.c
+SRCL += ft_max.c
+
+OBJS += $(patsubst %.c, $(OPATH)%.o, $(SRCS))
+OBJS += $(patsubst %.c, $(OPATH)%.o, $(SRCL))
+
+all: $(OPATH) $(NAME)
+
+$(EXEC): $(NAME) $(SRCM)
+	$(CC) $^ -I $(IPATH) -o $@
+
+run: $(OPATH) $(EXEC)
+	./$(EXEC)
+
+$(NAME): $(OBJS)
+	ar -rusc $@ $^ 
+	ranlib $@
+	printf "$(GREEN)$@ is ready.\n$(NC)"
+
+$(OBJS): $(OPATH)%.o : %.c $(INCS)
+	$(COMPILE) $(CFLAGS) $< -o $@
+	printf "$(CYAN)Compiling $<\n$(NC)"
+
+$(OPATH):
+	$(MKDIR) $@
 
 clean:
-	@rm -rf $(OBJ) $(OBJLIB)
-	@echo "\033[1;34mft_printf\t\033[1;33mCleaning obj\t\033[0;32m[OK]\033[0m"
+	$(CLEANUP) $(OBJS)
+	$(CLEANUP) $(OPATH)
+	$(CLEANUP) $(EXEC)
+	printf "$(RED)All objects removed\n$(NC)"
 
 fclean: clean
-	@rm -rf ./obj $(NAME)
-	@echo "\033[1;34mft_printf\t\033[1;33mCleaning lib\t\033[0;32m[OK]\033[0m"
+	$(CLEANUP) $(NAME)
+	$(CLEANUP) $(EXEC)
+	printf "$(RED)$(NAME) deleted\n$(NC)"
 
 re: fclean all
 
-norme:
-	@norminette $(SRC) $(LIB) $(INC)
-	@echo "\033[1;34mft_printf\t\033[1;33mNorminette\t\033[0;32m[OK]\033[0m"
+.PHONY: all clean fclean re
+.SILENT:

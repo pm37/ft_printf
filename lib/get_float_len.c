@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   get_float_len.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:57:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 17:37:26 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/27 16:55:38 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/27 16:57:18 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_toupper(int c)
+int				get_float_len(char *str)
 {
-	if (ft_islower(c))
-		c -= 32;
-	return (c);
+	int		last_index;
+	int		first_index;
+
+	first_index = ft_str_notchr_index(str, '0', '.');
+	last_index = ft_strr_notchr_index(str, '0', '.');
+	return (last_index - first_index + 1);
 }

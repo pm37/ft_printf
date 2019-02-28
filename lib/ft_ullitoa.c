@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 15:31:02 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/22 12:48:06 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/01/31 18:08:39 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/20 19:14:22 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "ft_printf.h"
 
-void	ft_memdel(void **ap)
+char	*ft_ullitoa(unsigned long long nb)
 {
-	if (!ap || !*ap)
-		return ;
-	free(*ap);
-	*ap = NULL;
+	int					len;
+	unsigned long long	nbr;
+	char				*str;
+
+	nbr = nb;
+	len = 1;
+	while (nbr /= 10)
+		len++;
+	if (!(str = (char *)malloc(sizeof(*str) * (len + 1))))
+		return (0);
+	str[len] = '\0';
+	while (--len >= 0)
+	{
+		str[len] = nb % 10 + '0';
+		nb /= 10;
+	}
+	return (str);
 }

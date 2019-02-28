@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:57:24 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/21 17:37:26 by bwan-nan         ###   ########.fr       */
+/*   Created: 2019/02/15 12:48:18 by pimichau          #+#    #+#             */
+/*   Updated: 2019/02/15 12:49:15 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int		ft_toupper(int c)
+int		ft_max(int n1, int n2)
 {
-	if (ft_islower(c))
-		c -= 32;
-	return (c);
+	if (n1 > n2)
+		return (n1);
+	return (n2);
 }
