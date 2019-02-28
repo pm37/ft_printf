@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:56:18 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 11:03:58 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 12:37:30 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		print_flags_before(t_conv *conv)
 			RET += write(1, "+", 1);
 	}
 	if (WIDTH > LEN + P_DIFF + SIGN && FLAG.zero && !FLAG.less && !EDGE)
-		while (--WIDTH > LEN + P_DIFF + SIGN)
+		while (--WIDTH > LEN + P_DIFF)
 			RET += write(1, "0", 1);
 }
 

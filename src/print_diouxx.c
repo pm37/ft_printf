@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/27 12:42:17 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 13:15:28 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void		print_di(t_conv *conv, char *output)
 	int		digits;
 	int		is_width;
 
+	
 	is_width = WIDTH > 0 ? 1 : 0;
 	prec = *output != '-' ?
 		PREC + FLAG.plus : PREC + 1;
@@ -60,7 +61,7 @@ void		print_di(t_conv *conv, char *output)
 	RET += *output == '-' ? write(1, "-", 1) : 0;
 	WIDTH -= TYPE == 'f' ? 1 : 0;
 	if (WIDTH > max)
-		if (!FLAG.less && FLAG.zero)
+		if (!FLAG.less && FLAG.zero && PREC == -1)
 			while (--WIDTH >= PREC && WIDTH >= len)
 				RET += write(1, "0", 1);
 	print_zeros(conv, digits);
