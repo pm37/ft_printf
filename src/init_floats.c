@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 21:50:02 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 12:26:59 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 14:10:34 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		init_simple_float(t_conv *conv)
 	FLOATS->bias = 127;
 	FLOATS->f_value.f_num = (float)va_arg(ARG, double);
 	FLOATS->binary = get_bits(&FLOATS->f_value.f_num, 4);
-	B_SIZE = 101;
+	B_SIZE = 274;
 	RESULT = init_str(B_SIZE, '0');
 }
 
@@ -78,13 +78,13 @@ int				init_floats(t_conv *conv)
 	FLOATS->e_len = SIZE.l ? 11 : 15;
 	FLOATS->m_len = SIZE.l ? 52 : 63;
 	FLOATS->bias = SIZE.l ? 1023 : 16383;
-	if (SIZE.l && (B_SIZE = 315))
+	if (SIZE.l && (B_SIZE = 2080))
 	{
 		FLOATS->f_value.d_num = va_arg(ARG, double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.d_num, 8);
 		RESULT = init_str(B_SIZE, '0');
 	}
-	else if (SIZE.lf && (B_SIZE = 10001))
+	else if (SIZE.lf && (B_SIZE = 33000))
 	{
 		FLOATS->f_value.ld_num = va_arg(ARG, long double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.ld_num, 10);
