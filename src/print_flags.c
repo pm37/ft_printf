@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 14:32:37 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 16:32:13 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:51:03 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 
 void	print_space_before(t_conv *conv, int max, char *output)
 {
-	int		tmp;
 
-	tmp = WIDTH;
 	if (FLAG.space && *output != '-' && TYPE != 'u')
 	{
 		RET += write(1, " ", 1);
 		--tmp;
 	}
 	if (WIDTH > max && !FLAG.less && !(FLAG.zero && PREC == -1))
-		while (--tmp >= max)
+		while (--WIDTH >= max)
 			RET += write(1, " ", 1);
 }
 
