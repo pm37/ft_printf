@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 10:23:05 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 11:07:06 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	str_div_by_two(char **str, t_conv *conv)
 
 	ret = 0;
 	i = INDEX;
-	while (i < INDEX + LEN)
+	while (i < INDEX + LEN && str[0][i])
 	{
 		if (str[0][i] == '.')
 			LEN++;
