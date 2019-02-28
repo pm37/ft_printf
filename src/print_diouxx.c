@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 17:37:11 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 17:47:00 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void		print_x(t_conv *conv, char *output)
 			RET += write(1, "0", 1);
 	print_output(conv, output, 0, is_width);
 	if (WIDTH > ft_max(prec, len) && FLAG.less)
-		while (--WIDTH >= prec && WIDTH >= len)
+		while (--WIDTH >= prec && WIDTH >= r_len)
 			RET += write(1, " ", 1);
 }
 
