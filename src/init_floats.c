@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 21:50:02 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/27 16:43:02 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 10:52:44 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			del_floats(t_conv *conv)
 	ft_strdel(&FLOATS->binary);
 	ft_strdel(&FLOATS->mant);
 	ft_strdel(&FLOATS->exp);
-	ft_strdel(&FLOATS->result);
+	ft_strdel(&RESULT);
 	ft_strdel(&FLOATS->min);
 	ft_memdel((void **)&conv->floats);
 }
@@ -57,7 +57,7 @@ static int		init_float_extensions(t_conv *conv)
 		ft_strdel(&tmp);
 		return (-1);
 	}
-	ft_strdel(&tmp);
+//	ft_strdel(&tmp);
 	return (0);
 }
 
@@ -69,7 +69,7 @@ static void		init_simple_float(t_conv *conv)
 	FLOATS->f_value.f_num = (float)va_arg(ARG, double);
 	FLOATS->binary = get_bits(&FLOATS->f_value.f_num, 4);
 	B_SIZE = 101;
-	FLOATS->result = init_str(B_SIZE, '0');
+	RESULT = init_str(B_SIZE, '0');
 }
 
 int				init_floats(t_conv *conv)
@@ -82,13 +82,13 @@ int				init_floats(t_conv *conv)
 	{
 		FLOATS->f_value.d_num = va_arg(ARG, double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.d_num, 8);
-		FLOATS->result = init_str(B_SIZE, '0');
+		RESULT = init_str(B_SIZE, '0');
 	}
 	else if (SIZE.lf && (B_SIZE = 10001))
 	{
 		FLOATS->f_value.ld_num = va_arg(ARG, long double);
 		FLOATS->binary = get_bits(&FLOATS->f_value.ld_num, 10);
-		FLOATS->result = init_str(B_SIZE, '0');
+		RESULT = init_str(B_SIZE, '0');
 	}
 	else
 		init_simple_float(conv);
