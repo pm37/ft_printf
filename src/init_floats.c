@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 21:50:02 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 10:52:44 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 12:26:59 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		init_float_extensions(t_conv *conv)
 		ft_strdel(&tmp);
 		return (-1);
 	}
-//	ft_strdel(&tmp);
+	ft_strdel(&tmp);
 	return (0);
 }
 

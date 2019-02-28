@@ -112,6 +112,7 @@ printf("% 0+50.30Lf\n", ld);
 
 	ft_printf("Long double test5\n");
 	ret = ft_printf("% -+015.8f\n", c);
+			ft_putendl("OK");
 	ret2 = printf("% -+015.8f\n", c);
 	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
 
@@ -150,5 +151,7 @@ printf("% 0+50.30Lf\n", ld);
 	ret = ft_printf("%15.8f\n", d/d);
 	ret2 = printf("%15.8f\n", d/d);
 	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
+	while (1)
+		;
 	return (0);
 }
