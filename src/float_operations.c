@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 11:15:08 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 11:17:28 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ void	str_div_by_two2(char **str, t_conv *conv)
 
 	ret = 0;
 	i = INDEX;
-	//ft_putchar(str[0][INDEX]);
-	//ft_putchar('\n');
 	while (i < INDEX + LEN && str[0][i])
 	{
 		if (str[0][i] != '.')
@@ -115,9 +113,6 @@ void	str_div_by_two2(char **str, t_conv *conv)
 		INDEX += 2;
 	else if (str[0][INDEX] == '0')
 		INDEX++;
-	//ft_putchar(str[0][INDEX]);
-	//ft_putchar('\n');
-	//exit(1);
 }
 
 void	str_div_by_two(char **str)
