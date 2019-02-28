@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/27 18:22:38 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 10:52:37 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char			*set_min(t_conv *conv, int exp)
 	else
 	{
 		while (++i < FLOATS->m_len - exp)
-			str_div_by_two2(&min, conv);
+			str_div_by_two(&min);
 		INDEX = ft_strr_notchr_index(min, '0', '.');
 		LEN = INDEX - ft_str_notchr_index(min, '0', '.') + 1;
 	}
