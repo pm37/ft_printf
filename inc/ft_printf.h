@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/27 18:07:34 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 10:23:27 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,7 @@ char				*get_bits2(long value);
 int					ft_binatoi(char *str);
 void				str_addition(char **result, char *add);
 void				str_mult_by_two(char **str, t_conv *conv);
-void				str_div_by_two(char **str);
-void				str_div_by_two2(char **str, t_conv *conv);
+void				str_div_by_two(char **str, t_conv *conv);
 int					format_float(t_conv *conv, char *number);
 char				*set_min(t_conv *conv, int exp);
 int					get_float_len(char *str);

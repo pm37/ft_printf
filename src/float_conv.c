@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/27 18:22:38 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/02/28 10:55:31 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char			*set_min(t_conv *conv, int exp)
 	int		i;
 
 	min = init_str(B_SIZE, '1');
-//	INDEX = ft_strr_notchr_index(min, '0', '.');
 	INDEX = (B_SIZE - 1) / 2 - 1;
 	LEN = 1;
 	if (!min)
@@ -88,7 +87,7 @@ char			*set_min(t_conv *conv, int exp)
 	else
 	{
 		while (++i < FLOATS->m_len - exp)
-			str_div_by_two2(&min, conv);
+			str_div_by_two(&min, conv);
 		INDEX = ft_strr_notchr_index(min, '0', '.');
 		LEN = INDEX - ft_str_notchr_index(min, '0', '.') + 1;
 	}
@@ -109,8 +108,6 @@ static int		format_result(t_conv *conv)
 		if (i != FLOATS->m_len)
 			str_mult_by_two(&FLOATS->min, conv);
 	}
-//	str_mult_by_two(&RESULT, conv);
-//	str_mult_by_two(&RESULT, conv);
 	tmp = RESULT;
 	p_max = ft_strlen(ft_strchr(RESULT, '.') + 1);
 	if (PREC > p_max && (P_DIFF = PREC - p_max))
@@ -131,6 +128,14 @@ int				handle_f(t_conv *conv)
 	if ((!SIZE.lf && FLOATS->is_neg)
 	|| (SIZE.lf && FLOATS->binary[0] == '1') || FLAG.plus)
 		SIGN = 1;
+/*	if (SIZE.lf && !ft_strchr(FLOATS->exp, '1') && FLOATS->binary[16] ==
+	'0' && !ft_strchr(FLOATS->binary + 18, '1'))
+	{
+		RESULT = ft_strdup("0");
+		LEN = 1;
+		print_float(conv);
+		return (0);
+	}*/
 	if (handle_edge_cases(conv))
 	{
 		print_float(conv);
