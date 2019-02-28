@@ -7,12 +7,12 @@ int		main(int ac, char **av)
 {
 	long double ld;
 	int ret, ret2;
-
-	ld = 0.3442932409320239840982309840923804982309842903;
-	ret = ft_printf("% 0+50.30Lf\n", ld);
-	ret2 = printf("% 0+50.30Lf\n", ld);
+	int z = 4242;
+	ld = 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.3442932409320239840982309840923804982309842903;
+	ret = ft_printf("%03.2d\n", 0);
+	ret2 = printf("%03.2d\n", 0);
 	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
-	
+/*	
 	float	nb = 0.7637;
 	char	*result;
 	float positive_inf = 90000000000000000000000000000000000000000.0;
@@ -150,5 +150,5 @@ int		main(int ac, char **av)
 	ret = ft_printf("%15.8f\n", d/d);
 	ret2 = printf("%15.8f\n", d/d);
 	printf("ret = %d | ret2 = %d\n\n", ret, ret2);
-	return (0);
+*/	return (0);
 }
