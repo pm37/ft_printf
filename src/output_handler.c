@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:03:46 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/27 12:59:49 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/02/28 14:06:36 by pimichau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void		handle_percent(t_conv *conv)
 
 int				output_handler(char *fmt, t_conv *conv)
 {
-	if (ft_strchr(OPTIONS, *fmt))
+	if (ft_strchr(OPTIONS, *fmt) && *fmt)
 	{
 		TYPE = *fmt;
 		if (handle_conv(conv) == -1)
@@ -72,5 +72,7 @@ int				output_handler(char *fmt, t_conv *conv)
 		handle_percent(conv);
 	else if (*fmt)
 		print_undef_char(conv, fmt);
+	else if (!(*fmt))
+		return (0);
 	return (OFFSET + 1);
 }
