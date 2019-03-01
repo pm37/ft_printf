@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 19:46:18 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/27 12:46:44 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 15:31:24 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int			handle_b(t_conv *conv)
 				RET += write(1, "0", 1);
 	}
 	RET += write(1, str, len);
-		if (WIDTH > len && FLAG.less)
-			while (--WIDTH >= len)
-				RET += write(1, " ", 1);
+	if (WIDTH > len && FLAG.less)
+		while (--WIDTH >= len)
+			RET += write(1, " ", 1);
 	ft_strdel(&str);
 	return (0);
 }

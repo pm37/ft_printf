@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 11:52:16 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 10:23:27 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 15:50:01 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,9 @@ void				print_float(t_conv *conv);
 void				print_space_before(t_conv *conv, int max, char *output);
 void				print_space_after(t_conv *conv, int max);
 void				print_zeros(t_conv *conv, int digits);
+void				print_extra_x(t_conv *conv, int prec, int len);
+void				print_extra_o(t_conv *conv, int len,
+					int *prec, int is_width);
 
 int					handle_di(t_conv *conv);
 int					handle_o(t_conv *conv);
