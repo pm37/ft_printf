@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 11:59:56 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/27 12:44:02 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 11:29:29 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void		print_sp(t_conv *conv, char *output)
 	len = ft_strlen(output);
 	if (PREC != -1 && PREC < len)
 	{
-		i = conv->conv_type == 'p' ? (int)PREC + 2 : (int)PREC;
+		i = TYPE == 'p' ? (int)PREC + 2 : (int)PREC;
 		output[i] = '\0';
+		len = ft_strlen(output);
 	}
-	len = ft_strlen(output);
 	if (WIDTH > len)
 	{
 		if (!FLAG.less && !FLAG.zero)
@@ -93,6 +93,10 @@ int			handle_s(t_conv *conv)
 		ft_strdel(&str);
 	}
 	else
-		RET += write(1, "(null)", 6);
+	{
+		tmp = ft_strdup("(null)");
+		print_sp(conv, tmp);
+		ft_strdel(&tmp);
+	}
 	return (0);
 }

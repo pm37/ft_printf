@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 14:31:05 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 18:38:22 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:16:51 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,16 @@
 
 int main()
 {
-int	ret;
-int	ret2;
-float	nb = 0;
-    
-    ft_printf("space:% f\n", nb);
-    ft_printf("plus:%+f\n", nb);
-    ft_printf("hash:%#f\n", nb);
-    ft_printf("precision:%.2f\n", nb);
-    ft_printf("big prec:%.14f\n", nb);
-    ft_printf("precision + hash:%#.0f\n", nb);
-    ft_printf("space + prec:% .5f\n", nb);
-    ft_printf("space + prec + hash:%# .0f\n", nb);
-    ft_printf("space + prec + hash:% #.0f\n", nb);
-    ft_printf("Plus + prec / grande:%+.5f\n", nb);
-    ft_printf("Plus + prec / petite:%+.0f\n", nb);
-    ft_printf("Plus + prec + hash:%#+.0f\n", nb);
-    ft_printf("Prec + 0:%0.5f\n", nb);
-    ft_printf("Prec + minus:%-.5f\n", nb);
-    ft_printf("size:%5f\n", nb);
-    ft_printf("size + space:% 5f\n", nb);
-    ft_printf("size + plus:%+5f\n", nb);
-    ft_printf("size + space:%# 5f\n", nb);
-    ft_printf("size + plus:%#+5f\n", nb);
-    ft_printf("size + minus:%-5f\n", nb);
-    ft_printf("size + 0:%05f\n", nb);
-    ft_printf("size + 0 + plus:%+05f\n", nb);
-    ft_printf("size + 0 + plus:%0+5f\n", nb);
-    ft_printf("size + 0 + prec:%05.3f\n", nb);
-    ft_printf("size + 0 + prec + hash:%0#5.0f\n", nb);
-    ft_printf("size + minus + prec:%-5.3f\n", nb);
-    ft_printf("size + minus + prec + hash:%-#5.0f\n", nb);
-    ft_printf("size + plus + 0 + prec:%+05.3f\n", nb);
-    ft_printf("size + plus + 0 + prec + hash:%0+#5.0f\n", nb);
-    ft_printf("size + espace + zero + prec:%0 5.3f\n", nb);
-    ft_printf("size + espace + zero + prec:% 05.3f\n", nb);
-    ft_printf("size + espace + zero + prec + hash:%#0 5.0f\n", nb);
-    ft_printf("size + minus + plus + prec:%-+5.3f\n", nb);
-    ft_printf("size + minus + plus + prec + hash:%-#+5.0f\n", nb);
+	float		nb;
+	nb = 0.5;
+//	printf("null prec : %+.0f\n", nb);
+	ft_printf("null prec : %.0f\n", nb);
+	printf("null prec : %.0f\n", nb);
+/*	nb = -25632.2541;
+	printf("null prec : %+.0f\n", nb);
+	nb = -1.0123;
+	printf("null prec : %+.0f\n", nb);
+	nb = 12354.569874;
+	printf("null prec : %+.0f\n", nb);*/
+
 }

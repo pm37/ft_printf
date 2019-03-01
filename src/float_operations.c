@@ -6,12 +6,11 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:40:48 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 11:07:06 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 11:25:24 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	round_float(char *number, int ret)
 {

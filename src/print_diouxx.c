@@ -6,7 +6,7 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:44:09 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 17:47:00 by pimichau         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:05:03 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void	print_output(t_conv *conv, char *output, int digits, int is_width)
 	}
 	else if (TYPE == 'o')
 	{
-		if (!(ft_strequ("0", output) && PREC == 0))
+		if (!(ft_strequ("0", output) && (PREC == 0 || PREC == 1)))
+		{
 			RET += write(1, output, ft_strlen(output));
-		else if (ft_strequ("0", output) && is_width && PREC == 0)
-			RET += write(1, " ", 1);
+		}
 	}
 	else if (TYPE == 'x' || TYPE == 'X')
 	{
@@ -110,6 +110,7 @@ void		print_x(t_conv *conv, char *output)
 	len = PREC == -1 ? ft_strlen(output) + FLAG.sharp * 2 : ft_strlen(output);
 	r_len = PREC > (int)ft_strlen(output) ?
 	PREC + FLAG.sharp * 2 : ft_strlen(output) + FLAG.sharp * 2;
+	r_len -= ft_strequ(output, "0") && FLAG.sharp ? 2 : 0;
 	if ((!FLAG.zero || (FLAG.zero && PREC != -1 && WIDTH != -1))
 	&& WIDTH > ft_max(prec, len) && !FLAG.less)
 		while (--WIDTH >= r_len)
@@ -140,20 +141,27 @@ void		print_o(t_conv *conv, char *output)
 	is_width = WIDTH > 0 ? 1 : 0;
 	prec = PREC + FLAG.sharp;
 	len = ft_strlen(output) + FLAG.sharp;
-	if (!FLAG.zero && WIDTH > ft_max(prec, len) && !FLAG.less)
+	len = ft_strequ(output, "0") && PREC == 0 ? 0 : len;
+	len = len == 0 && FLAG.sharp ? 1 : len;
+	if ((!FLAG.zero || (FLAG.zero && is_width && PREC > 0))
+	&& WIDTH > ft_max(prec, len) && !FLAG.less)
 		while (--WIDTH >= PREC && WIDTH >= len)
 			RET += write(1, " ", 1);
-	if (FLAG.sharp && PREC >= 0)
+	if (FLAG.sharp && prec >= 0)
+	{
 		RET += write(1, "0", 1);
-	if (WIDTH > ft_max(prec, len) && !FLAG.less
-			&& FLAG.zero && PREC == -1)
+		--prec;
+		//printf("prec = %d | PREc = %d | len = %d\n", prec, PREC, len);
+		prec -= prec == 1 ? 1 : 0;
+	}
+	if (WIDTH > ft_max(prec, len) && !FLAG.less && FLAG.zero && PREC <= 0)
 		while (--WIDTH >= prec && WIDTH >= len)
 			RET += write(1, "0", 1);
 	if (PREC != -1 && len < PREC)
-		while (--PREC >= len)
+		while (--prec >= len)
 			RET += write(1, "0", 1);
 	print_output(conv, output, 0, is_width);
 	if (WIDTH > ft_max(prec, len) && FLAG.less)
-		while (--WIDTH >= prec && WIDTH >= len)
+		while (--WIDTH >= PREC && WIDTH >= len)
 			RET += write(1, " ", 1);
 }

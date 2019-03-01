@@ -6,11 +6,12 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 21:50:02 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/28 14:10:34 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:14:14 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 void			del_floats(t_conv *conv)
 {
@@ -99,3 +100,34 @@ int				init_floats(t_conv *conv)
 	}
 	return (0);
 }
+
+
+/*
+   int				init_floats(t_conv *conv)
+   {
+   conv->prec = conv->prec == -1 ? 6 : conv->prec;
+   FLOATS->e_len = SIZE.ll ? 15 : 11;
+   FLOATS->m_len = SIZE.ll ? 63 : 52;
+   FLOATS->bias = SIZE.ll ? 16383 : 1023;
+
+   if (SIZE.lf && (B_SIZE = 33000))
+   {
+   FLOATS->f_value.ld_num = va_arg(ARG, long double);
+   FLOATS->binary = get_bits(&FLOATS->f_value.ld_num, 10);
+//printf("%s\n", FLOATS->binary);
+RESULT = init_str(B_SIZE, '0');
+}
+else
+{
+B_SIZE = 2080;
+FLOATS->f_value.d_num = va_arg(ARG, double);
+FLOATS->binary = get_bits(&FLOATS->f_value.d_num, 8);
+RESULT = init_str(B_SIZE, '0');
+}
+if (!FLOATS->binary || !RESULT || init_float_extensions(conv) == -1)
+{
+del_floats(conv);
+return (-1);
+}
+return (0);
+}*/

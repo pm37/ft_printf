@@ -6,7 +6,7 @@
 /*   By: pimichau <pimichau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:18:08 by pimichau          #+#    #+#             */
-/*   Updated: 2019/02/28 18:13:40 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:13:16 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,14 +127,6 @@ int				handle_f(t_conv *conv)
 	if ((!SIZE.lf && FLOATS->is_neg)
 	|| (SIZE.lf && FLOATS->binary[0] == '1') || FLAG.plus)
 		SIGN = 1;
-/*	if (SIZE.lf && !ft_strchr(FLOATS->exp, '1') && FLOATS->binary[16] ==
-	'0' && !ft_strchr(FLOATS->binary + 18, '1'))
-	{
-		RESULT = ft_strdup("0");
-		LEN = 1;
-		print_float(conv);
-		return (0);
-	}*/
 	if (handle_edge_cases(conv))
 	{
 		print_float(conv);
