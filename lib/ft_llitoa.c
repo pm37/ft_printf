@@ -6,12 +6,11 @@
 /*   By: bwan-nan <bwan-nan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 14:15:18 by bwan-nan          #+#    #+#             */
-/*   Updated: 2019/02/19 18:38:21 by bwan-nan         ###   ########.fr       */
+/*   Updated: 2019/03/01 19:35:44 by bwan-nan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static int		get_str_len(long long n)
 {
